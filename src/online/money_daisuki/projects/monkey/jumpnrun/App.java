@@ -37,8 +37,11 @@ import online.money_daisuki.api.monkey.basegame.character.control.RotateLinearBy
 import online.money_daisuki.api.monkey.basegame.debug.DebugBulletCommand;
 import online.money_daisuki.api.monkey.basegame.debug.ProfilerCommand;
 import online.money_daisuki.api.monkey.basegame.debug.SetStatsCommand;
+import online.money_daisuki.api.monkey.basegame.light.AddAmbientLightCommand;
+import online.money_daisuki.api.monkey.basegame.light.AddDirectionalLightCommand;
+import online.money_daisuki.api.monkey.basegame.light.AddPointLightCommand;
+import online.money_daisuki.api.monkey.basegame.light.AddSpotLightCommand;
 import online.money_daisuki.api.monkey.basegame.material.FlexibleMaterialLoader;
-import online.money_daisuki.api.monkey.basegame.misc.AddLightCommand;
 import online.money_daisuki.api.monkey.basegame.misc.Utils;
 import online.money_daisuki.api.monkey.basegame.model.AddModelCommand;
 import online.money_daisuki.api.monkey.basegame.model.FlexibleModelLoader;
@@ -102,12 +105,48 @@ public final class App extends ExtendedApplication {
 		final BulletAppState bulletAppState = new BulletAppState();
 		stateManager.attach(bulletAppState);
 		
+		
+		final BiConverter<String, Spatial, Spatial> spatialTarget = new BiConverter<String, Spatial, Spatial>() {
+			@Override
+			public Spatial convert(final String a, final Spatial b) {
+				switch(a) {
+					case("player"):
+						if(!playerContainer.isSet()) {
+							throw new IllegalStateException("Player not set");
+						}
+						return(playerContainer.source());
+					case("this"):
+						return(b);
+					case("root"):
+						return(getRootNode());
+					default:
+						final String thisName = b.getName();
+						if(thisName != null && thisName.equals(a)) {
+							return(b);
+						}
+						
+						if(b instanceof Node) {
+							final Spatial thisChild = ((Node) b).getChild(a);
+							if(thisChild != null) {
+								return(thisChild);
+							}
+						}
+						
+						final Spatial rootChild = getRootNode().getChild(a);
+						if(rootChild == null) {
+							throw new IllegalArgumentException("Node " + a + " not found.");
+						}
+						return(rootChild);
+				}
+			}
+		};
+		
 		installCamCommands(exe);
-		installLightCommands(exe);
+		installLightCommands(exe, spatialTarget);
 		installModelCommands(exe, bulletAppState);
 		installTerrainCommands(exe, bulletAppState);
 		installTextboxCommands();
-		installSpatialCommands(exe, bulletAppState);
+		installSpatialCommands(exe, bulletAppState, spatialTarget);
 		
 		// Misc
 		exe.addCommand("DebugBullet", new DebugBulletCommand(bulletAppState));
@@ -153,7 +192,7 @@ public final class App extends ExtendedApplication {
 		exe.addCommand("PrintChaseCamera", new PrintCameraTransformCommand(playerContainer));
 		exe.addCommand("SetCameraTransform", new SetCameraTransformCommand(playerContainer));
 	}
-	private void installSpatialCommands(final CommandExecutor exe, final BulletAppState bullet) {
+	private void installSpatialCommands(final CommandExecutor exe, final BulletAppState bullet, final BiConverter<String, Spatial, Spatial> spatialTarget) {
 		exe.addCommand("SetTranslation", new SetSpatialTranslationCommand(new Converter<String, Translatable>() {
 			@Override
 			public Translatable convert(final String value) {
@@ -185,38 +224,6 @@ public final class App extends ExtendedApplication {
 			}
 		}));
 		exe.addCommand("Unload", new UnloadCommand(bullet));
-		final BiConverter<String, Spatial, Spatial> spatialTarget = new BiConverter<String, Spatial, Spatial>() {
-			@Override
-			public Spatial convert(final String a, final Spatial b) {
-				switch(a) {
-					case("player"):
-						if(!playerContainer.isSet()) {
-							throw new IllegalStateException("Player not set");
-						}
-						return(playerContainer.source());
-					case("this"):
-						return(b);
-					default:
-						final String thisName = b.getName();
-						if(thisName != null && thisName.equals(a)) {
-							return(b);
-						}
-						
-						if(b instanceof Node) {
-							final Spatial thisChild = ((Node) b).getChild(a);
-							if(thisChild != null) {
-								return(thisChild);
-							}
-						}
-						
-						final Spatial rootChild = getRootNode().getChild(a);
-						if(rootChild == null) {
-							throw new IllegalArgumentException("Node " + a + " not found.");
-						}
-						return(rootChild);
-				}
-			}
-		};
 		exe.addCommand("TurnTo", new TurnToCommand(spatialTarget));
 		exe.addCommand("MoveTo", new MoveToCommand(spatialTarget));
 		exe.addCommand("UnloadScene", new UnloadSceneCommand(getRootNode(), playerContainer, bullet));
@@ -224,9 +231,11 @@ public final class App extends ExtendedApplication {
 		exe.addCommand("MoveLinearTo", new MoveLinearToCommand(spatialTarget, this));
 		exe.addCommand("RotateLinearBy", new RotateLinearByCommand(spatialTarget, this));
 	}
-	private void installLightCommands(final CommandExecutor exe) {
-		exe.addCommand("AddLight", new AddLightCommand(getRootNode()));
-		//exe.addCommand("ShowLights", new ShowLightsCommand(getRootNode()));
+	private void installLightCommands(final CommandExecutor exe, final BiConverter<String, Spatial, Spatial> spatialTarget) {
+		exe.addCommand("AddAmbientLight", new AddAmbientLightCommand(spatialTarget));
+		exe.addCommand("AddDirectionalLight", new AddDirectionalLightCommand(spatialTarget));
+		exe.addCommand("AddSpotLight", new AddSpotLightCommand(spatialTarget));
+		exe.addCommand("AddPointLight", new AddPointLightCommand(spatialTarget));
 	}
 	private void installTerrainCommands(final CommandExecutor exe, final BulletAppState bulletAppState) {
 		final Converter<String, TerrainQuad> ldr = new FlexibleTerrainLoader(new FlexibleMaterialLoader(this), this);

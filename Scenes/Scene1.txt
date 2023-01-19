@@ -1,6 +1,6 @@
 atomar
 AddCharacter Characters/Scene1/def.json 0 0 0 1 1 1
-AddLight ambient 1 1 1 0.1
+AddAmbientLight root 1 1 1 0.1
 
 AddCharacter Characters/Sign_Post/def.json -40 0 -40 1 1 1
 AddCharacter Characters/Scene1Teleport/def.json 0 2 -60.5 1 1 1
