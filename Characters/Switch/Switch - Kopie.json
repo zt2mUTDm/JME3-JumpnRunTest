@@ -1,0 +1,32 @@
+{
+	"model": "Models/Switch/Switch.json",
+	"physic": {
+		"shapes": [
+			{
+				"type": "Compound",
+				"childs": [
+					{
+						"type": "Box",
+						"extends": [ 1.0, 0.17, 0.17 ],
+						"translation": [ 0.0, 0.0, 1.15 ],
+					},
+					{
+						"type": "Box",
+						"extends": [ 1.0, 0.17, 0.17 ],
+						"translation": [ 0.0, 0.0, -1.15 ],
+					}
+				],
+				"attach": "Switch",
+				"collisionGroup": 0,
+				"purpose": "rigid",
+				"mass": 0.0
+			}
+		]
+	},
+	"controls": [
+		
+	],
+	"conditions": [
+		
+	]
+}

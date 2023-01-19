@@ -1,0 +1,10 @@
+{
+	"type": "node",
+	"name": "Tank",
+	"childs": [
+		{
+			"type": "model",
+			"url": "Models/Tank/tank.j3o",
+		}
+	]
+}

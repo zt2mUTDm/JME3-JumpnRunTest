@@ -1,0 +1,10 @@
+{
+	"type": "node",
+	"name": "Main",
+	"childs": [
+		{
+			"type": "model",
+			"url": "Models/Scene2/Scene2.j3o",
+		}
+	]
+}

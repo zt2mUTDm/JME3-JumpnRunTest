@@ -1,0 +1,18 @@
+{
+	"type": "node",
+	"name": "SwordMain",
+	"childs": [
+		{
+			"type": "node",
+			"name": "SwordHit",
+			"childs": [
+			
+			],
+			"translation": [ 0.0, 0.0, 3.0 ]
+		},
+		{
+			"type": "model",
+			"url": "Models/Sword/Sword.mesh.j3o",
+		}
+	]
+}

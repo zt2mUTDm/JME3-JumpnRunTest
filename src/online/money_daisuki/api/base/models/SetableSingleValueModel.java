@@ -1,0 +1,16 @@
+package online.money_daisuki.api.base.models;
+
+import online.money_daisuki.api.base.Setable;
+import online.money_daisuki.api.base.SetableDataSource;
+
+/**
+ * Interface to extends a {@link SingleValueModel} with {@link Setable} to give
+ * the ability to be empty and remove the stored value.
+ * 
+ * @author (c) Money Daisuki Online
+ *
+ * @param <T>
+ */
+public interface SetableSingleValueModel<T> extends SetableDataSource<T>, SingleValueModel<T> {
+	
+}

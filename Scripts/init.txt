@@ -1,0 +1,2 @@
+DebugBullet on
+Exec Scripts/loadTestworld.txt

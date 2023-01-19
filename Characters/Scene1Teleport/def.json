@@ -1,0 +1,17 @@
+{
+	"model": "Models/Dummy/def.json",
+	"physic": {
+		"shapes": [
+			{
+				"type": "Box",
+				"extends": [ 1.0, 2.0, 0.5 ],
+				"attach": "Main",
+				"collisionGroup": 2,
+				"setCollideWithGroups": 2,
+				"purpose": "eventReceive",
+				"trigger": "touch",
+				"simpleScript": "Scripts/TeleportToScene2.txt"
+			}
+		]
+	}
+}

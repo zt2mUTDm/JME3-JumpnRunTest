@@ -1,0 +1,7 @@
+SetPlayerControlEnabled off
+SetTextCull dynamic
+ShowControlledText That is a sign! Insert some interesting smart text here.\nLine 2\nLine 3\nHold the jump key to speed up texts and press the attack key to skip them.
+WaitFor 0
+SetTextCull always
+SetPlayerControlEnabled on
+ClearText

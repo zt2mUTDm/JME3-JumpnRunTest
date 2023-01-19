@@ -1,0 +1,23 @@
+atomar
+AddCharacter Characters/Scene1/def.json 0 0 0 1 1 1
+AddLight ambient 1 1 1 0.1
+
+AddCharacter Characters/Sign_Post/def.json -40 0 -40 1 1 1
+AddCharacter Characters/Scene1Teleport/def.json 0 2 -60.5 1 1 1
+AddCharacter Characters/EnemySpawn/EnemySpawn.json 0 2 -100 1.0 1.0 1.0
+AddCharacter Characters/Onigiri/Onigiri.json 69 12.6 -50 1 1 1
+
+AddCharacter Characters/Switch/Switch.json 20 0 -200 1.0 1.0 1.0
+AddCharacter Characters/Tank/Tank.json 20 0 -220 1.0 1.0 1.0
+
+if Switch pressed == true
+	SetVariable Tank rotated false
+endif
+
+SetVariable Enemy activated false
+SetVariable Enemy playerDetected false
+	
+endatomar
+sleep 1
+SetPlayerEnabled on
+SetPlayerControlEnabled on
