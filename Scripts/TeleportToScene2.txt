@@ -3,7 +3,7 @@ UnloadScene
 
 Exec Scenes/Scene2.txt
 SetTranslation player -8 1 0
-SetCameraTransform 0.71695817 0.5371094 12.8
+SetChaseCameraTransform player 0.71695817 0.5371094 12.8
 
 SetCull player dynamic
 SetPlayerControlEnabled on
