@@ -23,9 +23,11 @@ import online.money_daisuki.api.base.models.SetableMutableSingleValueModelImpl;
 import online.money_daisuki.api.monkey.basegame.ExtendedApplication;
 import online.money_daisuki.api.monkey.basegame.FrequencyDividingAppState;
 import online.money_daisuki.api.monkey.basegame.RemoveDoneAppState;
+import online.money_daisuki.api.monkey.basegame.cam.AddChaseCameraCommand;
 import online.money_daisuki.api.monkey.basegame.cam.DebugCameraTransformCommand;
 import online.money_daisuki.api.monkey.basegame.cam.FlycamMoveSpeedCommand;
 import online.money_daisuki.api.monkey.basegame.cam.PrintCameraTransformCommand;
+import online.money_daisuki.api.monkey.basegame.cam.RemoveChaseCameraCommand;
 import online.money_daisuki.api.monkey.basegame.cam.SetCameraFrustumFarCommand;
 import online.money_daisuki.api.monkey.basegame.cam.SetCameraTransformCommand;
 import online.money_daisuki.api.monkey.basegame.character.AddCharacterCommand;
@@ -141,7 +143,7 @@ public final class App extends ExtendedApplication {
 			}
 		};
 		
-		installCamCommands(exe);
+		installCamCommands(exe, spatialTarget);
 		installLightCommands(exe, spatialTarget);
 		installModelCommands(exe, bulletAppState);
 		installTerrainCommands(exe, bulletAppState);
@@ -185,12 +187,15 @@ public final class App extends ExtendedApplication {
 			}
 		});
 	}
-	private void installCamCommands(final CommandExecutor exe) {
+	private void installCamCommands(final CommandExecutor exe, final BiConverter<String, Spatial, Spatial> spatialTarget) {
 		exe.addCommand("SetFlycamMoveSpeed", new FlycamMoveSpeedCommand(this));
 		exe.addCommand("SetCameraFrustumFar", new SetCameraFrustumFarCommand(getCamera()));
 		exe.addCommand("DebugChaseCamera", new DebugCameraTransformCommand(getGuiNode(), playerContainer, this));
 		exe.addCommand("PrintChaseCamera", new PrintCameraTransformCommand(playerContainer));
 		exe.addCommand("SetCameraTransform", new SetCameraTransformCommand(playerContainer));
+		
+		exe.addCommand("AddChaseCamera", new AddChaseCameraCommand(spatialTarget, this));
+		exe.addCommand("RemoveChaseCamera", new RemoveChaseCameraCommand(spatialTarget, this));
 	}
 	private void installSpatialCommands(final CommandExecutor exe, final BulletAppState bullet, final BiConverter<String, Spatial, Spatial> spatialTarget) {
 		exe.addCommand("SetTranslation", new SetSpatialTranslationCommand(new Converter<String, Translatable>() {

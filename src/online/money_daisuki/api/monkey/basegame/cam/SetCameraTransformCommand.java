@@ -13,7 +13,6 @@ public final class SetCameraTransformCommand implements Command {
 	public SetCameraTransformCommand(final SetableDataSource<Spatial> player) {
 		this.player = Requires.notNull(player, "player == null");
 	}
-	
 	@Override
 	public void execute(final Spatial caller, final String[] cmd, final Runnable done) {
 		Requires.notNull(caller, "caller == null");

@@ -25,7 +25,6 @@ public final class DebugCameraTransformCommand implements Command {
 		this.player = Requires.notNull(player, "player == null");
 		this.app = Requires.notNull(app, "app == null");
 	}
-	
 	@Override
 	public void execute(final Spatial caller, final String[] cmd, final Runnable done) {
 		Requires.notNull(caller, "caller == null");
@@ -50,5 +49,4 @@ public final class DebugCameraTransformCommand implements Command {
 		}, player);
 		app.getStateManager().attach(state);
 	}
-
 }
