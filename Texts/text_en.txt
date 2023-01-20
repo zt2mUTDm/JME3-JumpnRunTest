@@ -1,0 +1,4 @@
+That is a sign! Insert some interesting smart text here.
+Line 2
+Line 3
+Hold the jump key to speed up texts and press the attack key to skip them.

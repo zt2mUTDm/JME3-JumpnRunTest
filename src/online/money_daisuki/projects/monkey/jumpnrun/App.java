@@ -18,6 +18,8 @@ import online.money_daisuki.api.base.BiConverter;
 import online.money_daisuki.api.base.Converter;
 import online.money_daisuki.api.base.DataSink;
 import online.money_daisuki.api.base.Requires;
+import online.money_daisuki.api.base.models.MutableSingleValueModel;
+import online.money_daisuki.api.base.models.MutableSingleValueModelImpl;
 import online.money_daisuki.api.base.models.SetableMutableSingleValueModel;
 import online.money_daisuki.api.base.models.SetableMutableSingleValueModelImpl;
 import online.money_daisuki.api.monkey.basegame.ExtendedApplication;
@@ -67,7 +69,9 @@ import online.money_daisuki.api.monkey.basegame.spatial.UnloadSceneCommand;
 import online.money_daisuki.api.monkey.basegame.terrain.AddTerrainCommand;
 import online.money_daisuki.api.monkey.basegame.terrain.FlexibleTerrainLoader;
 import online.money_daisuki.api.monkey.basegame.text.ClearTextCommand;
+import online.money_daisuki.api.monkey.basegame.text.SetLanguageKeyCommand;
 import online.money_daisuki.api.monkey.basegame.text.ShowControlledTextCommand;
+import online.money_daisuki.api.monkey.basegame.text.ShowControlledTextFromFileCommand;
 import online.money_daisuki.api.monkey.basegame.text.ShowTextAppState;
 import online.money_daisuki.api.monkey.basegame.text.ShowTextAppStateUi;
 import online.money_daisuki.api.monkey.basegame.text.ShowTextCommand;
@@ -309,10 +313,15 @@ public final class App extends ExtendedApplication {
 		
 		getStateManager().attach(textAppState);
 		
+		final MutableSingleValueModel<String> languageKey = new MutableSingleValueModelImpl<>("en");
+		
 		exe.addCommand("SetTextCull", new SetNodeCullHintCommand(uiNode));
 		exe.addCommand("ShowText", new ShowTextCommand(textAppState));
 		exe.addCommand("ShowControlledText", new ShowControlledTextCommand(textAppState, getInputManager(), this));
 		exe.addCommand("ClearText", new ClearTextCommand(textAppState));
+		exe.addCommand("SetLanguageKey", new SetLanguageKeyCommand(languageKey));
+		exe.addCommand("ShowControlledTextFromFile", new ShowControlledTextFromFileCommand(textAppState, getInputManager(), this,
+				languageKey));
 	}
 	
 	@Override
