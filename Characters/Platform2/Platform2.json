@@ -1,0 +1,24 @@
+{
+	"model": "Models/Platform/Platform.json",
+	"physic": {
+		"shapes": [
+			{
+				"type": "MeshShape",
+				"attach": "Platform",
+				"collisionGroup": 0,
+				"purpose": "rigid",
+				"mass": 0.0
+			}
+		]
+	},
+	"controls": [
+		{
+			"type": "script",
+			"url": "Scripts/Platform2.txt",
+			"attach": "Platform"
+		}
+	],
+	"conditions": [
+		
+	],
+}

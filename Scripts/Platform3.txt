@@ -1,0 +1,4 @@
+MoveLinearTo Platform 3 -55 27 -195
+WaitFor 0
+MoveLinearTo Platform 3 -55 13 -170
+WaitFor 0
