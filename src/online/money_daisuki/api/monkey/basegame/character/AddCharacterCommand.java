@@ -116,9 +116,9 @@ public final class AddCharacterCommand implements Command {
 			
 			final VariableContainer container = app.getVariable(type, name);
 			if(!container.test(op, value)) {
-				return(true);
+				return(false);
 			}
 		}
-		return(false);
+		return(true);
 	}
 }
