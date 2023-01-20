@@ -20,14 +20,14 @@ public final class RemoveChaseCameraCommand implements Command {
 	public void execute(final Spatial caller, final String[] cmd, final Runnable done) {
 		Requires.notNull(caller, "caller == null");
 		Requires.containsNotNull(cmd, "cmd contains null");
-		Requires.lenEqual(cmd, 1);
+		Requires.lenEqual(cmd, 2);
 		
-		final String spatialName = cmd[0];
+		final String spatialName = cmd[1];
 		final Spatial spatial = spatialTarget.convert(spatialName, caller);
 		
 		final ChaseCamera cam = spatial.getControl(ChaseCamera.class);
 		if(cam == null) {
-			throw new IllegalArgumentException("ChaseCamera not found");
+			throw new IllegalArgumentException("Spatial has no ChaseCamera");
 		}
 		cam.cleanupWithInput(app.getInputManager());
 		

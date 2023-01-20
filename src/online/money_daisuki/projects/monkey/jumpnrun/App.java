@@ -30,6 +30,8 @@ import online.money_daisuki.api.monkey.basegame.cam.PrintCameraTransformCommand;
 import online.money_daisuki.api.monkey.basegame.cam.RemoveChaseCameraCommand;
 import online.money_daisuki.api.monkey.basegame.cam.SetCameraFrustumFarCommand;
 import online.money_daisuki.api.monkey.basegame.cam.SetCameraTransformCommand;
+import online.money_daisuki.api.monkey.basegame.cam.SetChaseCameraEnabledCommand;
+import online.money_daisuki.api.monkey.basegame.cam.SetChaseCameraTransformCommand;
 import online.money_daisuki.api.monkey.basegame.character.AddCharacterCommand;
 import online.money_daisuki.api.monkey.basegame.character.FlexibleCharacterLoader;
 import online.money_daisuki.api.monkey.basegame.character.SetSpatialAnim;
@@ -196,6 +198,8 @@ public final class App extends ExtendedApplication {
 		
 		exe.addCommand("AddChaseCamera", new AddChaseCameraCommand(spatialTarget, this));
 		exe.addCommand("RemoveChaseCamera", new RemoveChaseCameraCommand(spatialTarget, this));
+		exe.addCommand("SetChaseCameraTransform", new SetChaseCameraTransformCommand(spatialTarget));
+		exe.addCommand("SetChaseCameraEnabled", new SetChaseCameraEnabledCommand(spatialTarget));
 	}
 	private void installSpatialCommands(final CommandExecutor exe, final BulletAppState bullet, final BiConverter<String, Spatial, Spatial> spatialTarget) {
 		exe.addCommand("SetTranslation", new SetSpatialTranslationCommand(new Converter<String, Translatable>() {
