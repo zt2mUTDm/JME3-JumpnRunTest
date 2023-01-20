@@ -1,5 +1,5 @@
 # What's that?
-Try to implement a game like a classical Jump'n run game to JMonkeyEngine.
+Try to implement the usual functions of a classical 3D Jump'n run game to JMonkeyEngine.
 
 # How to try it?
 Clone the repo local and add at least following libaries to the class path:
