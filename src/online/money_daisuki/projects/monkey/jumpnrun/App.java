@@ -229,7 +229,7 @@ public final class App extends ExtendedApplication {
 		exe.addCommand("UnloadScene", new UnloadSceneCommand(getRootNode(), playerContainer, bullet));
 		exe.addCommand("SetSpatialAnim", new SetSpatialAnim(spatialTarget));
 		exe.addCommand("MoveLinearTo", new MoveLinearToCommand(spatialTarget, this));
-		exe.addCommand("RotateLinearBy", new RotateLinearByCommand(spatialTarget, this));
+		exe.addCommand("RotateLinearBy", new RotateLinearByCommand(spatialTarget));
 	}
 	private void installLightCommands(final CommandExecutor exe, final BiConverter<String, Spatial, Spatial> spatialTarget) {
 		exe.addCommand("AddAmbientLight", new AddAmbientLightCommand(spatialTarget));
