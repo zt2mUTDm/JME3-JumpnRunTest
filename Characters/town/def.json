@@ -1,8 +1,0 @@
-{
-	"model": "assets/Models/town/main.scene",
-	"collision": {
-		"enabled": true,
-		"type": "rigid",
-		"mass": 0
-	}
-}
