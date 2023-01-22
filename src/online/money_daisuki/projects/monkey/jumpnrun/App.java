@@ -1,5 +1,8 @@
 package online.money_daisuki.projects.monkey.jumpnrun;
 
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -7,7 +10,10 @@ import java.util.Map.Entry;
 import com.jme3.asset.plugins.FileLocator;
 import com.jme3.bullet.BulletAppState;
 import com.jme3.input.KeyInput;
+import com.jme3.input.controls.ActionListener;
 import com.jme3.input.controls.KeyTrigger;
+import com.jme3.post.FilterPostProcessor;
+import com.jme3.post.filters.CartoonEdgeFilter;
 import com.jme3.renderer.RenderManager;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
@@ -15,6 +21,7 @@ import com.jme3.scene.Spatial.CullHint;
 import com.jme3.terrain.geomipmap.TerrainQuad;
 
 import online.money_daisuki.api.base.BiConverter;
+import online.money_daisuki.api.base.ConstantDataSource;
 import online.money_daisuki.api.base.Converter;
 import online.money_daisuki.api.base.DataSink;
 import online.money_daisuki.api.base.Requires;
@@ -60,6 +67,11 @@ import online.money_daisuki.api.monkey.basegame.light.AddDirectionalLightCommand
 import online.money_daisuki.api.monkey.basegame.light.AddPointLightCommand;
 import online.money_daisuki.api.monkey.basegame.light.AddSpotLightCommand;
 import online.money_daisuki.api.monkey.basegame.material.FlexibleMaterialLoader;
+import online.money_daisuki.api.monkey.basegame.misc.FormatDateAsStringSource;
+import online.money_daisuki.api.monkey.basegame.misc.NumeredFileGenerated;
+import online.money_daisuki.api.monkey.basegame.misc.OwnScreenshotAppState;
+import online.money_daisuki.api.monkey.basegame.misc.SetScreenshotDirectoryCommand;
+import online.money_daisuki.api.monkey.basegame.misc.TakeScreenshotCommand;
 import online.money_daisuki.api.monkey.basegame.misc.Utils;
 import online.money_daisuki.api.monkey.basegame.model.AddModelCommand;
 import online.money_daisuki.api.monkey.basegame.model.FlexibleModelLoader;
@@ -108,6 +120,8 @@ public final class App extends ExtendedApplication {
 	@Override
 	public void simpleInitApp() {
 		getFlyByCamera().setEnabled(false);
+		
+		final MutableSingleValueModel<File> screenshotDirectory = new MutableSingleValueModelImpl<>(new File("."));
 		
 		variables = new HashMap<>();
 		
@@ -182,6 +196,36 @@ public final class App extends ExtendedApplication {
 		stateManager.attach(new ConsoleAppState(exe));
 		
 		
+		final OwnScreenshotAppState screenshot = new OwnScreenshotAppState(new NumeredFileGenerated(
+				screenshotDirectory,
+				new FormatDateAsStringSource(
+						new ConstantDataSource<>(new SimpleDateFormat("yyyy-MM-dd.HH.mm.ss")),
+						new ConstantDataSource<>(new Date())
+				),
+				new ConstantDataSource<>("png"),
+				255
+		));
+		screenshot.addCapturedListener(new Runnable() {
+			@Override
+			public void run() {
+				
+			}
+		});
+		screenshot.addCapturingFailedListener(new Runnable() {
+			@Override
+			public void run() {
+				
+			}
+		});
+		getStateManager().attach(screenshot);
+		
+		exe.addCommand("SetScreenshotDirectory", new SetScreenshotDirectoryCommand(screenshotDirectory));
+		exe.addCommand("TakeScreenshot", new TakeScreenshotCommand(screenshot));
+		
+		final FilterPostProcessor foo = new FilterPostProcessor(getAssetManager());
+		foo.addFilter(new CartoonEdgeFilter());
+		getViewPort().addProcessor(foo);
+		
 		getInputManager().addMapping("ControlMoveUp", new KeyTrigger(KeyInput.KEY_UP));
 		getInputManager().addMapping("ControlMoveLeft", new KeyTrigger(KeyInput.KEY_LEFT));
 		getInputManager().addMapping("ControlMoveDown", new KeyTrigger(KeyInput.KEY_DOWN));
@@ -196,6 +240,17 @@ public final class App extends ExtendedApplication {
 		
 		getInputManager().addMapping("CamZoomIn", new KeyTrigger(KeyInput.KEY_NUMPAD9));
 		getInputManager().addMapping("CamZoomOut", new KeyTrigger(KeyInput.KEY_NUMPAD3));
+		
+		getInputManager().addMapping("TakeScreenshot", new KeyTrigger(KeyInput.KEY_F12));
+		
+		getInputManager().addListener(new ActionListener() {
+			@Override
+			public void onAction(final String name, final boolean isPressed, final float tpf) {
+				if(isPressed) {
+					screenshot.capture();
+				}
+			}
+		}, "TakeScreenshot");
 		
 		getStateManager().attach(new FrequencyDividingAppState(removeDoneState, 30.0f));
 		exe.addCommand("Exec", new ExecCommand(getStateManager(), this, removeDoneState));
@@ -271,7 +326,6 @@ public final class App extends ExtendedApplication {
 		exe.addCommand("SetAudioVolume", new SetAudioVolumeCommand(spatialTarget));
 		exe.addCommand("SetRefDistance", new SetRefDistanceCommand(spatialTarget));
 		exe.addCommand("SetMaxDistance", new SetMaxDistanceCommand(spatialTarget));
-		
 	}
 	private void installLightCommands(final CommandExecutor exe, final BiConverter<String, Spatial, Spatial> spatialTarget) {
 		exe.addCommand("AddAmbientLight", new AddAmbientLightCommand(spatialTarget));
@@ -352,6 +406,7 @@ public final class App extends ExtendedApplication {
 		exe.addCommand("ShowControlledTextFromFile", new ShowControlledTextFromFileCommand(textAppState, getInputManager(), this,
 				languageKey));
 	}
+	
 	
 	@Override
 	public void simpleUpdate(final float tpf) {
