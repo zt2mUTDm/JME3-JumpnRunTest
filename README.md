@@ -7,6 +7,7 @@ Clone the repo local and add at least following libaries to the class path:
 Java standard library (8+)
 1) jme3-core (3.5.2)
 1) jme3-desktop (3.5.2)
+1) jme3-jogg (3.5.2)
 1) jme3-lwjgl3 (3.5.2)
 1) jme3-plugings (3.5.2)
 1) jme3-terrain (3.5.2)
