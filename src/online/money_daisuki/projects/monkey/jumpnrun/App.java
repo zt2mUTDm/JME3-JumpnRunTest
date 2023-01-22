@@ -24,6 +24,7 @@ import online.money_daisuki.api.base.BiConverter;
 import online.money_daisuki.api.base.ConstantDataSource;
 import online.money_daisuki.api.base.Converter;
 import online.money_daisuki.api.base.DataSink;
+import online.money_daisuki.api.base.DataSource;
 import online.money_daisuki.api.base.Requires;
 import online.money_daisuki.api.base.models.MutableSingleValueModel;
 import online.money_daisuki.api.base.models.MutableSingleValueModelImpl;
@@ -200,7 +201,12 @@ public final class App extends ExtendedApplication {
 				screenshotDirectory,
 				new FormatDateAsStringSource(
 						new ConstantDataSource<>(new SimpleDateFormat("yyyy-MM-dd.HH.mm.ss")),
-						new ConstantDataSource<>(new Date())
+						new DataSource<Date>() {
+							@Override
+							public Date source() {
+								return(new Date());
+							}
+						}
 				),
 				new ConstantDataSource<>("png"),
 				255
@@ -241,7 +247,7 @@ public final class App extends ExtendedApplication {
 		getInputManager().addMapping("CamZoomIn", new KeyTrigger(KeyInput.KEY_NUMPAD9));
 		getInputManager().addMapping("CamZoomOut", new KeyTrigger(KeyInput.KEY_NUMPAD3));
 		
-		getInputManager().addMapping("TakeScreenshot", new KeyTrigger(KeyInput.KEY_F12));
+		getInputManager().addMapping("TakeScreenshot", new KeyTrigger(KeyInput.KEY_SYSRQ));
 		
 		getInputManager().addListener(new ActionListener() {
 			@Override
@@ -261,6 +267,7 @@ public final class App extends ExtendedApplication {
 			}
 		});
 	}
+	
 	private void installCamCommands(final CommandExecutor exe, final BiConverter<String, Spatial, Spatial> spatialTarget) {
 		exe.addCommand("SetFlycamMoveSpeed", new FlycamMoveSpeedCommand(this));
 		exe.addCommand("SetCameraFrustumFar", new SetCameraFrustumFarCommand(getCamera()));
