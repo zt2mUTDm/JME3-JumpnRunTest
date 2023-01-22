@@ -16,5 +16,5 @@ Java standard library (8+)
 
 # But compiling on the own is such a hard job.
 Here is a ready runnable jar version: https://mega.nz/file/LJQnTL5T#NRNHdm3ZLO5pSmcWyslSaEslqh8jUMj1-RZBcnfHd0o
-
+ 
 Contains all required libraries but no source and is proberly not up-to-date.
