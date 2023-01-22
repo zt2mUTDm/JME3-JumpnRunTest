@@ -25,6 +25,18 @@ import online.money_daisuki.api.base.models.SetableMutableSingleValueModelImpl;
 import online.money_daisuki.api.monkey.basegame.ExtendedApplication;
 import online.money_daisuki.api.monkey.basegame.FrequencyDividingAppState;
 import online.money_daisuki.api.monkey.basegame.RemoveDoneAppState;
+import online.money_daisuki.api.monkey.basegame.audio.CreateAudioNodeCommand;
+import online.money_daisuki.api.monkey.basegame.audio.PauseAudioCommand;
+import online.money_daisuki.api.monkey.basegame.audio.PlayAudioCommand;
+import online.money_daisuki.api.monkey.basegame.audio.SetAudioDirectionalCommand;
+import online.money_daisuki.api.monkey.basegame.audio.SetAudioLoopingCommand;
+import online.money_daisuki.api.monkey.basegame.audio.SetAudioPitchOffsetCommand;
+import online.money_daisuki.api.monkey.basegame.audio.SetAudioPositionalCommand;
+import online.money_daisuki.api.monkey.basegame.audio.SetAudioTimeOffsetCommand;
+import online.money_daisuki.api.monkey.basegame.audio.SetAudioVolumeCommand;
+import online.money_daisuki.api.monkey.basegame.audio.SetMaxDistanceCommand;
+import online.money_daisuki.api.monkey.basegame.audio.SetRefDistanceCommand;
+import online.money_daisuki.api.monkey.basegame.audio.StopAudioCommand;
 import online.money_daisuki.api.monkey.basegame.cam.AddChaseCameraCommand;
 import online.money_daisuki.api.monkey.basegame.cam.DebugCameraTransformCommand;
 import online.money_daisuki.api.monkey.basegame.cam.FlycamMoveSpeedCommand;
@@ -55,6 +67,7 @@ import online.money_daisuki.api.monkey.basegame.player.AddPlayerCommand;
 import online.money_daisuki.api.monkey.basegame.player.control.SetPlayerControlEnabledCommand;
 import online.money_daisuki.api.monkey.basegame.player.control.SetPlayerEnabledCommand;
 import online.money_daisuki.api.monkey.basegame.script.ExecCommand;
+import online.money_daisuki.api.monkey.basegame.spatial.DetachSpatialCommand;
 import online.money_daisuki.api.monkey.basegame.spatial.HasSpatial;
 import online.money_daisuki.api.monkey.basegame.spatial.HasSpatialAdapter;
 import online.money_daisuki.api.monkey.basegame.spatial.MoveToCommand;
@@ -155,6 +168,7 @@ public final class App extends ExtendedApplication {
 		installTerrainCommands(exe, bulletAppState);
 		installTextboxCommands();
 		installSpatialCommands(exe, bulletAppState, spatialTarget);
+		installAudioCommands(exe, spatialTarget);
 		
 		// Misc
 		exe.addCommand("DebugBullet", new DebugBulletCommand(bulletAppState));
@@ -182,7 +196,6 @@ public final class App extends ExtendedApplication {
 		
 		getInputManager().addMapping("CamZoomIn", new KeyTrigger(KeyInput.KEY_NUMPAD9));
 		getInputManager().addMapping("CamZoomOut", new KeyTrigger(KeyInput.KEY_NUMPAD3));
-		
 		
 		getStateManager().attach(new FrequencyDividingAppState(removeDoneState, 30.0f));
 		exe.addCommand("Exec", new ExecCommand(getStateManager(), this, removeDoneState));
@@ -243,6 +256,22 @@ public final class App extends ExtendedApplication {
 		exe.addCommand("SetSpatialAnim", new SetSpatialAnim(spatialTarget));
 		exe.addCommand("MoveLinearTo", new MoveLinearToCommand(spatialTarget, this));
 		exe.addCommand("RotateLinearBy", new RotateLinearByCommand(spatialTarget));
+		exe.addCommand("DetachSpatial", new DetachSpatialCommand(spatialTarget));
+	}
+	private void installAudioCommands(final CommandExecutor exe, final BiConverter<String, Spatial, Spatial> spatialTarget) {
+		exe.addCommand("CreateAudioNode", new CreateAudioNodeCommand(assetManager, spatialTarget));
+		exe.addCommand("PlayAudio", new PlayAudioCommand(spatialTarget));
+		exe.addCommand("PauseAudio", new PauseAudioCommand(spatialTarget));
+		exe.addCommand("StopAudio", new StopAudioCommand(spatialTarget));
+		exe.addCommand("SetAudioDirectional", new SetAudioDirectionalCommand(spatialTarget));
+		exe.addCommand("SetAudioPositional", new SetAudioPositionalCommand(spatialTarget));
+		exe.addCommand("SetAudioLooping", new SetAudioLoopingCommand(spatialTarget));
+		exe.addCommand("SetAudioTimeOffset", new SetAudioTimeOffsetCommand(spatialTarget));
+		exe.addCommand("SetAudioPitchOffset", new SetAudioPitchOffsetCommand(spatialTarget));
+		exe.addCommand("SetAudioVolume", new SetAudioVolumeCommand(spatialTarget));
+		exe.addCommand("SetRefDistance", new SetRefDistanceCommand(spatialTarget));
+		exe.addCommand("SetMaxDistance", new SetMaxDistanceCommand(spatialTarget));
+		
 	}
 	private void installLightCommands(final CommandExecutor exe, final BiConverter<String, Spatial, Spatial> spatialTarget) {
 		exe.addCommand("AddAmbientLight", new AddAmbientLightCommand(spatialTarget));
@@ -333,8 +362,7 @@ public final class App extends ExtendedApplication {
 	public void simpleRender(final RenderManager rm) {
 		//TODO: add render code
 	}
-	
-	
+		
 	@Override
 	public void execute(final Spatial spatial, final String[] cmd, final Runnable done) {
 		exe.execute(spatial, cmd, done);

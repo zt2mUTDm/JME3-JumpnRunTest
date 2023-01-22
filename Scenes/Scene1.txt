@@ -21,7 +21,10 @@ endif
 
 SetVariable Enemy activated false
 SetVariable Enemy playerDetected false
-	
+
+CreateAudioNode root bgaudio Audio/AMBForst_Forest_(ID_0100)_BSB.ogg buffer
+PlayAudio bgaudio
+
 endatomar
 sleep 1
 SetPlayerEnabled on
