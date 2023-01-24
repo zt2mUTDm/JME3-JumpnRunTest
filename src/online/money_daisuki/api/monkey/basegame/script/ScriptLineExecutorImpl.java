@@ -48,10 +48,14 @@ public final class ScriptLineExecutorImpl implements ScriptLineExecutor {
 				return;
 			}
 			sleeps = false;
+			run();
+			return;
 		} else if(waits) {
 			if(!runningScripts.contains(waitingId)) {
 				waits = false;
 				waitingId = null;
+				run();
+				return;
 			} else {
 				return;
 			}
@@ -82,6 +86,8 @@ public final class ScriptLineExecutorImpl implements ScriptLineExecutor {
 				if(runningScripts.contains(waitIdLong)) {
 					waitingId = waitIdLong;
 					waits = true;
+					return;
+				} else if(afterLastCommand()) {
 					return;
 				}
 			default:
