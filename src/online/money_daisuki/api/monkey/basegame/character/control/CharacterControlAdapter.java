@@ -17,6 +17,7 @@ import com.jme3.renderer.ViewPort;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
 import com.jme3.scene.control.Control;
+import com.jme3.util.TempVars;
 
 import online.money_daisuki.api.base.DataSource;
 import online.money_daisuki.api.base.Requires;
@@ -72,7 +73,13 @@ public final class CharacterControlAdapter implements CharControl {
 	
 	@Override
 	public boolean isOnGround() {
-		return(onGroundTester.source().booleanValue());
+		final TempVars vars = TempVars.get();
+		try {
+			control.getCharacter().getLinearVelocity(vars.vect1);
+			return(onGroundTester.source().booleanValue() && vars.vect1.y == 0.0f);
+		} finally {
+			vars.release();
+		}
 	}
 	
 	@Override
