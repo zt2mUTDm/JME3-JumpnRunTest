@@ -1,4 +1,4 @@
-package online.money_daisuki.api.monkey.basegame.player.control;
+package online.money_daisuki.api.monkey.basegame.player;
 
 import com.jme3.scene.Spatial;
 
