@@ -6,6 +6,8 @@ import java.io.Reader;
 
 import com.jme3.bullet.BulletAppState;
 import com.jme3.bullet.control.RigidBodyControl;
+import com.jme3.math.FastMath;
+import com.jme3.math.Quaternion;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
@@ -43,7 +45,7 @@ public final class AddCharacterCommand implements Command {
 	}
 	@Override
 	public void execute(final Spatial a, final String[] b, final Runnable done) {
-		Requires.lenEqual(b, 8);
+		Requires.lenEqual(b, 11);
 		//final File f = new File(b[1]);
 		//Requires.isTrue(Utils.isSubdirectory(f, new File("models")));
 		
@@ -68,17 +70,24 @@ public final class AddCharacterCommand implements Command {
 				Float.parseFloat(b[6]),
 				Float.parseFloat(b[7])
 		);
+		final Quaternion q = new Quaternion().fromAngles(new float[] {
+				Float.parseFloat(b[8]) * FastMath.DEG_TO_RAD,
+				Float.parseFloat(b[9]) * FastMath.DEG_TO_RAD,
+				Float.parseFloat(b[10]) * FastMath.DEG_TO_RAD
+		});
 		
 		Utils.forEachControl(spatial, RigidBodyControl.class, new DataSink<RigidBodyControl>() {
 			@Override
 			public void sink(final RigidBodyControl rigid) {
 				rigid.setPhysicsLocation(location);
 				rigid.setPhysicsScale(scale);
+				rigid.setPhysicsRotation(q);
 			}
 		});
 		
 		spatial.setLocalTranslation(location);
 		spatial.setLocalScale(scale);
+		spatial.setLocalRotation(q);
 		
 		app.enqueue(new Runnable() {
 			@Override

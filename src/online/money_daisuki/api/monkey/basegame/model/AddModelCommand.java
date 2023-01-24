@@ -4,6 +4,8 @@ import java.io.File;
 
 import com.jme3.app.Application;
 import com.jme3.bullet.control.RigidBodyControl;
+import com.jme3.math.FastMath;
+import com.jme3.math.Quaternion;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
@@ -47,8 +49,14 @@ public final class AddModelCommand implements Command {
 				Float.parseFloat(b[6]),
 				Float.parseFloat(b[7])
 		);
+		final Quaternion q = new Quaternion().fromAngles(new float[] {
+				Float.parseFloat(b[8]) * FastMath.DEG_TO_RAD,
+				Float.parseFloat(b[9]) * FastMath.DEG_TO_RAD,
+				Float.parseFloat(b[10]) * FastMath.DEG_TO_RAD
+		});
 		
 		spatial.setLocalScale(scale);
+		spatial.setLocalRotation(q);
 		
 		final RigidBodyControl rigid = spatial.getControl(RigidBodyControl.class);
 		if(rigid != null) {

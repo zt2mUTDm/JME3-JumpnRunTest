@@ -1,21 +1,21 @@
 atomar
-AddCharacter Characters/Scene1/def.json 0 0 0 1 1 1
+AddCharacter Characters/Scene1/def.json 0 0 0 1 1 1 0 0 0
 AddAmbientLight root 1 1 1 0.1
 
-AddCharacter Characters/Sign_Post/def.json -40 0 -40 1 1 1
-AddCharacter Characters/Scene1Teleport/def.json 0 2 -83.5 1 1 1
-AddCharacter Characters/EnemySpawn/EnemySpawn.json 0 2 -100 1.0 1.0 1.0
-AddCharacter Characters/Onigiri/Onigiri.json 69 12.6 -50 1 1 1
+AddCharacter Characters/Sign_Post/def.json -40 0 -40 1 1 1 0 0 0
+AddCharacter Characters/Scene1Teleport/def.json 0 2 -83.5 1 1 1 0 0 0
+AddCharacter Characters/EnemySpawn/EnemySpawn.json 0 2 -100 1.0 1.0 1.0 0 0 0
+AddCharacter Characters/Onigiri/Onigiri.json 69 12.6 -50 1 1 1 0 0 0
 
-AddCharacter Characters/Platform1/Platform1.json -150 13 -45 1 1 1
-AddCharacter Characters/Platform2/Platform2.json -135 20 -15 1 1 1
-AddCharacter Characters/Platform3/Platform3.json -105 20 -15 1 1 1
-AddCharacter Characters/Onigiri2/Onigiri2.json -86 26 -176 1 1 1
+AddCharacter Characters/Platform1/Platform1.json -150 13 -45 1 1 1 0 0 0
+AddCharacter Characters/Platform2/Platform2.json -135 20 -15 1 1 1 0 0 0
+AddCharacter Characters/Platform3/Platform3.json -105 20 -15 1 1 1 0 0 0
+AddCharacter Characters/Onigiri2/Onigiri2.json -86 26 -176 1 1 1 0 0 0
 
-AddCharacter Characters/Switch/Switch.json -120 0 -190 1.0 1.0 1.0
-AddCharacter Characters/Tank/Tank.json -120 0 -220 1.0 1.0 1.0
+AddCharacter Characters/Switch/Switch.json -120 0 -190 1.0 1.0 1.0 0 45 0
+AddCharacter Characters/Tank/Tank.json -120 0 -220 1.0 1.0 1.0 0 0 0
 
-AddCharacter Characters/Trampoline/Trampoline.json -10 1 -10 1 1 1
+AddCharacter Characters/Trampoline/Trampoline.json -10 1 -100 1 1 1 0 0 0
 
 if Switch pressed == true
 	SetVariable Tank rotated false
