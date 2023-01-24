@@ -13,7 +13,6 @@ import com.jme3.input.KeyInput;
 import com.jme3.input.controls.ActionListener;
 import com.jme3.input.controls.KeyTrigger;
 import com.jme3.post.FilterPostProcessor;
-import com.jme3.post.filters.CartoonEdgeFilter;
 import com.jme3.renderer.RenderManager;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
@@ -79,6 +78,8 @@ import online.money_daisuki.api.monkey.basegame.model.FlexibleModelLoader;
 import online.money_daisuki.api.monkey.basegame.player.AddPlayerCommand;
 import online.money_daisuki.api.monkey.basegame.player.SetPlayerControlEnabledCommand;
 import online.money_daisuki.api.monkey.basegame.player.SetPlayerEnabledCommand;
+import online.money_daisuki.api.monkey.basegame.player.SetPlayerJumpSpeedCommand;
+import online.money_daisuki.api.monkey.basegame.player.SetResetPlayerJumpSpeedOnSurfaceCommand;
 import online.money_daisuki.api.monkey.basegame.script.ExecCommand;
 import online.money_daisuki.api.monkey.basegame.spatial.DetachSpatialCommand;
 import online.money_daisuki.api.monkey.basegame.spatial.HasSpatial;
@@ -219,7 +220,7 @@ public final class App extends ExtendedApplication {
 		});
 		screenshot.addCapturingFailedListener(new Runnable() {
 			@Override
-			public void run() {
+			public  void run() {
 				
 			}
 		});
@@ -229,7 +230,6 @@ public final class App extends ExtendedApplication {
 		exe.addCommand("TakeScreenshot", new TakeScreenshotCommand(screenshot));
 		
 		final FilterPostProcessor foo = new FilterPostProcessor(getAssetManager());
-		foo.addFilter(new CartoonEdgeFilter());
 		getViewPort().addProcessor(foo);
 		
 		getInputManager().addMapping("ControlMoveUp", new KeyTrigger(KeyInput.KEY_UP));
@@ -274,7 +274,6 @@ public final class App extends ExtendedApplication {
 		exe.addCommand("DebugChaseCamera", new DebugCameraTransformCommand(getGuiNode(), playerContainer, this));
 		exe.addCommand("PrintChaseCamera", new PrintCameraTransformCommand(playerContainer));
 		exe.addCommand("SetCameraTransform", new SetCameraTransformCommand(playerContainer));
-		
 		exe.addCommand("AddChaseCamera", new AddChaseCameraCommand(spatialTarget, this));
 		exe.addCommand("RemoveChaseCamera", new RemoveChaseCameraCommand(spatialTarget, this));
 		exe.addCommand("SetChaseCameraTransform", new SetChaseCameraTransformCommand(spatialTarget));
@@ -384,6 +383,12 @@ public final class App extends ExtendedApplication {
 		);
 		exe.addCommand("SetPlayerControlEnabled",
 				new SetPlayerControlEnabledCommand(playerContainer)
+		);
+		exe.addCommand("SetPlayerJumpSpeed",
+				new SetPlayerJumpSpeedCommand(playerContainer)
+		);
+		exe.addCommand("SetResetPlayerJumpSpeedOnSurface",
+				new SetResetPlayerJumpSpeedOnSurfaceCommand(playerContainer)
 		);
 	}
 	private void installTextboxCommands() {

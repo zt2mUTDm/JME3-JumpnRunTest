@@ -15,6 +15,8 @@ AddCharacter Characters/Onigiri2/Onigiri2.json -86 26 -176 1 1 1
 AddCharacter Characters/Switch/Switch.json -120 0 -190 1.0 1.0 1.0
 AddCharacter Characters/Tank/Tank.json -120 0 -220 1.0 1.0 1.0
 
+AddCharacter Characters/Trampoline/Trampoline.json -10 1 -10 1 1 1
+
 if Switch pressed == true
 	SetVariable Tank rotated false
 endif

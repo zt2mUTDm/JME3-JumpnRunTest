@@ -1,0 +1,29 @@
+{
+	"model": "Models/Trampoline/Trampoline.json",
+	"physic": {
+		"shapes": [
+			{
+				"type": "Cylinder",
+				"radius": 0.5,
+				"height": 0.5,
+				"attach": "TrampolineScript",
+				"collisionGroup": 2,
+				"purpose": "onOffEventReceive",
+				"trigger": "shot",
+				"scripts": [
+					"Scripts/TrampolineEntered.txt",
+					"Scripts/TrampolineLeaved.txt"
+				]
+			},
+			{
+				"type": "Cylinder",
+				"radius": 1,
+				"height": 2,
+				"attach": "Trampoline",
+				"collisionGroup": 0,
+				"purpose": "rigid",
+				"mass": 0
+			},
+		]
+	}
+}

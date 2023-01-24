@@ -44,6 +44,8 @@ public final class MoveControlledSpatialControl implements Control {
 	
 	private boolean inDoubleJump;
 	
+	private boolean resetJumpSpeedOnSurface;
+	
 	private boolean hitted;
 	private float untilBlinkCounter;
 	private int hittedBlinkCounter;
@@ -155,6 +157,8 @@ public final class MoveControlledSpatialControl implements Control {
 			cc.setMoveVector(Vector3f.ZERO);
 			//cc.setWalkDirection(Vector3f.ZERO);
 			
+			resetJumpSpeed();
+			
 			if(!inLongIdle) {
 				longIdleCounter+= tpf;
 				if(longIdleCounter >= 10) {
@@ -196,6 +200,7 @@ public final class MoveControlledSpatialControl implements Control {
 		}
 		triggerEvent("Main", false);
 		updateMoveDirection(true);
+		resetJumpSpeed();
 	}
 	private void strikeStart(final float tpf) {
 		state = State.STRIKE_MIDDLE;
@@ -270,6 +275,8 @@ public final class MoveControlledSpatialControl implements Control {
 			state = State.JUMP_END;
 			
 			cc.setMoveVector(Vector3f.ZERO);
+			
+			resetJumpSpeed();
 			
 			cc.playAnimation("JumpEnd", true, new Runnable() {
 				@Override
@@ -487,6 +494,20 @@ public final class MoveControlledSpatialControl implements Control {
 		} else {
 			return(-1);
 		}
+	}
+	
+	private void resetJumpSpeed() {
+		if(resetJumpSpeedOnSurface) {
+			getUnderlyingControl().getCharacter().setJumpSpeed(20.0f);
+			resetJumpSpeedOnSurface = false;
+		}
+	}
+	
+	public void setJumpSpeed(final float jumpSpeed) {
+		getUnderlyingControl().getCharacter().setJumpSpeed(100.0f);
+	}
+	public void resetJumpSpeedOnSurfaceGround() {
+		resetJumpSpeedOnSurface = true;
 	}
 	
 	private CharControl getUnderlyingControl() {

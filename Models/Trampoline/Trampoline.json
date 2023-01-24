@@ -1,0 +1,18 @@
+{
+	"type": "node",
+	"name": "Trampoline",
+	"childs": [
+		{
+			"type": "node",
+			"name": "TrampolineScript",
+			"translation": [ 0.0, 1.0, 0.0 ],
+			"childs": [
+				
+			]
+		},
+		{
+			"type": "model",
+			"url": "Models/Trampoline/Trampoline.obj",
+		}
+	]
+}
