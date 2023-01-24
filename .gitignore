@@ -2,3 +2,6 @@
 /.classpath
 /.project
 /.settings/
+/OpenAL64.dll
+/bulletjme.dll
+/lwjgl64.dll
