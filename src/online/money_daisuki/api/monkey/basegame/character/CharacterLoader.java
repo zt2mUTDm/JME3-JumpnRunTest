@@ -19,6 +19,7 @@ import com.jme3.bullet.collision.shapes.CollisionShape;
 import com.jme3.bullet.collision.shapes.CompoundCollisionShape;
 import com.jme3.bullet.collision.shapes.ConeCollisionShape;
 import com.jme3.bullet.collision.shapes.ConvexShape;
+import com.jme3.bullet.collision.shapes.CylinderCollisionShape;
 import com.jme3.bullet.collision.shapes.SphereCollisionShape;
 import com.jme3.bullet.control.BetterCharacterControl;
 import com.jme3.bullet.control.CharacterControl;
@@ -49,10 +50,10 @@ import online.money_daisuki.api.monkey.basegame.character.anim.NullAnimPlayer;
 import online.money_daisuki.api.monkey.basegame.character.control.CharacterControlAdapter;
 import online.money_daisuki.api.monkey.basegame.misc.Utils;
 import online.money_daisuki.api.monkey.basegame.player.control.EventReceiver;
+import online.money_daisuki.api.monkey.basegame.player.control.EventReceiver.TriggerType;
 import online.money_daisuki.api.monkey.basegame.player.control.EventTriggerer;
 import online.money_daisuki.api.monkey.basegame.player.control.NamedEventTriggerControl;
 import online.money_daisuki.api.monkey.basegame.player.control.OnOffEventReceiver;
-import online.money_daisuki.api.monkey.basegame.player.control.EventReceiver.TriggerType;
 import online.money_daisuki.api.monkey.basegame.script.ScriptControl;
 import online.money_daisuki.api.monkey.basegame.script.ScriptFileLoader;
 import online.money_daisuki.api.monkey.basegame.script.ScriptLineExecutorImpl;
@@ -238,6 +239,8 @@ public final class CharacterLoader implements DataSource<Spatial> {
 				return(loadConeShape(map));
 			case("Sphere"):
 				return(loadSphereShape(map));
+			case("Cylinder"):
+				return(loadCylinderShape(map));
 			case("Compound"):
 				return(loadCompoundShape(map, spatial));
 			case("MeshShape"):
@@ -273,6 +276,12 @@ public final class CharacterLoader implements DataSource<Spatial> {
 	private ConvexShape loadSphereShape(final JsonMap map) {
 		final float radius = map.get("radius").asData().asNumber().asBigDecimal().floatValue();
 		return(new SphereCollisionShape(radius));
+	}
+	private ConvexShape loadCylinderShape(final JsonMap map) {
+		final float radius = map.get("radius").asData().asNumber().asBigDecimal().floatValue();
+		final float height = map.get("height").asData().asNumber().asBigDecimal().floatValue();
+		final int axis = map.containsKey("axis") ? map.get("axis").asData().asNumber().asBigInteger().intValueExact() : 1;
+		return(new CylinderCollisionShape(radius, height, axis));
 	}
 	private CollisionShape loadCompoundShape(final JsonMap map, final Spatial spatial) {
 		final CompoundCollisionShape cs = new CompoundCollisionShape();
