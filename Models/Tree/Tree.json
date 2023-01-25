@@ -1,0 +1,10 @@
+{
+	"type": "node",
+	"name": "Tree",
+	"childs": [
+		{
+			"type": "model",
+			"url": "Models/Tree/Tree.obj",
+		}
+	]
+}

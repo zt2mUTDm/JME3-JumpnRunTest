@@ -27,6 +27,8 @@ SetVariable Enemy playerDetected false
 CreateAudioNode root bgaudio Audio/AMBForst_Forest_(ID_0100)_BSB.ogg buffer
 PlayAudio bgaudio
 
+AddCharacter Characters/Tree/Tree.json -10 4 -10 1 1 1 0 0 0
+
 endatomar
 sleep 1
 SetPlayerEnabled on

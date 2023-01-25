@@ -1,1 +1,1 @@
-SetPlayerJumpSpeed 100
+SetPlayerJumpSpeed 40

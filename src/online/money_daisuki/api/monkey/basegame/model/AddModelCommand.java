@@ -32,7 +32,7 @@ public final class AddModelCommand implements Command {
 	}
 	@Override
 	public void execute(final Spatial a, final String[] b, final Runnable done) {
-		Requires.lenEqual(b, 8);
+		Requires.lenEqual(b, 11);
 		final File f = new File(b[1]);
 		//Requires.isTrue(Utils.isSubdirectory(f, new File("models")));
 		
