@@ -78,6 +78,9 @@ import online.money_daisuki.api.monkey.basegame.misc.TakeScreenshotCommand;
 import online.money_daisuki.api.monkey.basegame.misc.Utils;
 import online.money_daisuki.api.monkey.basegame.model.AddModelCommand;
 import online.money_daisuki.api.monkey.basegame.model.FlexibleModelLoader;
+import online.money_daisuki.api.monkey.basegame.particles.CreateParticleEmitterCommand;
+import online.money_daisuki.api.monkey.basegame.particles.EmitAllParticlesCommand;
+import online.money_daisuki.api.monkey.basegame.particles.FlexibleParticleEmitterLoader;
 import online.money_daisuki.api.monkey.basegame.player.AddPlayerCommand;
 import online.money_daisuki.api.monkey.basegame.player.SetPlayerControlEnabledCommand;
 import online.money_daisuki.api.monkey.basegame.player.SetPlayerEnabledCommand;
@@ -191,6 +194,7 @@ public final class App extends ExtendedApplication {
 		installTextboxCommands();
 		installSpatialCommands(exe, bulletAppState, spatialTarget);
 		installAudioCommands(exe, spatialTarget);
+		installParticleCommands(exe, spatialTarget);
 		
 		// Misc
 		exe.addCommand("DebugBullet", new DebugBulletCommand(bulletAppState));
@@ -431,6 +435,11 @@ public final class App extends ExtendedApplication {
 		exe.addCommand("SetLanguageKey", new SetLanguageKeyCommand(languageKey));
 		exe.addCommand("ShowControlledTextFromFile", new ShowControlledTextFromFileCommand(textAppState, getInputManager(), this,
 				languageKey));
+	}
+	private void installParticleCommands(final CommandExecutor exe, final BiConverter<String, Spatial, Spatial> spatialTarget) {
+		final FlexibleParticleEmitterLoader particleLoader = new FlexibleParticleEmitterLoader(new FlexibleMaterialLoader(this), this);
+		exe.addCommand("CreateParticleEmitter", new CreateParticleEmitterCommand(spatialTarget, particleLoader));
+		exe.addCommand("EmitAllParticles", new EmitAllParticlesCommand(spatialTarget));
 	}
 	
 	

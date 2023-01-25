@@ -1,0 +1,9 @@
+{
+	"url": "Common/MatDefs/Misc/Particle.j3md",
+	"textures": [
+		{
+			"name": "Texture",
+			"url": "Effects/Explosion/flash.png"
+		}
+	]
+}

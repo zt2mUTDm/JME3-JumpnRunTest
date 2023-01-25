@@ -1,0 +1,8 @@
+{
+	"type": "triangle",
+	"particleCount": 1000,
+	"material": "Materials/Flash.json",
+	"imageX": 2,
+	"imageY": 2,
+	"selectRandomImage": true
+}
