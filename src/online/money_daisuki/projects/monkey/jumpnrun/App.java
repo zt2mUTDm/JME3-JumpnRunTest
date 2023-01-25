@@ -10,8 +10,10 @@ import java.util.Map.Entry;
 import com.jme3.asset.plugins.FileLocator;
 import com.jme3.bullet.BulletAppState;
 import com.jme3.input.KeyInput;
+import com.jme3.input.MouseInput;
 import com.jme3.input.controls.ActionListener;
 import com.jme3.input.controls.KeyTrigger;
+import com.jme3.input.controls.MouseButtonTrigger;
 import com.jme3.post.FilterPostProcessor;
 import com.jme3.renderer.RenderManager;
 import com.jme3.renderer.ViewPort;
@@ -199,6 +201,7 @@ public final class App extends ExtendedApplication {
 		exe.addCommand("ClearVariablenType", new ClearVariablenTypeCommand(this));
 		exe.addCommand("ClearVariables", new ClearVariablesCommand(this));
 		
+		//stateManager.attach(new ConsoleAppState(exe));
 		
 		final ViewPort vp = getViewPort();
 		
@@ -207,7 +210,6 @@ public final class App extends ExtendedApplication {
 		console.setVisible(false);
 		stateManager.attach(new ConsoleAppState(console, new CommandStringDataSink(exe, new Node("ConsoleDummyNode"))));
 		guiNode.attachChild(console.getRoot());
-		
 		
 		final OwnScreenshotAppState screenshot = new OwnScreenshotAppState(new NumeredFileGenerated(
 				screenshotDirectory,
@@ -243,12 +245,13 @@ public final class App extends ExtendedApplication {
 		final FilterPostProcessor foo = new FilterPostProcessor(getAssetManager());
 		getViewPort().addProcessor(foo);
 		
-		getInputManager().addMapping("ControlMoveUp", new KeyTrigger(KeyInput.KEY_UP));
-		getInputManager().addMapping("ControlMoveLeft", new KeyTrigger(KeyInput.KEY_LEFT));
-		getInputManager().addMapping("ControlMoveDown", new KeyTrigger(KeyInput.KEY_DOWN));
-		getInputManager().addMapping("ControlMoveRight", new KeyTrigger(KeyInput.KEY_RIGHT));
-		getInputManager().addMapping("ControlStrike", new KeyTrigger(KeyInput.KEY_Z));
-		getInputManager().addMapping("ControlJump", new KeyTrigger(KeyInput.KEY_X));
+		getInputManager().addMapping("ControlMoveUp", new KeyTrigger(KeyInput.KEY_W));
+		getInputManager().addMapping("ControlMoveLeft", new KeyTrigger(KeyInput.KEY_A));
+		getInputManager().addMapping("ControlMoveDown", new KeyTrigger(KeyInput.KEY_S));
+		getInputManager().addMapping("ControlMoveRight", new KeyTrigger(KeyInput.KEY_D));
+		
+		getInputManager().addMapping("ControlStrike", new MouseButtonTrigger(MouseInput.BUTTON_RIGHT));
+		getInputManager().addMapping("ControlJump", new MouseButtonTrigger(MouseInput.BUTTON_LEFT));
 		
 		getInputManager().addMapping("CamMoveUp", new KeyTrigger(KeyInput.KEY_NUMPAD8));
 		getInputManager().addMapping("CamMoveRight", new KeyTrigger(KeyInput.KEY_NUMPAD6));

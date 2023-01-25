@@ -144,6 +144,7 @@ public final class AddPlayerCommand implements Command {
 				final ChaseCamera cam = new ChaseCamera(app.getCamera(), spatial, input);
 				cam.setMinDistance(7.0f);
 				cam.setInvertVerticalAxis(true);
+				cam.setDragToRotate(false);
 				
 				final ChaseCamControl camControl = new ChaseCamControl(new DataSource<Boolean>() {
 					@Override
