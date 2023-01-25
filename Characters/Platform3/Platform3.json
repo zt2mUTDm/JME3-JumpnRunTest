@@ -3,7 +3,7 @@
 	"physic": {
 		"shapes": [
 			{
-				"type": "MeshShape",
+				"type": "Mesh",
 				"attach": "Platform",
 				"collisionGroup": 0,
 				"purpose": "rigid",
@@ -20,5 +20,5 @@
 	],
 	"conditions": [
 		
-	],
+	]
 }

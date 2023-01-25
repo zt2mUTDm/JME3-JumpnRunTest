@@ -3,12 +3,12 @@
 	"physic": {
 		"shapes": [
 			{
-				"type": "MeshShape",
+				"type": "Mesh",
 				"attach": "Main",
 				"collisionGroup": 0,
 				"purpose": "rigid",
 				"mass": 0
-			},
+			}
 		]
 	}
 }

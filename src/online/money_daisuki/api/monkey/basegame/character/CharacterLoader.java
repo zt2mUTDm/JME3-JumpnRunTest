@@ -243,7 +243,7 @@ public final class CharacterLoader implements DataSource<Spatial> {
 				return(loadCylinderShape(map));
 			case("Compound"):
 				return(loadCompoundShape(map, spatial));
-			case("MeshShape"):
+			case("Mesh"):
 				return(loadMeshShape(map, spatial));
 			default:
 				throw new IllegalArgumentException("Unknown shape type: " + type);

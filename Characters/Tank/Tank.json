@@ -10,7 +10,7 @@
 	"physic": {
 		"shapes": [
 			{
-				"type": "MeshShape",
+				"type": "Mesh",
 				"attach": "Tank",
 				"collisionGroup": 0,
 				"setCollideWithGroups": 0,
