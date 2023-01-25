@@ -11,18 +11,14 @@ import com.jme3.input.InputManager;
 import com.jme3.input.KeyInput;
 import com.jme3.input.event.KeyInputEvent;
 import com.jme3.renderer.RenderManager;
-import com.jme3.scene.Node;
 
-import online.money_daisuki.api.base.NullRunnable;
+import online.money_daisuki.api.base.DataSink;
 import online.money_daisuki.api.base.Requires;
 
 public class ConsoleAppState implements AppState {
-	private final Command target;
+	private final DataSink<String> target;
 	
-	private final Node refNode;
 	private final SoftstoringHistory<String> history;
-	
-	private final Runnable doneListener;
 	
 	private boolean initialized = false;
 	
@@ -31,25 +27,24 @@ public class ConsoleAppState implements AppState {
 	
 	private ConsoleRawInputListener rawInputListener;
 	
-	private ConsoleUi ui;
+	private final Console console;
 	
-	public ConsoleAppState(final Command target) {
+	public ConsoleAppState(final Console console, final DataSink<String> target) {
+		this.console = Requires.notNull(console, "console == null");
 		this.target = Requires.notNull(target, "target == null");
-		this.refNode = new Node();
 		this.history = new SoftstoringHistory<>(255, true);
-		this.doneListener = new NullRunnable();
 	}
-
+	
 	@Override
 	final public void initialize(final AppStateManager pstateManager, final Application papp) {
 		initialized = true;
 		app = (SimpleApplication) papp;
 		inputManager = app.getInputManager();
 		
-		ui = new ConsoleUi(app);
-		ui.applyViewPortChange();
+		//ui = new ConsoleUi(app);
+		//ui.applyViewPortChange();
 		
-		ui.setInputText(ui.getInputText());
+		//ui.setInputText(ui.getInputText());
 		
 		rawInputListener = new ConsoleRawInputListener();
 		inputManager.addRawInputListener(rawInputListener);
@@ -69,25 +64,14 @@ public class ConsoleAppState implements AppState {
 	}
 	
 	public void applyViewPortChange() {
-		ui.applyViewPortChange();
-	}
-	
-	public int getConsoleNumLines() {
-		return(ui.getConsoleNumLines());
-	}
-	
-	public float getConsoleTextSize() {
-		if(!initialized) {
-			throw new IllegalStateException("Not initialized");
-		}
-		return(ui.getConsoleTextSize());
+		//ui.applyViewPortChange();
 	}
 	
 	private void submit(final String input) {
-		ui.appendConsole("> " + input);
+		console.appendOutputText("> " + input);
 		
 		try {
-			target.execute(refNode, input.split(" "), doneListener);
+			target.sink(input);
 		} catch(final RuntimeException e) {
 			Throwable t = e;
 			final Deque<Throwable> ts = new LinkedList<>();
@@ -97,21 +81,21 @@ public class ConsoleAppState implements AppState {
 			}
 			
 			for(; (t = ts.pollFirst()) != null;) {
-				ui.appendConsole("Error: " + t.toString());
+				console.appendOutputText("Error: " + t.toString());
 			}
 		}
 	}
 	
 	private void appendInputText(final String text) {
-		ui.appendInputText(text);
+		console.appendInputText(text);
 	}
 	private void appendInputTextBackspace() {
-		ui.appendInputTextBackspace();
+		console.inputTextBackspace();
 	}
 	
 	@Override
 	public void update(final float tpf) {
-		ui.update(tpf);
+		//ui.update(tpf);
 	}
 	
 	@Override
@@ -131,8 +115,8 @@ public class ConsoleAppState implements AppState {
 	}
 	
 	public final void setVisible(final boolean visible) {
-		if(ui != null) {
-			ui.setVisible(visible);
+		if(console != null) {
+			console.setVisible(visible);
 		}
 	}
 	
@@ -141,7 +125,7 @@ public class ConsoleAppState implements AppState {
 	}
 	
 	public final boolean isVisible() {
-		return(ui.isVisible());
+		return(console.isVisible());
 	}
 	
 	@Override
@@ -151,7 +135,7 @@ public class ConsoleAppState implements AppState {
 	
 	@Override
 	public final boolean isEnabled() {
-		return(ui.isVisible());
+		return(console.isVisible());
 	}
 	
 	@Override
@@ -196,7 +180,7 @@ public class ConsoleAppState implements AppState {
 				case KeyInput.KEY_BACK:
 					if (isVisible()) {
 						if (leftShiftPressed) {
-							ui.setInputText("");
+							console.setInputText("");
 						} else {
 							appendInputTextBackspace();
 						}
@@ -205,27 +189,27 @@ public class ConsoleAppState implements AppState {
 				break;
 				case KeyInput.KEY_RETURN:
 					if (isVisible()) {
-						final String text = ui.getInputText();
+						final String text = console.getInputText();
 						if(text.equals("")) {
 							setVisible(false);
 						} else {
 							submit(text);
 							history.submit(text);
-							ui.clearInput();
+							console.setInputText("");
 						}
 						evt.setConsumed();
 					}
 				break;
 				case KeyInput.KEY_UP:
 					if (isVisible()) {
-						ui.setInputText(history.previous(ui.getInputText()));
+						console.setInputText(history.previous(console.getInputText()));
 						evt.setConsumed();
 						
 					}
 				break;
 				case KeyInput.KEY_DOWN:
 					if (isVisible()) {
-						ui.setInputText(history.next(ui.getInputText()));
+						console.setInputText(history.next(console.getInputText()));
 						evt.setConsumed();
 					}
 				break;

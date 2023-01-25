@@ -14,6 +14,7 @@ import com.jme3.input.controls.ActionListener;
 import com.jme3.input.controls.KeyTrigger;
 import com.jme3.post.FilterPostProcessor;
 import com.jme3.renderer.RenderManager;
+import com.jme3.renderer.ViewPort;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
 import com.jme3.scene.Spatial.CullHint;
@@ -110,7 +111,10 @@ import online.money_daisuki.api.monkey.basegame.variables.IncVariableCommand;
 import online.money_daisuki.api.monkey.basegame.variables.SetVariableCommand;
 import online.money_daisuki.api.monkey.basegame.variables.VariableContainer;
 import online.money_daisuki.api.monkey.console.CommandExecutor;
+import online.money_daisuki.api.monkey.console.CommandStringDataSink;
 import online.money_daisuki.api.monkey.console.ConsoleAppState;
+import online.money_daisuki.api.monkey.console.ConsoleNodeBuilder;
+import online.money_daisuki.api.monkey.console.ConsoleSpatial;
 
 public final class App extends ExtendedApplication {
 	private CommandExecutor exe;
@@ -195,7 +199,14 @@ public final class App extends ExtendedApplication {
 		exe.addCommand("ClearVariablenType", new ClearVariablenTypeCommand(this));
 		exe.addCommand("ClearVariables", new ClearVariablesCommand(this));
 		
-		stateManager.attach(new ConsoleAppState(exe));
+		
+		final ViewPort vp = getViewPort();
+		
+		final ConsoleNodeBuilder cnb = new ConsoleNodeBuilder(assetManager, vp.getCamera().getWidth(), vp.getCamera().getHeight());
+		final ConsoleSpatial console = cnb.source();
+		console.setVisible(false);
+		stateManager.attach(new ConsoleAppState(console, new CommandStringDataSink(exe, new Node("ConsoleDummyNode"))));
+		guiNode.attachChild(console.getRoot());
 		
 		
 		final OwnScreenshotAppState screenshot = new OwnScreenshotAppState(new NumeredFileGenerated(
