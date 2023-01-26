@@ -292,6 +292,12 @@ public final class MoveControlledSpatialControl implements Control {
 			}
 		});
 		
+		if(inDrag) {
+			inDrag = false;
+			dragSource = null;
+			dragSourceLastLocation = null;
+		}
+		
 		updateMoveDirection(true);
 		
 		wantJump = false;
@@ -345,6 +351,9 @@ public final class MoveControlledSpatialControl implements Control {
 		wantJump = false;
 	}
 	private void jumpEnd(final float tpf) {
+		readNotifies();
+		handleDrag();
+		
 		if(wantStrike) {
 			state = State.STRIKE_START;
 			wantStrike = false;
