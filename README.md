@@ -15,6 +15,6 @@ Java standard library (8+)
 1) Minie (Recommend version 6.2, needs additional Heart (8.1.0), sim-math (1.5.0) and slf4j-api (1.7.32))
 
 # But compiling on the own is such a hard job.
-Here is a ready runnable jar version: https://mega.nz/file/LJQnTL5T#NRNHdm3ZLO5pSmcWyslSaEslqh8jUMj1-RZBcnfHd0o
+Here is a ready runnable jar version: https://mega.nz/file/aBpWgBiT#clNupyTkyjWE6xYAGeqC6H4dp8uGvEymO2ie8dMxqEM
 
 Contains all required libraries but no source and is proberly not up-to-date.
