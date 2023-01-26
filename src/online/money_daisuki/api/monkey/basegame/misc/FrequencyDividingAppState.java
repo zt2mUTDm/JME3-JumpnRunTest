@@ -1,4 +1,4 @@
-package online.money_daisuki.api.monkey.basegame;
+package online.money_daisuki.api.monkey.basegame.misc;
 
 import com.jme3.app.Application;
 import com.jme3.app.state.AppState;

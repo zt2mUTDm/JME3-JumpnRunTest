@@ -6,22 +6,21 @@ import com.jme3.terrain.geomipmap.TerrainQuad;
 
 import online.money_daisuki.api.base.Converter;
 import online.money_daisuki.api.base.Requires;
-import online.money_daisuki.api.monkey.basegame.WeakHashMapRefresher;
 
 public final class FlexibleTerrainLoader implements Converter<String, TerrainQuad> {
-	private final WeakHashMapRefresher<String, TerrainQuad> cache;
+	private final Converter<String, TerrainQuad> converter;
 	
 	public FlexibleTerrainLoader(final Converter<String, Material> matLoader,
 			final Application app) {
-		this.cache = new WeakHashMapRefresher<>(new Converter<String, TerrainQuad>() {
+		this.converter = new Converter<String, TerrainQuad>() {
 			@Override
 			public TerrainQuad convert(final String value) {
 				return(new TerrainLoader(Requires.notNull(value, "value == null"), matLoader, app).source());
 			}
-		});
+		};
 	}
 	@Override
 	public TerrainQuad convert(final String value) {
-		return(cache.get(value));
+		return(converter.convert(value));
 	}
 }

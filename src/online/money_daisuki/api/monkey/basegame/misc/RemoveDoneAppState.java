@@ -1,4 +1,4 @@
-package online.money_daisuki.api.monkey.basegame;
+package online.money_daisuki.api.monkey.basegame.misc;
 
 import java.util.Collection;
 import java.util.Iterator;

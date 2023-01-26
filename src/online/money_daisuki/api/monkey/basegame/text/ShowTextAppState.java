@@ -12,7 +12,7 @@ import com.jme3.app.state.AppStateManager;
 import com.jme3.renderer.RenderManager;
 
 import online.money_daisuki.api.base.Requires;
-import online.money_daisuki.api.monkey.basegame.MayDoneAppState;
+import online.money_daisuki.api.monkey.basegame.misc.MayDoneAppState;
 
 public final class ShowTextAppState implements MayDoneAppState {
 	private boolean enabled;

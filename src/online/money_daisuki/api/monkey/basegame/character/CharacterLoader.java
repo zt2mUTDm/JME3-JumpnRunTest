@@ -41,7 +41,6 @@ import online.money_daisuki.api.io.json.JsonElement;
 import online.money_daisuki.api.io.json.JsonList;
 import online.money_daisuki.api.io.json.JsonMap;
 import online.money_daisuki.api.monkey.basegame.ExtendedApplication;
-import online.money_daisuki.api.monkey.basegame.RotateControl;
 import online.money_daisuki.api.monkey.basegame.character.anim.AnimControl;
 import online.money_daisuki.api.monkey.basegame.character.anim.AnimPlayer;
 import online.money_daisuki.api.monkey.basegame.character.anim.AnimPlayerImpl;
@@ -60,6 +59,7 @@ import online.money_daisuki.api.monkey.basegame.player.control.OnOffEventReceive
 import online.money_daisuki.api.monkey.basegame.script.ScriptControl;
 import online.money_daisuki.api.monkey.basegame.script.ScriptFileLoader;
 import online.money_daisuki.api.monkey.basegame.script.ScriptLineExecutorImpl;
+import online.money_daisuki.api.monkey.basegame.spatial.RotateControl;
 
 public final class CharacterLoader implements DataSource<Spatial> {
 	private final String s;

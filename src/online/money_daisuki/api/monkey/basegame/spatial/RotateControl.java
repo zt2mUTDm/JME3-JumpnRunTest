@@ -1,4 +1,4 @@
-package online.money_daisuki.api.monkey.basegame;
+package online.money_daisuki.api.monkey.basegame.spatial;
 
 import java.io.IOException;
 import java.util.Arrays;

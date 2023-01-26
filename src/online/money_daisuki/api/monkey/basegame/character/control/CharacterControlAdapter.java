@@ -3,7 +3,6 @@ package online.money_daisuki.api.monkey.basegame.character.control;
 import java.io.IOException;
 
 import com.jme3.app.SimpleApplication;
-import com.jme3.bounding.BoundingBox;
 import com.jme3.bullet.BulletAppState;
 import com.jme3.bullet.PhysicsSpace;
 import com.jme3.bullet.collision.shapes.BoxCollisionShape;
@@ -25,18 +24,13 @@ import online.money_daisuki.api.monkey.basegame.character.anim.AnimControl;
 
 public final class CharacterControlAdapter implements CharControl {
 	private final CharacterControl control;
-	//private final SimpleApplication app;
-	private final BoundingBox box;
-	private final BulletAppState state;
 	
 	private final DataSource<Boolean> onGroundTester;
 	
 	public CharacterControlAdapter(final CharacterControl control, final SimpleApplication app,
 			final Node collisionNode, final BulletAppState state) {
 		//this.app = app;
-		this.state = state;
 		this.control = Requires.notNull(control, "control == null;");
-		this.box = new BoundingBox();
 		
 		final Node testNode = new Node();
 		testNode.setLocalTranslation(0, -5f, 0);

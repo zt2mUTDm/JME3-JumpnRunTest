@@ -5,7 +5,7 @@ import com.jme3.app.state.AppStateManager;
 import com.jme3.renderer.RenderManager;
 
 import online.money_daisuki.api.base.Requires;
-import online.money_daisuki.api.monkey.basegame.MayDoneAppState;
+import online.money_daisuki.api.monkey.basegame.misc.MayDoneAppState;
 
 public final class ExecAppState implements MayDoneAppState {
 	private final ScriptLineExecutor exec;
@@ -36,14 +36,14 @@ public final class ExecAppState implements MayDoneAppState {
 		}
 		
 		counter+=tpf;
-		while(counter > speed) {
+		//while(counter > speed) {
 			exec.run();
 			
 			if(exec.isDone() && looped) {
 				exec.reset();
 			}
 			counter-= speed;
-		}
+		//}
 		
 		if(exec.isDone()) {
 			done = true;
