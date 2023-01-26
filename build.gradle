@@ -1,0 +1,48 @@
+// Gradle build script for the JME3-JumpnRunTest project
+
+plugins {
+    id 'application'
+}
+
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
+
+ext.jme3Version = '3.5.2-stable'
+
+sourceSets.main.java {
+    srcDir 'src'
+}
+
+application {
+    mainClass = 'online.money_daisuki.projects.monkey.jumpnrun.Main'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'com.github.stephengold:Minie:7.2.0'
+    runtimeOnly 'org.jmonkeyengine:jme3-desktop:' + jme3Version
+    runtimeOnly 'org.jmonkeyengine:jme3-jogg:' + jme3Version
+    runtimeOnly 'org.jmonkeyengine:jme3-lwjgl:' + jme3Version  // LWJGL 2.x
+    runtimeOnly 'org.jmonkeyengine:jme3-plugins:' + jme3Version
+    runtimeOnly 'org.jmonkeyengine:jme3-testdata:' + jme3Version
+}
+
+// cleanup tasks:
+
+clean.dependsOn('cleanDLLs', 'cleanDyLibs', 'cleanLogs', 'cleanSOs')
+
+tasks.register('cleanDLLs', Delete) { // extracted Windows native libraries
+    delete fileTree(dir: '.', include: '*.dll')
+}
+tasks.register('cleanDyLibs', Delete) { // extracted macOS native libraries
+    delete fileTree(dir: '.', include: '*.dylib')
+}
+tasks.register('cleanLogs', Delete) { // JVM crash logs
+    delete fileTree(dir: '.', include: 'hs_err_pid*.log')
+}
+tasks.register('cleanSOs', Delete) { // extracted Linux and Android native libraries
+    delete fileTree(dir: '.', include: '*.so')
+}

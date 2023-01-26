@@ -5,3 +5,6 @@
 /OpenAL64.dll
 /bulletjme.dll
 /lwjgl64.dll
+/.gradle/
+/build/
+/*.so
