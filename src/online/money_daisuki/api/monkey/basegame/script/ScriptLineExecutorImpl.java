@@ -23,7 +23,7 @@ public final class ScriptLineExecutorImpl implements ScriptLineExecutor {
 	private int pointer;
 	
 	private boolean sleeps;
-	private int sleepCounter;
+	private float sleepCounter;
 	
 	private boolean waits;
 	private Long waitingId;
@@ -39,30 +39,30 @@ public final class ScriptLineExecutorImpl implements ScriptLineExecutor {
 		this.runningScripts = new HashSet<>();
 	}
 	@Override
-	public void run() {
+	public void sink(final float f) {
 		if(afterLastCommand()) {
 			return;
 		} else if(sleeps) {
-			sleepCounter--;
-			if(sleepCounter > 0) {
+			sleepCounter-= f;
+			if(sleepCounter > 0.0f) {
 				return;
 			}
 			sleeps = false;
-			run();
+			sink(f);
 			return;
 		} else if(waits) {
 			if(!runningScripts.contains(waitingId)) {
 				waits = false;
 				waitingId = null;
-				run();
+				sink(f);
 				return;
 			} else {
 				return;
 			}
 		}
-		run0();
+		sink0();
 	}
-	private void run0() {
+	private void sink0() {
 		final String[] command = commands.get(pointer);
 		switch(command[0]) {
 			case("atomar"):
@@ -71,7 +71,7 @@ public final class ScriptLineExecutorImpl implements ScriptLineExecutor {
 				pointer++;
 			break;
 			case("sleep"):
-				sleepCounter = (int) (Requires.greaterThanZero(Float.parseFloat(command[1]), "sleep duration <= 0") * 10);
+				sleepCounter = Requires.greaterThanZero(Float.parseFloat(command[1]), "sleep duration <= 0");
 				sleeps = true;
 				pointer++;
 				return;
@@ -91,7 +91,7 @@ public final class ScriptLineExecutorImpl implements ScriptLineExecutor {
 					return;
 				}
 			default:
-				run1();
+				run();
 			break;
 		}
 	}
@@ -101,11 +101,11 @@ public final class ScriptLineExecutorImpl implements ScriptLineExecutor {
 			if(command[0].equals("endatomar")) {
 				return;
 			} else {
-				run1();
+				run();
 			}
 		} while(true);
 	}
-	private void run1() {
+	private void run() {
 		final String[] command = commands.get(pointer);
 		switch(command[0]) {
 			case("if"):

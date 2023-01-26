@@ -28,7 +28,7 @@ public final class ScriptControl implements Control {
 	public void update(final float tpf) {
 		counter+=tpf;
 		while(counter > speed) {
-			exec.run();
+			exec.sink(tpf);
 			
 			if(exec.isDone() && looped) {
 				exec.reset();

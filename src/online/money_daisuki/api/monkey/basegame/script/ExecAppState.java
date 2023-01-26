@@ -37,7 +37,7 @@ public final class ExecAppState implements MayDoneAppState {
 		
 		counter+=tpf;
 		//while(counter > speed) {
-			exec.run();
+			exec.sink(tpf);
 			
 			if(exec.isDone() && looped) {
 				exec.reset();
