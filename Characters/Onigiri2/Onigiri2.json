@@ -7,7 +7,6 @@
 				"extends": [ 0.2, 0.2, 0.2 ],
 				"attach": "Main",
 				"collisionGroup": 0,
-				"setCollideWithGroups": 0,
 				"purpose": "rigid",
 				"mass": 0.5
 			},
@@ -16,7 +15,6 @@
 				"extends": [ 0.6, 0.6, 0.85 ],
 				"attach": "ModelCenter",
 				"collisionGroup": 2,
-				"setCollideWithGroups": 2,
 				"purpose": "eventReceive",
 				"trigger": "touch",
 				"simpleScript": "Scripts/Onigiri2.txt"

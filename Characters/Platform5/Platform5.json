@@ -8,6 +8,13 @@
 				"collisionGroup": 0,
 				"purpose": "rigid",
 				"mass": 0.0
+			},
+			{
+				"type": "Mesh",
+				"attach": "PlatformTop",
+				"collisionGroup": 6,
+				"purpose": "notifySend",
+				"description": "drag"
 			}
 		]
 	},

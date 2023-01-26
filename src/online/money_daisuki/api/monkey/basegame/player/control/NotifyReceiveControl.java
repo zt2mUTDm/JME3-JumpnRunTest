@@ -1,8 +1,9 @@
 package online.money_daisuki.api.monkey.basegame.player.control;
 
 import java.io.IOException;
-import java.util.Collection;
+import java.util.Map;
 
+import com.jme3.bullet.collision.PhysicsCollisionObject;
 import com.jme3.export.JmeExporter;
 import com.jme3.export.JmeImporter;
 import com.jme3.renderer.RenderManager;
@@ -24,7 +25,7 @@ public final class NotifyReceiveControl implements Control {
 		
 	}
 	
-	public void run(final Collection<String> target) {
+	public void run(final Map<String, PhysicsCollisionObject> target) {
 		recv.run(target);
 	}
 	

@@ -1,6 +1,6 @@
 package online.money_daisuki.api.monkey.basegame.player.control;
 
-import java.util.Collection;
+import java.util.Map;
 
 import com.jme3.bullet.BulletAppState;
 import com.jme3.bullet.collision.PhysicsCollisionEvent;
@@ -18,7 +18,7 @@ public final class NotifyReceiver extends GhostControl {
 		super(shape);
 		this.bullet = Requires.notNull(bullet, "bullet == null");
 	}
-	public void run(final Collection<String> target) {
+	public void run(final Map<String, PhysicsCollisionObject> target) {
 		bullet.getPhysicsSpace().contactTest(this, new PhysicsCollisionListener() {
 			@Override
 			public void collision(final PhysicsCollisionEvent event) {
@@ -32,7 +32,7 @@ public final class NotifyReceiver extends GhostControl {
 				
 				if(ob instanceof NotifySender) {
 					final NotifySender cast = ((NotifySender)ob);
-					target.add(cast.getDescription());
+					target.put(cast.getDescription(), cast);
 				}
 			}
 		});

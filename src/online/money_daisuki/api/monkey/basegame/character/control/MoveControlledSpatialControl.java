@@ -1,10 +1,11 @@
 package online.money_daisuki.api.monkey.basegame.character.control;
 
 import java.io.IOException;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.HashMap;
+import java.util.Map;
 
 import com.jme3.app.Application;
+import com.jme3.bullet.collision.PhysicsCollisionObject;
 import com.jme3.export.JmeExporter;
 import com.jme3.export.JmeImporter;
 import com.jme3.math.Quaternion;
@@ -55,12 +56,16 @@ public final class MoveControlledSpatialControl implements Control {
 	
 	private final Vector3f tmpVec = new Vector3f();
 	
-	private final Set<String> notifyTarget;
+	private final Map<String, PhysicsCollisionObject> notifyTarget;
+	
+	private boolean inDrag;
+	private PhysicsCollisionObject dragSource;
+	private Vector3f dragSourceLastLocation;
 	
 	public MoveControlledSpatialControl(final Application app, final float speed) {
 		this.app = Requires.notNull(app, "cam == null");
 		this.speed = Requires.greaterThanZero(speed, "speed <= 0");
-		this.notifyTarget = new HashSet<>();
+		this.notifyTarget = new HashMap<>();
 		
 		this.state = State.STAND;
 		this.controlEnabled = true;
@@ -160,6 +165,9 @@ public final class MoveControlledSpatialControl implements Control {
 		} else {
 			triggerEvent("Main", false);
 			
+			readNotifies();
+			handleDrag();
+			
 			cc.setMoveVector(Vector3f.ZERO);
 			//cc.setWalkDirection(Vector3f.ZERO);
 			
@@ -182,6 +190,12 @@ public final class MoveControlledSpatialControl implements Control {
 			cc.playAnimation("Idle", false);
 			return;
 		};
+		
+		if(inDrag) {
+			inDrag = false;
+			dragSource = null;
+			dragSourceLastLocation = null;
+		}
 		
 		if(wantStrike) {
 			state = State.STRIKE_START;
@@ -214,6 +228,9 @@ public final class MoveControlledSpatialControl implements Control {
 		final CharControl cc = getUnderlyingControl();
 		cc.setMoveVector(Vector3f.ZERO);
 		
+		readNotifies();
+		handleDrag();
+		
 		cc.playAnimation("Attack", true, new Runnable() {
 			@Override
 			public void run() {
@@ -228,6 +245,9 @@ public final class MoveControlledSpatialControl implements Control {
 	private void strikeMiddle(final float tpf) {
 		final NamedEventTriggerControl c = spatial.getControl(NamedEventTriggerControl.class);
 		c.run("HitEnemy", true);
+		
+		readNotifies();
+		handleDrag();
 		
 		wantJump = false;
 		wantStrike = false;
@@ -259,7 +279,7 @@ public final class MoveControlledSpatialControl implements Control {
 		
 		final CharControl cc = getUnderlyingControl();
 		readNotifies();
-		if(notifyTarget.contains("highjump")) {
+		if(notifyTarget.containsKey("highjump")) {
 			cc.getCharacter().setJumpSpeed(40);
 			resetJumpSpeedOnSurface = true;
 		}
@@ -292,6 +312,12 @@ public final class MoveControlledSpatialControl implements Control {
 			cc.playAnimation("JumpEnd", true, new Runnable() {
 				@Override
 				public void run() {
+					if(inDrag) {
+						inDrag = false;
+						dragSource = null;
+						dragSourceLastLocation = null;
+					}
+					
 					if(state == State.JUMP_END) {
 						cc.playAnimation("Idle", false);
 						state = State.STAND;
@@ -386,6 +412,29 @@ public final class MoveControlledSpatialControl implements Control {
 	private void readNotifies() {
 		notifyTarget.clear();
 		spatial.getControl(NotifyReceiveControl.class).run(notifyTarget);
+	}
+	
+	private void handleDrag() {
+		if(notifyTarget.containsKey("drag")) {
+			if(!inDrag) {
+				dragSource = notifyTarget.get("drag");
+				dragSourceLastLocation = dragSource.getPhysicsLocation();
+				inDrag = true;
+			} else {
+				final Vector3f thisLocation = dragSource.getPhysicsLocation();
+				final Vector3f difference = thisLocation.subtract(dragSourceLastLocation);
+				//difference.multLocal(1, 0, 1);
+				getUnderlyingControl().getCharacter().setPhysicsLocation(getUnderlyingControl().getCharacter().getPhysicsLocation().add(difference));
+				
+				System.out.println(difference);
+				
+				dragSourceLastLocation = thisLocation;
+			}
+		} else if(inDrag) {
+			inDrag = false;
+			dragSource = null;
+			dragSourceLastLocation = null;
+		}
 	}
 	
 	private void handleHitted(final float tpf) {
