@@ -85,7 +85,6 @@ import online.money_daisuki.api.monkey.basegame.player.AddPlayerCommand;
 import online.money_daisuki.api.monkey.basegame.player.SetPlayerControlEnabledCommand;
 import online.money_daisuki.api.monkey.basegame.player.SetPlayerEnabledCommand;
 import online.money_daisuki.api.monkey.basegame.player.SetPlayerJumpSpeedCommand;
-import online.money_daisuki.api.monkey.basegame.player.SetResetPlayerJumpSpeedOnSurfaceCommand;
 import online.money_daisuki.api.monkey.basegame.script.ExecCommand;
 import online.money_daisuki.api.monkey.basegame.spatial.DetachSpatialCommand;
 import online.money_daisuki.api.monkey.basegame.spatial.HasSpatial;
@@ -404,9 +403,6 @@ public final class App extends ExtendedApplication {
 		);
 		exe.addCommand("SetPlayerJumpSpeed",
 				new SetPlayerJumpSpeedCommand(playerContainer)
-		);
-		exe.addCommand("SetResetPlayerJumpSpeedOnSurface",
-				new SetResetPlayerJumpSpeedOnSurfaceCommand(playerContainer)
 		);
 	}
 	private void installTextboxCommands() {

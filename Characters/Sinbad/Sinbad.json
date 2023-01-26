@@ -26,8 +26,8 @@
 					"url": "Models/Sword/Sword.json",
 					"translation": [ -1, 1, 0 ],
 					"rotate": [
-						[ 270.0, 0, 1, 0, ],
-						[ 180.0, 0, 0, 1, ],
+						[ 270.0, 0, 1, 0 ],
+						[ 180.0, 0, 0, 1 ]
 					]
 				}
 			}
@@ -70,6 +70,14 @@
 				"purpose": "eventTrigger",
 				"eventName": "SeePlayer"
 			},
+			{
+				"type": "Capsule",
+				"radius": 0.4,
+				"height": 1.8,
+				"attach": "Main",
+				"collisionGroup": 6,
+				"purpose": "notifyReceive"
+			}
 		]
 	}
 }

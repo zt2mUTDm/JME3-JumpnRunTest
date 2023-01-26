@@ -28,7 +28,6 @@ public final class SetPlayerJumpSpeedCommand implements Command {
 		
 		final Spatial player = playerContainer.source();
 		final CharControl control = Utils.getControlRecursive(player, CharControl.class);
-		System.out.println(control.getCharacter().getJumpSpeed());
 		control.getCharacter().setJumpSpeed(f);
 		done.run();
 	}

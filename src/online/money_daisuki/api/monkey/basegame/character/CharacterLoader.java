@@ -53,6 +53,9 @@ import online.money_daisuki.api.monkey.basegame.player.control.EventReceiver;
 import online.money_daisuki.api.monkey.basegame.player.control.EventReceiver.TriggerType;
 import online.money_daisuki.api.monkey.basegame.player.control.EventTriggerer;
 import online.money_daisuki.api.monkey.basegame.player.control.NamedEventTriggerControl;
+import online.money_daisuki.api.monkey.basegame.player.control.NotifyReceiveControl;
+import online.money_daisuki.api.monkey.basegame.player.control.NotifyReceiver;
+import online.money_daisuki.api.monkey.basegame.player.control.NotifySender;
 import online.money_daisuki.api.monkey.basegame.player.control.OnOffEventReceiver;
 import online.money_daisuki.api.monkey.basegame.script.ScriptControl;
 import online.money_daisuki.api.monkey.basegame.script.ScriptFileLoader;
@@ -228,6 +231,7 @@ public final class CharacterLoader implements DataSource<Spatial> {
 		final String attachName = map.get("attach").asData().asString();
 		parsePurpose(map, spatial, shape, attachName);
 	}
+	
 	private CollisionShape loadShapeType(final JsonMap map, final Spatial spatial) {
 		final String type = map.get("type").asData().asString();
 		switch(type) {
@@ -333,6 +337,12 @@ public final class CharacterLoader implements DataSource<Spatial> {
 			case("onOffEventReceive"):
 				loadOnOffEventReceivePurpose(map, shape, spatial, attachName);
 			break;
+			case("notifyReceive"):
+				loadNotifyReceivePurpose(map, shape, spatial, attachName);
+			break;
+			case("notifySend"):
+				loadNotifySendPurpose(map, shape, spatial, attachName);
+			break;
 			default:
 				throw new IllegalArgumentException("Unknown purpose: " + purpose);
 		}
@@ -378,6 +388,26 @@ public final class CharacterLoader implements DataSource<Spatial> {
 		};
 		
 		final GhostControl c = new OnOffEventReceiver(shape, spatial, scripts, app);
+		loadPhysicalCollisionGroup(map, c);
+		
+		final Spatial attachSpatial = Utils.getChildWithName(spatial, attachName);
+		Requires.notNull(attachSpatial, "Node to attach shape not found");
+		attachSpatial.addControl(c);
+	}
+	private void loadNotifyReceivePurpose(final JsonMap map, final CollisionShape shape, final Spatial spatial, final String attachName) {
+		final NotifyReceiver c = new NotifyReceiver(shape, bullet);
+		loadPhysicalCollisionGroup(map, c);
+		
+		final Spatial attachSpatial = Utils.getChildWithName(spatial, attachName);
+		Requires.notNull(attachSpatial, "Node to attach shape not found");
+		attachSpatial.addControl(c);
+		
+		attachSpatial.addControl(new NotifyReceiveControl(c));
+	}
+	private void loadNotifySendPurpose(final JsonMap map, final CollisionShape shape, final Spatial spatial, final String attachName) {
+		final String description = map.get("description").asData().asString();
+		
+		final GhostControl c = new NotifySender(shape, description);
 		loadPhysicalCollisionGroup(map, c);
 		
 		final Spatial attachSpatial = Utils.getChildWithName(spatial, attachName);

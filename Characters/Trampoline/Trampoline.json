@@ -7,13 +7,9 @@
 				"radius": 0.5,
 				"height": 0.5,
 				"attach": "TrampolineScript",
-				"collisionGroup": 2,
-				"purpose": "onOffEventReceive",
-				"trigger": "shot",
-				"scripts": [
-					"Scripts/TrampolineEntered.txt",
-					"Scripts/TrampolineLeaved.txt"
-				]
+				"collisionGroup": 6,
+				"purpose": "notifySend",
+				"description": "highjump"
 			},
 			{
 				"type": "Cylinder",
@@ -23,7 +19,7 @@
 				"collisionGroup": 0,
 				"purpose": "rigid",
 				"mass": 0
-			},
+			}
 		]
 	}
 }

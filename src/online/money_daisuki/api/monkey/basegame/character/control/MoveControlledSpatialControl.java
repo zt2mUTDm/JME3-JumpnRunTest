@@ -1,6 +1,8 @@
 package online.money_daisuki.api.monkey.basegame.character.control;
 
 import java.io.IOException;
+import java.util.HashSet;
+import java.util.Set;
 
 import com.jme3.app.Application;
 import com.jme3.export.JmeExporter;
@@ -18,6 +20,7 @@ import com.jme3.util.TempVars;
 import online.money_daisuki.api.base.Requires;
 import online.money_daisuki.api.monkey.basegame.misc.Utils;
 import online.money_daisuki.api.monkey.basegame.player.control.NamedEventTriggerControl;
+import online.money_daisuki.api.monkey.basegame.player.control.NotifyReceiveControl;
 
 public final class MoveControlledSpatialControl implements Control {
 	private Spatial spatial;
@@ -52,9 +55,12 @@ public final class MoveControlledSpatialControl implements Control {
 	
 	private final Vector3f tmpVec = new Vector3f();
 	
+	private final Set<String> notifyTarget;
+	
 	public MoveControlledSpatialControl(final Application app, final float speed) {
 		this.app = Requires.notNull(app, "cam == null");
 		this.speed = Requires.greaterThanZero(speed, "speed <= 0");
+		this.notifyTarget = new HashSet<>();
 		
 		this.state = State.STAND;
 		this.controlEnabled = true;
@@ -252,6 +258,11 @@ public final class MoveControlledSpatialControl implements Control {
 		inJumpAir = false;
 		
 		final CharControl cc = getUnderlyingControl();
+		readNotifies();
+		if(notifyTarget.contains("highjump")) {
+			cc.getCharacter().setJumpSpeed(40);
+			resetJumpSpeedOnSurface = true;
+		}
 		cc.jump();
 		
 		cc.playAnimation("JumpStart", true, new Runnable() {
@@ -371,6 +382,10 @@ public final class MoveControlledSpatialControl implements Control {
 	
 	private boolean triggerEvent(final String name, final boolean b) {
 		return(spatial.getControl(NamedEventTriggerControl.class).run(name, b));
+	}
+	private void readNotifies() {
+		notifyTarget.clear();
+		spatial.getControl(NotifyReceiveControl.class).run(notifyTarget);
 	}
 	
 	private void handleHitted(final float tpf) {
@@ -504,10 +519,7 @@ public final class MoveControlledSpatialControl implements Control {
 	}
 	
 	public void setJumpSpeed(final float jumpSpeed) {
-		getUnderlyingControl().getCharacter().setJumpSpeed(100.0f);
-	}
-	public void resetJumpSpeedOnSurfaceGround() {
-		resetJumpSpeedOnSurface = true;
+		getUnderlyingControl().getCharacter().setJumpSpeed(jumpSpeed);
 	}
 	
 	private CharControl getUnderlyingControl() {
