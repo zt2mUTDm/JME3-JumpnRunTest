@@ -1,7 +1,7 @@
 SetPlayerControlEnabled off
 SetTextCull dynamic
 ShowControlledTextFromFile Texts/text
-WaitFor 0
+waitfor 0
 SetTextCull always
 SetPlayerControlEnabled on
 ClearText

@@ -75,7 +75,7 @@ public final class ScriptLineExecutorImpl implements ScriptLineExecutor {
 				sleeps = true;
 				pointer++;
 				return;
-			case("WaitFor"):
+			case("waitfor"):
 				final int waitForId = Requires.positive(Integer.parseInt(command[1]), "wait id < 0");
 				if(waitForId >= pointer) {
 					throw new IllegalArgumentException("Waiting id is out of bounds");

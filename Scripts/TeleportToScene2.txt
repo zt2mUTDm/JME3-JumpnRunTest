@@ -1,6 +1,6 @@
 SetPlayerControlEnabled off
 FadeOut
-WaitFor 0
+waitfor 0
 UnloadScene
 
 Exec Scenes/Scene2.txt
@@ -9,6 +9,6 @@ SetChaseCameraTransform player 0.71695817 0.5371094 12.8
 
 SetCull player dynamic
 FadeIn
-WaitFor 0
+waitfor 0
 SetPlayerControlEnabled on
 

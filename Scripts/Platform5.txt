@@ -1,4 +1,4 @@
 MoveLinearTo Platform 2.5 -75.0 24.8 -209.0
-WaitFor 0
+waitfor 0
 MoveLinearTo Platform 2.5 -35.0 24.8 -209.0
-WaitFor 0
+waitfor 0
