@@ -1,0 +1,26 @@
+{
+	"type": "node",
+	"name": "Platform",
+	"childs": [
+		{
+			"type": "node",
+			"name": "PlatformCenter",
+			"translation": [ 0.0, 0.0, 0.0 ],
+			"childs": [
+				{
+					"type": "model",
+					"url": "Models/Generic/Platform/Platform.obj",
+					"translation": [ 0.0, 0.0, 0.0 ]
+				}
+			]
+		},
+		{
+			"type": "node",
+			"name": "PlatformTop",
+			"translation": [ 0.0, 0.1, 0.0 ],
+			"childs": [
+				
+			]
+		}
+	]
+}

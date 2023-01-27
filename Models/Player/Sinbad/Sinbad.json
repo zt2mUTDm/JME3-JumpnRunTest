@@ -1,0 +1,11 @@
+{
+	"type": "node",
+	"name": "Main",
+	"childs": [
+		{
+			"type": "model",
+			"url": "Models/Player/Sinbad/Sinbad.mesh.xml",
+			"translation": [ 0.0, 0.9, 0.0 ]
+		}
+	]
+}

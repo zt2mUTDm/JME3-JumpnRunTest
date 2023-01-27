@@ -1,0 +1,28 @@
+{
+	"type": "node",
+	"name": "Jaime",
+	"childs": [
+		{
+			"type": "node",
+			"translation": [ 0, -0.71, 0 ],
+			"childs": [
+				{
+					"type": "model",
+					"url": "Models/Enemies/Jaime/Jaime.j3o"
+				}
+			]
+		},
+		{
+			"type": "node",
+			"name": "View",
+			"childs": [
+				{
+					"type": "node",
+					"name": "View-Snap",
+					"translation": [ 0, 0, 0.5 ],
+					"rotation": [ 0, 180, 0 ]
+				}
+			]
+		}
+	]
+}
