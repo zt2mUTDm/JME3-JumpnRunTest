@@ -5,7 +5,7 @@ import com.jme3.scene.Spatial;
 import online.money_daisuki.api.base.Requires;
 import online.money_daisuki.api.monkey.console.Command;
 
-public class TakeScreenshotCommand implements Command {
+public final class TakeScreenshotCommand implements Command {
 	private final OwnScreenshotAppState state;
 	
 	public TakeScreenshotCommand(final OwnScreenshotAppState state) {

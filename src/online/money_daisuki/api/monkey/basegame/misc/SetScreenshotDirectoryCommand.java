@@ -8,7 +8,7 @@ import online.money_daisuki.api.base.DataSink;
 import online.money_daisuki.api.base.Requires;
 import online.money_daisuki.api.monkey.console.Command;
 
-public class SetScreenshotDirectoryCommand implements Command {
+public final class SetScreenshotDirectoryCommand implements Command {
 	private final DataSink<? super File> screenshotDirectory;
 	
 	public SetScreenshotDirectoryCommand(final DataSink<? super File> screenshotDirectory) {
