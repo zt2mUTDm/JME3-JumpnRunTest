@@ -1,0 +1,10 @@
+{
+	"type": "node",
+	"name": "Bridge",
+	"childs": [
+		{
+			"type": "model",
+			"url": "Models/Bridge/Bridge.obj",
+		}
+	]
+}

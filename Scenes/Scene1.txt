@@ -23,6 +23,8 @@ AddCharacter Characters/Trampoline/Trampoline.json -10 1 -100 1 1 1 0 0 0
 AddCharacter Characters/Platform4/Platform4.json -55.0 24.8 -239.0 1 1 1 0 0 0
 AddCharacter Characters/Platform5/Platform5.json -55.0 24.8 -209.0 1 1 1 0 0 0
 
+AddCharacter Characters/Bridge/Bridge.json 45 -0.7 -135 2 1 5 0 0 0
+
 if Switch pressed == true
 	SetVariable Tank rotated false
 endif
