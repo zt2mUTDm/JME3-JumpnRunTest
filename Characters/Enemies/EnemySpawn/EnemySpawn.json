@@ -1,0 +1,13 @@
+{
+	"model": "Models/Generic/Dummy/Dummy.json",
+	"controls": [
+		{
+			"type": "spawn",
+			"firstspawn": 0.0,
+			"respawn": 15.0,
+			"character": "Characters/Enemies/Jaime/Jaime.json",
+			"scale": [ 5.0, 5.0, 5.0 ],
+			"attach": "Main"
+		}
+	]
+}

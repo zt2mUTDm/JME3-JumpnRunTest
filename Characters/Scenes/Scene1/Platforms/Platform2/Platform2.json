@@ -1,0 +1,31 @@
+{
+	"model": "Models/Generic/Platform/Platform.json",
+	"physic": {
+		"shapes": [
+			{
+				"type": "Mesh",
+				"attach": "Platform",
+				"collisionGroup": 0,
+				"purpose": "rigid",
+				"mass": 0.0
+			},
+			{
+				"type": "Mesh",
+				"attach": "PlatformTop",
+				"collisionGroup": 6,
+				"purpose": "notifySend",
+				"description": "drag"
+			}
+		]
+	},
+	"controls": [
+		{
+			"type": "script",
+			"url": "Scripts/Scene1/Platforms/Platform2.txt",
+			"attach": "Platform"
+		}
+	],
+	"conditions": [
+		
+	]
+}

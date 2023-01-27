@@ -1,0 +1,32 @@
+{
+	"model": "Models/Generic/Onigiri/Onigiri.json",
+	"physic": {
+		"shapes": [
+			{
+				"type": "Box",
+				"extends": [ 0.6, 0.6, 0.85 ],
+				"attach": "ModelCenter",
+				"collisionGroup": 2,
+				"purpose": "eventReceive",
+				"trigger": "touch",
+				"simpleScript": "Scripts/Scene1/Onigiri1.txt"
+			}
+		]
+	},
+	"controls": [
+		{
+			"type": "rotate",
+			"axises": [ 0.0, 45.0, 0.0 ],
+			"attach": "Main"
+		}
+	],
+	"conditions": [
+		{
+			"type": "global",
+			"name": "Onigiri2",
+			"op": "==",
+			"value": "false",
+			"default": true
+		}
+	]
+}

@@ -1,0 +1,14 @@
+{
+	"model": "Models/Generic/Bridge/Bridge.json",
+	"physic": {
+		"shapes": [
+			{
+				"type": "Mesh",
+				"attach": "Bridge",
+				"collisionGroup": 0,
+				"purpose": "rigid",
+				"mass": 0
+			}
+		]
+	}
+}

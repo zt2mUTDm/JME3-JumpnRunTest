@@ -1,0 +1,14 @@
+{
+	"model": "Models/Scenes/Scene2/Scene2.json",
+	"physic": {
+		"shapes": [
+			{
+				"type": "Mesh",
+				"attach": "Main",
+				"collisionGroup": 0,
+				"purpose": "rigid",
+				"mass": 0
+			}
+		]
+	}
+}

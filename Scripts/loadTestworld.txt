@@ -1,5 +1,5 @@
-AddPlayer Characters/Sinbad/Sinbad.json 0 20 0 0.25 0.25 0.25
-Exec Scenes/Scene1.txt
+AddPlayer Characters/Player/Sinbad/Sinbad.json 0 20 0 0.25 0.25 0.25
+Exec Scripts/Scene1/Scene1.txt
 waitfor 0
 FadeIn
 waitfor 0

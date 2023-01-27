@@ -1,0 +1,14 @@
+SetPlayerControlEnabled off
+FadeOut
+waitfor 0
+UnloadScene
+
+Exec Scripts/Scene2/Scene2.txt
+SetTranslation player -8 1 0
+SetChaseCameraTransform player 0.71695817 0.5371094 12.8
+
+SetCull player dynamic
+FadeIn
+waitfor 0
+SetPlayerControlEnabled on
+
