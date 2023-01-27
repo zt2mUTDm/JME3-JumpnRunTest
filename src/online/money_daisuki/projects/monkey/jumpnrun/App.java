@@ -17,6 +17,8 @@ import com.jme3.input.controls.KeyTrigger;
 import com.jme3.input.controls.MouseButtonTrigger;
 import com.jme3.math.ColorRGBA;
 import com.jme3.post.FilterPostProcessor;
+import com.jme3.post.filters.CartoonEdgeFilter;
+import com.jme3.post.filters.FadeFilter;
 import com.jme3.renderer.RenderManager;
 import com.jme3.renderer.ViewPort;
 import com.jme3.scene.Node;
@@ -66,6 +68,10 @@ import online.money_daisuki.api.monkey.basegame.character.control.RotateLinearBy
 import online.money_daisuki.api.monkey.basegame.debug.DebugBulletCommand;
 import online.money_daisuki.api.monkey.basegame.debug.ProfilerCommand;
 import online.money_daisuki.api.monkey.basegame.debug.SetStatsCommand;
+import online.money_daisuki.api.monkey.basegame.filter.FadeAppState;
+import online.money_daisuki.api.monkey.basegame.filter.FadeInCommand;
+import online.money_daisuki.api.monkey.basegame.filter.FadeOutCommand;
+import online.money_daisuki.api.monkey.basegame.filter.SetFadeDurationCommand;
 import online.money_daisuki.api.monkey.basegame.light.AddAmbientLightCommand;
 import online.money_daisuki.api.monkey.basegame.light.AddDirectionalLightCommand;
 import online.money_daisuki.api.monkey.basegame.light.AddPointLightCommand;
@@ -204,6 +210,7 @@ public final class App extends ExtendedApplication {
 		installSpatialCommands(exe, bulletAppState, spatialTarget, sky);
 		installAudioCommands(exe, spatialTarget);
 		installParticleCommands(exe, spatialTarget);
+		installFilterCommands(exe);
 		
 		// Misc
 		exe.addCommand("DebugBullet", new DebugBulletCommand(bulletAppState));
@@ -280,6 +287,7 @@ public final class App extends ExtendedApplication {
 		exe.addCommand("TakeScreenshot", new TakeScreenshotCommand(screenshot));
 		
 		final FilterPostProcessor foo = new FilterPostProcessor(getAssetManager());
+		foo.addFilter(new CartoonEdgeFilter());
 		getViewPort().addProcessor(foo);
 		
 		getInputManager().addMapping("ControlMoveUp", new KeyTrigger(KeyInput.KEY_W));
@@ -315,6 +323,7 @@ public final class App extends ExtendedApplication {
 		exe.execute(new Node(), "Exec Scripts/init.txt".split(" "), new Runnable() {
 			@Override
 			public void run() {
+				
 			}
 		});
 	}
@@ -472,7 +481,19 @@ public final class App extends ExtendedApplication {
 		exe.addCommand("CreateParticleEmitter", new CreateParticleEmitterCommand(spatialTarget, particleLoader));
 		exe.addCommand("EmitAllParticles", new EmitAllParticlesCommand(spatialTarget));
 	}
-	
+	private void installFilterCommands(final CommandExecutor exe) {
+		final FilterPostProcessor fpp = new FilterPostProcessor(getAssetManager());
+		getViewPort().addProcessor(fpp);
+		
+		final FadeFilter fade = new FadeFilter();
+		fade.setValue(0.0f);
+		fpp.addFilter(fade);
+		getStateManager().attach(new FadeAppState(fade));
+		
+		exe.addCommand("FadeOut", new FadeOutCommand(this));
+		exe.addCommand("FadeIn", new FadeInCommand(this));
+		exe.addCommand("SetFadeDuration", new SetFadeDurationCommand(this));
+	}
 	
 	@Override
 	public void simpleUpdate(final float tpf) {

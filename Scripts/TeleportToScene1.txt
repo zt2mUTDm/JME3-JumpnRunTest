@@ -1,4 +1,6 @@
 SetPlayerControlEnabled off
+FadeOut
+WaitFor 0
 UnloadScene
 
 Exec Scenes/Scene1.txt
@@ -6,5 +8,7 @@ SetTranslation player 0 1 -81
 SetChaseCameraTransform player 1.57438 0.21777344 40.0
 
 SetCull player dynamic
+FadeIn
+WaitFor 0
 SetPlayerControlEnabled on
 
