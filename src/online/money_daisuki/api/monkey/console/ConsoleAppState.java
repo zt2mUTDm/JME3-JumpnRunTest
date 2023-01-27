@@ -150,6 +150,7 @@ public class ConsoleAppState implements AppState {
 	
 	private class ConsoleRawInputListener extends RawInputAdapter {
 		private boolean leftShiftPressed;
+		private boolean previousCursorVisibility;
 		
 		@Override
 		public void onKeyEvent(final KeyInputEvent evt) {
@@ -174,7 +175,13 @@ public class ConsoleAppState implements AppState {
 				break;
 				case KeyInput.KEY_TAB:
 					toggleVisible();
-					app.getInputManager().setCursorVisible(isVisible());
+					
+					if(isVisible()) {
+						previousCursorVisibility = app.getInputManager().isCursorVisible();
+						app.getInputManager().setCursorVisible(true);
+					} else {
+						app.getInputManager().setCursorVisible(previousCursorVisibility);
+					}
 					evt.setConsumed();
 				break;
 				case KeyInput.KEY_BACK:
@@ -192,6 +199,7 @@ public class ConsoleAppState implements AppState {
 						final String text = console.getInputText();
 						if(text.equals("")) {
 							setVisible(false);
+							app.getInputManager().setCursorVisible(previousCursorVisibility);
 						} else {
 							submit(text);
 							history.submit(text);
@@ -204,7 +212,6 @@ public class ConsoleAppState implements AppState {
 					if (isVisible()) {
 						console.setInputText(history.previous(console.getInputText()));
 						evt.setConsumed();
-						
 					}
 				break;
 				case KeyInput.KEY_DOWN:

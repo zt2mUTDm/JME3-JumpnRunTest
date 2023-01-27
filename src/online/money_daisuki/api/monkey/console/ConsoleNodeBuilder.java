@@ -114,6 +114,6 @@ public final class ConsoleNodeBuilder implements DataSource<ConsoleSpatial> {
 		scrollbackGeometry.setMesh(new Quad(bgFieldQuadWidth, lineHeight * numConsoleLines));
 		scrollbackGeometry.setLocalTranslation(horizontalPadding, viewportHeight - (lineHeight * numConsoleLines) - verticalPadding, .9f);
 		
-		return(new ConsoleImpl(node, inputBitmapText, scrollingBitmapText));
+		return(new ConsoleImpl(node, inputBitmapText, scrollingBitmapText, numConsoleLines));
 	}
 }
