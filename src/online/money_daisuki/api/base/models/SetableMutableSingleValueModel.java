@@ -1,6 +1,7 @@
 package online.money_daisuki.api.base.models;
 
 import online.money_daisuki.api.base.Setable;
+import online.money_daisuki.api.base.SetableDataSink;
 
 /**
  * Interface to extends a {@link MutableSingleValueModel} with {@link Setable} to give
@@ -10,6 +11,6 @@ import online.money_daisuki.api.base.Setable;
  *
  * @param <T> Type of the value.
  */
-public interface SetableMutableSingleValueModel<T> extends SetableSingleValueModel<T>, MutableSingleValueModel<T> {
+public interface SetableMutableSingleValueModel<T> extends SetableSingleValueModel<T>, MutableSingleValueModel<T>, SetableDataSink<T> {
 
 }

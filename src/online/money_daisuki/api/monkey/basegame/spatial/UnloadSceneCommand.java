@@ -8,6 +8,7 @@ import com.jme3.scene.Spatial;
 import com.jme3.scene.Spatial.CullHint;
 
 import online.money_daisuki.api.base.Requires;
+import online.money_daisuki.api.base.Setable;
 import online.money_daisuki.api.base.SetableDataSource;
 import online.money_daisuki.api.monkey.console.Command;
 
@@ -15,11 +16,14 @@ public final class UnloadSceneCommand implements Command {
 	private final Node root;
 	private final SetableDataSource<Spatial> player;
 	private final BulletAppState bullet;
+	private final Setable sky;
 	
-	public UnloadSceneCommand(final Node root, final SetableDataSource<Spatial> player, final BulletAppState bullet) {
+	public UnloadSceneCommand(final Node root, final SetableDataSource<Spatial> player, final BulletAppState bullet,
+			final Setable sky) {
 		this.root = Requires.notNull(root, "root == null");
 		this.player = Requires.notNull(player, "player == null");
 		this.bullet = Requires.notNull(bullet, "bullet == null");
+		this.sky = Requires.notNull(sky, "sky == null");
 	}
 	@Override
 	public void execute(final Spatial a, final String[] b, final Runnable done) {
@@ -44,5 +48,6 @@ public final class UnloadSceneCommand implements Command {
 			
 			playerSpatial.setCullHint(CullHint.Always);
 		}
+		sky.unset();
 	}
 }

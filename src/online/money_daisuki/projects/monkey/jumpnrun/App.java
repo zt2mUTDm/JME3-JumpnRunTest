@@ -28,6 +28,7 @@ import online.money_daisuki.api.base.Converter;
 import online.money_daisuki.api.base.DataSink;
 import online.money_daisuki.api.base.DataSource;
 import online.money_daisuki.api.base.Requires;
+import online.money_daisuki.api.base.Setable;
 import online.money_daisuki.api.base.models.MutableSingleValueModel;
 import online.money_daisuki.api.base.models.MutableSingleValueModelImpl;
 import online.money_daisuki.api.base.models.SetableMutableSingleValueModel;
@@ -86,6 +87,8 @@ import online.money_daisuki.api.monkey.basegame.player.SetPlayerControlEnabledCo
 import online.money_daisuki.api.monkey.basegame.player.SetPlayerEnabledCommand;
 import online.money_daisuki.api.monkey.basegame.player.SetPlayerJumpSpeedCommand;
 import online.money_daisuki.api.monkey.basegame.script.ExecCommand;
+import online.money_daisuki.api.monkey.basegame.sky.CreateSkyCommand;
+import online.money_daisuki.api.monkey.basegame.sky.RemoveSkyCommand;
 import online.money_daisuki.api.monkey.basegame.spatial.DetachSpatialCommand;
 import online.money_daisuki.api.monkey.basegame.spatial.HasSpatial;
 import online.money_daisuki.api.monkey.basegame.spatial.HasSpatialAdapter;
@@ -186,12 +189,14 @@ public final class App extends ExtendedApplication {
 			}
 		};
 		
+		final SetableMutableSingleValueModel<Spatial> sky = new SetableMutableSingleValueModelImpl<>();
+		
 		installCamCommands(exe, spatialTarget);
 		installLightCommands(exe, spatialTarget);
 		installModelCommands(exe, bulletAppState);
 		installTerrainCommands(exe, bulletAppState);
 		installTextboxCommands();
-		installSpatialCommands(exe, bulletAppState, spatialTarget);
+		installSpatialCommands(exe, bulletAppState, spatialTarget, sky);
 		installAudioCommands(exe, spatialTarget);
 		installParticleCommands(exe, spatialTarget);
 		
@@ -204,7 +209,9 @@ public final class App extends ExtendedApplication {
 		exe.addCommand("ClearVariablenType", new ClearVariablenTypeCommand(this));
 		exe.addCommand("ClearVariables", new ClearVariablesCommand(this));
 		
-		//stateManager.attach(new ConsoleAppState(exe));
+		exe.addCommand("CreateSky", new CreateSkyCommand(sky, this));
+		exe.addCommand("RemoveSky", new RemoveSkyCommand(sky, this));
+		
 		
 		final ViewPort vp = getViewPort();
 		
@@ -296,7 +303,8 @@ public final class App extends ExtendedApplication {
 		exe.addCommand("SetChaseCameraTransform", new SetChaseCameraTransformCommand(spatialTarget));
 		exe.addCommand("SetChaseCameraEnabled", new SetChaseCameraEnabledCommand(spatialTarget));
 	}
-	private void installSpatialCommands(final CommandExecutor exe, final BulletAppState bullet, final BiConverter<String, Spatial, Spatial> spatialTarget) {
+	private void installSpatialCommands(final CommandExecutor exe, final BulletAppState bullet, final BiConverter<String, Spatial, Spatial> spatialTarget,
+			final Setable sky) {
 		exe.addCommand("SetTranslation", new SetSpatialTranslationCommand(new Converter<String, Translatable>() {
 			@Override
 			public Translatable convert(final String value) {
@@ -330,7 +338,7 @@ public final class App extends ExtendedApplication {
 		exe.addCommand("Unload", new UnloadCommand(bullet));
 		exe.addCommand("TurnTo", new TurnToCommand(spatialTarget));
 		exe.addCommand("MoveTo", new MoveToCommand(spatialTarget));
-		exe.addCommand("UnloadScene", new UnloadSceneCommand(getRootNode(), playerContainer, bullet));
+		exe.addCommand("UnloadScene", new UnloadSceneCommand(getRootNode(), playerContainer, bullet, sky));
 		exe.addCommand("SetSpatialAnim", new SetSpatialAnim(spatialTarget));
 		exe.addCommand("MoveLinearTo", new MoveLinearToCommand(spatialTarget, this));
 		exe.addCommand("RotateLinearBy", new RotateLinearByCommand(spatialTarget));

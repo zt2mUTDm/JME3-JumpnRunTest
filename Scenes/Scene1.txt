@@ -1,4 +1,6 @@
 atomar
+CreateSky Textures/Sky/Bright/BrightSky.dds cube
+
 AddCharacter Characters/Scene1/def.json 0 0 0 1 1 1 0 0 0
 AddAmbientLight root 1 1 1 0.1
 
