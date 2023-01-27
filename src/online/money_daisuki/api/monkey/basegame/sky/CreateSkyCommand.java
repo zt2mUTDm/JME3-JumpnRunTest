@@ -44,7 +44,6 @@ public final class CreateSkyCommand implements Command {
 				throw new IllegalArgumentException("Expect either cube, sphere or equiret.");
 		}
 		
-		// TODO Maybe syncronize?
 		final Spatial sky = SkyFactory.createSky(app.getAssetManager(), resource, type);
 		app.getRootNode().attachChild(sky);
 		skyTarget.sink(sky);

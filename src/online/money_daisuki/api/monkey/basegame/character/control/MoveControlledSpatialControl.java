@@ -435,8 +435,6 @@ public final class MoveControlledSpatialControl implements Control {
 				//difference.multLocal(1, 0, 1);
 				getUnderlyingControl().getCharacter().setPhysicsLocation(getUnderlyingControl().getCharacter().getPhysicsLocation().add(difference));
 				
-				System.out.println(difference);
-				
 				dragSourceLastLocation = thisLocation;
 			}
 		} else if(inDrag) {
