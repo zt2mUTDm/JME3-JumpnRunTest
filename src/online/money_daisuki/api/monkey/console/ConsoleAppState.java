@@ -32,26 +32,22 @@ public class ConsoleAppState implements AppState {
 	public ConsoleAppState(final Console console, final DataSink<String> target) {
 		this.console = Requires.notNull(console, "console == null");
 		this.target = Requires.notNull(target, "target == null");
+		
 		this.history = new SoftstoringHistory<>(255, true);
 	}
 	
 	@Override
-	final public void initialize(final AppStateManager pstateManager, final Application papp) {
+	public void initialize(final AppStateManager pstateManager, final Application papp) {
 		initialized = true;
 		app = (SimpleApplication) papp;
 		inputManager = app.getInputManager();
-		
-		//ui = new ConsoleUi(app);
-		//ui.applyViewPortChange();
-		
-		//ui.setInputText(ui.getInputText());
 		
 		rawInputListener = new ConsoleRawInputListener();
 		inputManager.addRawInputListener(rawInputListener);
 	}
 	
 	@Override
-	public final void cleanup() {
+	public void cleanup() {
 		inputManager.removeRawInputListener(rawInputListener);
 		
 		if (isVisible()) {
@@ -61,10 +57,6 @@ public class ConsoleAppState implements AppState {
 		rawInputListener.leftShiftPressed = false;
 		
 		initialized = false;
-	}
-	
-	public void applyViewPortChange() {
-		//ui.applyViewPortChange();
 	}
 	
 	private void submit(final String input) {
@@ -95,7 +87,7 @@ public class ConsoleAppState implements AppState {
 	
 	@Override
 	public void update(final float tpf) {
-		//ui.update(tpf);
+		
 	}
 	
 	@Override
@@ -114,32 +106,32 @@ public class ConsoleAppState implements AppState {
 	public void postRender() {
 	}
 	
-	public final void setVisible(final boolean visible) {
+	public void setVisible(final boolean visible) {
 		if(console != null) {
 			console.setVisible(visible);
 		}
 	}
 	
-	public final void toggleVisible() {
+	public void toggleVisible() {
 		setVisible(!isVisible());
 	}
 	
-	public final boolean isVisible() {
+	public boolean isVisible() {
 		return(console.isVisible());
 	}
 	
 	@Override
-	public final void setEnabled(final boolean setEnabled) {
+	public void setEnabled(final boolean e) {
 		throw new UnsupportedOperationException();
 	}
 	
 	@Override
-	public final boolean isEnabled() {
+	public boolean isEnabled() {
 		return(console.isVisible());
 	}
 	
 	@Override
-	public final boolean isInitialized() {
+	public boolean isInitialized() {
 		return initialized;
 	}
 	

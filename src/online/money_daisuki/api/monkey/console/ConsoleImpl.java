@@ -15,10 +15,10 @@ public final class ConsoleImpl implements ConsoleSpatial {
 	private final StringBuilder input;
 	
 	public ConsoleImpl(final Spatial root, final BitmapText inputText, final BitmapText outputText, final int outputTextLineCount) {
-		this.root = root;
-		this.inputText = inputText;
-		this.outputText = outputText;
-		this.outputTextLineCount = outputTextLineCount;
+		this.root = Requires.notNull(root, "root == null");
+		this.inputText = Requires.notNull(inputText, "inputText == null");
+		this.outputText = Requires.notNull(outputText, "outputText == null");
+		this.outputTextLineCount = Requires.greaterThanZero(outputTextLineCount, "outputTextLineCount <= 0");
 		
 		this.input = new StringBuilder();
 	}
