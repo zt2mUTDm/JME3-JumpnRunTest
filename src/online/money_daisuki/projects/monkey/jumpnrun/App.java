@@ -9,11 +9,13 @@ import java.util.Map.Entry;
 
 import com.jme3.asset.plugins.FileLocator;
 import com.jme3.bullet.BulletAppState;
+import com.jme3.font.BitmapText;
 import com.jme3.input.KeyInput;
 import com.jme3.input.MouseInput;
 import com.jme3.input.controls.ActionListener;
 import com.jme3.input.controls.KeyTrigger;
 import com.jme3.input.controls.MouseButtonTrigger;
+import com.jme3.math.ColorRGBA;
 import com.jme3.post.FilterPostProcessor;
 import com.jme3.renderer.RenderManager;
 import com.jme3.renderer.ViewPort;
@@ -71,7 +73,9 @@ import online.money_daisuki.api.monkey.basegame.light.AddSpotLightCommand;
 import online.money_daisuki.api.monkey.basegame.material.FlexibleMaterialLoader;
 import online.money_daisuki.api.monkey.basegame.misc.FormatDateAsStringSource;
 import online.money_daisuki.api.monkey.basegame.misc.FrequencyDividingAppState;
+import online.money_daisuki.api.monkey.basegame.misc.MayDoneAppState;
 import online.money_daisuki.api.monkey.basegame.misc.NumeredFileGenerated;
+import online.money_daisuki.api.monkey.basegame.misc.OneTimeDelayedRunAppState;
 import online.money_daisuki.api.monkey.basegame.misc.OwnScreenshotAppState;
 import online.money_daisuki.api.monkey.basegame.misc.RemoveDoneAppState;
 import online.money_daisuki.api.monkey.basegame.misc.SetScreenshotDirectoryCommand;
@@ -89,6 +93,7 @@ import online.money_daisuki.api.monkey.basegame.player.SetPlayerJumpSpeedCommand
 import online.money_daisuki.api.monkey.basegame.script.ExecCommand;
 import online.money_daisuki.api.monkey.basegame.sky.CreateSkyCommand;
 import online.money_daisuki.api.monkey.basegame.sky.RemoveSkyCommand;
+import online.money_daisuki.api.monkey.basegame.spatial.DetachSpatialAppState;
 import online.money_daisuki.api.monkey.basegame.spatial.DetachSpatialCommand;
 import online.money_daisuki.api.monkey.basegame.spatial.HasSpatial;
 import online.money_daisuki.api.monkey.basegame.spatial.HasSpatialAdapter;
@@ -224,6 +229,11 @@ public final class App extends ExtendedApplication {
 		stateManager.attach(new ConsoleAppState(console, new CommandStringDataSink(exe, new Node("ConsoleDummyNode"))));
 		guiNode.attachChild(console.getRoot());
 		
+		final BitmapText tookScreenshotBitmapText = new BitmapText(guiFont);
+		tookScreenshotBitmapText.setText("Screenshot taken");
+		tookScreenshotBitmapText.setLocalTranslation(0, 100, 0);
+		tookScreenshotBitmapText.setColor(ColorRGBA.Green);
+		
 		final OwnScreenshotAppState screenshot = new OwnScreenshotAppState(new NumeredFileGenerated(
 				screenshotDirectory,
 				new FormatDateAsStringSource(
@@ -241,13 +251,27 @@ public final class App extends ExtendedApplication {
 		screenshot.addCapturedListener(new Runnable() {
 			@Override
 			public void run() {
+				tookScreenshotBitmapText.setText("Screenshot taken");
+				tookScreenshotBitmapText.setColor(ColorRGBA.Green);
 				
+				getGuiNode().attachChild(tookScreenshotBitmapText);
+				
+				final MayDoneAppState state = new OneTimeDelayedRunAppState(new DetachSpatialAppState(tookScreenshotBitmapText), 5.0f);
+				getStateManager().attach(state);
+				removeDoneState.addAppState(state);
 			}
 		});
 		screenshot.addCapturingFailedListener(new Runnable() {
 			@Override
 			public  void run() {
+				tookScreenshotBitmapText.setText("Screenshot taken failed");
+				tookScreenshotBitmapText.setColor(ColorRGBA.Red);
 				
+				getGuiNode().attachChild(tookScreenshotBitmapText);
+				
+				final MayDoneAppState state = new OneTimeDelayedRunAppState(new DetachSpatialAppState(tookScreenshotBitmapText), 5.0f);
+				getStateManager().attach(state);
+				removeDoneState.addAppState(state);
 			}
 		});
 		getStateManager().attach(screenshot);

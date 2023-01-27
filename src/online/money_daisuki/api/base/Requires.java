@@ -44,8 +44,8 @@ public final class Requires {
 	public static int positive(final int i) {
 		return(positive(i, "Must be positive: " + i));
 	}
-	public static int positive(final int l, final String message) {
-		return(positive(l, new IllegalArgumentException(message)));
+	public static int positive(final int i, final String message) {
+		return(positive(i, new IllegalArgumentException(message)));
 	}
 	public static int positive(final int i, final RuntimeException e) {
 		isTrue(i >= 0, e);
@@ -62,6 +62,18 @@ public final class Requires {
 		isTrue(l >= 0, e);
 		return(l);
 	}
+	
+	public static float positive(final float f) {
+		return(positive(f, "Must be positive: " + f));
+	}
+	public static float positive(final float f, final String message) {
+		return(positive(f, new IllegalArgumentException(message)));
+	}
+	public static float positive(final float f, final RuntimeException e) {
+		isTrue(f >= 0, e);
+		return(f);
+	}
+	
 	
 	public static BigInteger positive(final BigInteger i) {
 		return(positive(i, "Must be positive: " + i));
