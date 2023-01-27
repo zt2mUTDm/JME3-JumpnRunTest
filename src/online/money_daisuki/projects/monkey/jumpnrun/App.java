@@ -210,7 +210,10 @@ public final class App extends ExtendedApplication {
 		exe.addCommand("ClearVariables", new ClearVariablesCommand(this));
 		
 		exe.addCommand("CreateSky", new CreateSkyCommand(sky, this));
-		exe.addCommand("RemoveSky", new RemoveSkyCommand(sky, this));
+		exe.addCommand("RemoveSky", new RemoveSkyCommand(sky));
+		
+		final Node relectNode = new Node();
+		getRootNode().attachChild(relectNode);
 		
 		
 		final ViewPort vp = getViewPort();
