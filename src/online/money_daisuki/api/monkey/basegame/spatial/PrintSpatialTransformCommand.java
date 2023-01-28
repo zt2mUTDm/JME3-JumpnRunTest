@@ -2,6 +2,7 @@ package online.money_daisuki.api.monkey.basegame.spatial;
 
 import java.io.PrintStream;
 
+import com.jme3.math.FastMath;
 import com.jme3.math.Quaternion;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Spatial;
@@ -34,19 +35,30 @@ public final class PrintSpatialTransformCommand  implements Command {
 		final Vector3f scale = spatial.getLocalScale();
 		final Quaternion rot = spatial.getLocalRotation();
 		
+		
+		final float tX = trans.x;
+		final float tY = trans.y;
+		final float tZ = trans.z;
+		
+		final float sX = scale.x;
+		final float sY = scale.y;
+		final float sZ = scale.z;
+		
+		final float[] rs = new float[3];
+		rot.toAngles(rs);
+		
 		out.println(
 				String.format(
-						"((%s, %s, %s), (%s, %s, %s), (%s, %s, %s, %s))",
-						trans.x,
-						trans.y,
-						trans.z,
-						scale.x,
-						scale.y,
-						scale.z,
-						rot.getX(),
-						rot.getY(),
-						rot.getZ(),
-						rot.getW()
+						"((%s, %s, %s), (%s, %s, %s), (%s, %s, %s))",
+						tX,
+						tY,
+						tZ,
+						sX,
+						sY,
+						sZ,
+						rs[0] * FastMath.RAD_TO_DEG,
+						rs[1] * FastMath.RAD_TO_DEG,
+						rs[2] * FastMath.RAD_TO_DEG
 				)
 		);
 		done.run();
