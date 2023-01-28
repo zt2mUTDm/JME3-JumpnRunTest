@@ -1,4 +1,4 @@
 AddAmbientLight root 1 1 1 0.1
 
 AddCharacter Characters/Scenes/Scene2/Scene2.json 0 0 0 1 1 1 0 0 0
-AddCharacter Characters/Scenes/Scene2/Scene2ToScene1Teleporter.json -9.5 2 0 1 1 1 0 0 0
+AddCharacter Characters/Scenes/Scene2/Scene2ToScene1Teleporter.json -9.5 2 0.5 1 1 1 0 0 0

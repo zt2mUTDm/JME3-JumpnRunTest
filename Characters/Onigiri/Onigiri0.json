@@ -9,7 +9,7 @@
 				"collisionGroup": 2,
 				"purpose": "eventReceive",
 				"trigger": "touch",
-				"simpleScript": "Scripts/Scene1/Onigiri0.txt"
+				"simpleScript": "Scripts/Scene1/Onigiri/Onigiri0.txt"
 			}
 		]
 	},
@@ -23,7 +23,7 @@
 	"conditions": [
 		{
 			"type": "global",
-			"name": "Onigiri1",
+			"name": "Onigiri0",
 			"op": "==",
 			"value": "false",
 			"default": true

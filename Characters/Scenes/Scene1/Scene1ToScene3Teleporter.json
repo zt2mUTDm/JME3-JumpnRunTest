@@ -4,12 +4,12 @@
 		"shapes": [
 			{
 				"type": "Box",
-				"extends": [ 1.0, 2.0, 0.5 ],
+				"extends": [ 2.0, 0.5, 2.0 ],
 				"attach": "Main",
 				"collisionGroup": 2,
 				"purpose": "eventReceive",
 				"trigger": "touch",
-				"simpleScript": "Scripts/Scene1/TeleportToScene2.txt"
+				"simpleScript": "Scripts/Scene1/TeleportToScene3.txt"
 			}
 		]
 	}

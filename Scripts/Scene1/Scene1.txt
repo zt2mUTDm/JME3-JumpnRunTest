@@ -6,22 +6,23 @@ AddAmbientLight root 1 1 1 0.1
 
 AddCharacter Characters/Generic/Sign_Post/Sign_Post.json -40 0 -40 1 1 1 0 0 0
 AddCharacter Characters/Scenes/Scene1/Scene1ToScene2Teleporter.json 0 2 -83.5 1 1 1 0 0 0
+AddCharacter Characters/Scenes/Scene1/Scene1ToScene3Teleporter.json 0 10 -88 1 1 1 0 0 0
 AddCharacter Characters/Enemies/EnemySpawn/EnemySpawn.json 0 2 -100 1.0 1.0 1.0 0 0 0
 
 AddCharacter Characters/Onigiri/Onigiri0.json -68.48175 6.0 -246.0 1 1 1 0 0 0
 AddCharacter Characters/Onigiri/Onigiri1.json -97.0 26.0 11.0 1 1 1 0 0 0
 
-AddCharacter Characters/Scenes/Scene1/Platforms/Platform0/Platform0.json -150 13 -45 1 1 1 0 0 0
-AddCharacter Characters/Scenes/Scene1/Platforms/Platform1/Platform1.json -135 20 -15 1 1 1 0 0 0
-AddCharacter Characters/Scenes/Scene1/Platforms/Platform2/Platform2.json -105 20 -15 1 1 1 0 0 0
+AddCharacter Characters/Scenes/Scene1/Platforms/Platform0.json -150 13 -45 1 1 1 0 0 0
+AddCharacter Characters/Scenes/Scene1/Platforms/Platform1.json -135 20 -15 1 1 1 0 0 0
+AddCharacter Characters/Scenes/Scene1/Platforms/Platform2.json -105 20 -15 1 1 1 0 0 0
 
 AddCharacter Characters/Generic/Switch/Switch.json -120 0 -190 1.0 1.0 1.0 0 45 0
 AddCharacter Characters/Generic/Tank/Tank.json -120 0 -220 1.0 1.0 1.0 0 0 0
 
 AddCharacter Characters/Generic/Trampoline/Trampoline.json -10 1 -100 1 1 1 0 0 0
 
-AddCharacter Characters/Scenes/Scene1/Platforms/Platform3/Platform3.json -55.0 24.8 -239.0 1 1 1 0 0 0
-AddCharacter Characters/Scenes/Scene1/Platforms/Platform4/Platform4.json -55.0 24.8 -209.0 1 1 1 0 0 0
+AddCharacter Characters/Scenes/Scene1/Platforms/Platform3.json -55.0 24.8 -239.0 1 1 1 0 0 0
+AddCharacter Characters/Scenes/Scene1/Platforms/Platform4.json -55.0 24.8 -209.0 1 1 1 0 0 0
 
 AddCharacter Characters/Generic/Bridge/Bridge.json 45 -0.7 -135 2 1 5 0 0 0
 

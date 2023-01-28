@@ -21,7 +21,7 @@
 	"controls": [
 		{
 			"type": "script",
-			"url": "Scripts/Scene1/Platforms/Platform2.txt",
+			"url": "Scripts/Scene1/Platforms/Platform3.txt",
 			"attach": "Platform"
 		}
 	],
