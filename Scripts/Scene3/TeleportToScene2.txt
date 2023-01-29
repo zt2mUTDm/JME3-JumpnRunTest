@@ -4,7 +4,7 @@ waitfor 0
 UnloadScene
 
 Exec Scripts/Scene2/Scene2.txt
-SetTranslation player 8.715357 4.8916664 2.9525952
+SetTranslation player 8.715357 5.8916664 2.9525952
 SetChaseCameraTransform player 2.7960596 0.41308594 10.4
 
 SetCull player dynamic

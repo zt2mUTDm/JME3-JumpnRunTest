@@ -4,7 +4,7 @@ waitfor 0
 UnloadScene
 
 Exec Scripts/Scene3/Scene3.txt
-SetTranslation player 1.6664531 1.1 1.092515
+SetTranslation player 1.6664531 8.0 1.092515
 SetChaseCameraTransform player 3.183755 0.099609375 7.0
 
 SetCull player dynamic

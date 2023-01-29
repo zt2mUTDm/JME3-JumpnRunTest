@@ -9,8 +9,8 @@ AddCharacter Characters/Scenes/Scene1/Scene1ToScene2Teleporter.json 0 2 -83.5 1 
 AddCharacter Characters/Scenes/Scene1/Scene1ToScene3Teleporter.json 0 10 -88 1 1 1 0 0 0
 AddCharacter Characters/Enemies/EnemySpawn/EnemySpawn.json 0 2 -100 1.0 1.0 1.0 0 0 0
 
-AddCharacter Characters/Onigiri/Onigiri0.json -68.48175 6.0 -246.0 1 1 1 0 0 0
-AddCharacter Characters/Onigiri/Onigiri1.json -97.0 26.0 11.0 1 1 1 0 0 0
+AddCharacter Characters/Onigiri/Onigiri0.json -68.48175 5.0 -246.0 1 1 1 0 0 0
+AddCharacter Characters/Onigiri/Onigiri1.json -97.0 25.0 11.0 1 1 1 0 0 0
 
 AddCharacter Characters/Scenes/Scene1/Platforms/Platform0.json -150 13 -45 1 1 1 0 0 0
 AddCharacter Characters/Scenes/Scene1/Platforms/Platform1.json -135 20 -15 1 1 1 0 0 0
@@ -25,6 +25,10 @@ AddCharacter Characters/Scenes/Scene1/Platforms/Platform3.json -55.0 24.8 -239.0
 AddCharacter Characters/Scenes/Scene1/Platforms/Platform4.json -55.0 24.8 -209.0 1 1 1 0 0 0
 
 AddCharacter Characters/Generic/Bridge/Bridge.json 45 -0.7 -135 2 1 5 0 0 0
+
+AddCharacter Characters/Scenes/Scene1/Scene1ToScene4BottomTeleporter.json 0 11 -168 1 1 1 0 0 0
+AddCharacter Characters/Scenes/Scene1/Scene1ToScene4TopTeleporter.json 32 47 -200 1 1 1 0 0 0
+AddCharacter Characters/Onigiri/Onigiri3.json -35.5 44.0 -192 1 1 1 0 0 0
 
 if Switch pressed == true
 	SetVariable Tank rotated false
