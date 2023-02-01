@@ -1,0 +1,5 @@
+AddAmbientLight root 1 1 1 0.1
+
+AddCharacter Characters/Scenes/Level0/YouseiNoKi/YouseiNoKi.json 0 0 0 1 1 1 0 0 0
+AddCharacter Characters/Scenes/Level0/YouseiNoKi/YouseiNoKiToScene1Teleporter.json -9.5 -8.0 0.0 1 1 1 0 0 0
+AddCharacter Characters/Scenes/Level0/YouseiNoKi/YouseiNoKiToScene4Teleporter.json 5.5 -4.0 -7.0 1 1 1 0 0 0

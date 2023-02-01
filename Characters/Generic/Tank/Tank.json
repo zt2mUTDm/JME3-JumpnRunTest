@@ -13,7 +13,6 @@
 				"type": "Mesh",
 				"attach": "Tank",
 				"collisionGroup": 0,
-				"setCollideWithGroups": 0,
 				"purpose": "rigid",
 				"mass": 0
 			}

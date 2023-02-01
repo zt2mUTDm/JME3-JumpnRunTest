@@ -1,0 +1,14 @@
+{
+	"model": "Models/Scenes/Level0/YouseiNoKi/YouseiNoKi.json",
+	"physic": {
+		"shapes": [
+			{
+				"type": "Mesh",
+				"attach": "Yousei no ki",
+				"collisionGroup": 0,
+				"purpose": "rigid",
+				"mass": 0
+			}
+		]
+	}
+}

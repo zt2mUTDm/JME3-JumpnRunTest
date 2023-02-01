@@ -106,7 +106,9 @@ import online.money_daisuki.api.monkey.basegame.spatial.HasSpatialAdapter;
 import online.money_daisuki.api.monkey.basegame.spatial.MoveToCommand;
 import online.money_daisuki.api.monkey.basegame.spatial.PrintSpatialTransformCommand;
 import online.money_daisuki.api.monkey.basegame.spatial.SetNodeCullHintCommand;
+import online.money_daisuki.api.monkey.basegame.spatial.SetSpatialRotationCommand;
 import online.money_daisuki.api.monkey.basegame.spatial.SetSpatialTranslationCommand;
+import online.money_daisuki.api.monkey.basegame.spatial.SetTranslationCommand;
 import online.money_daisuki.api.monkey.basegame.spatial.SetVariableSpatialCullHintCommand;
 import online.money_daisuki.api.monkey.basegame.spatial.Translatable;
 import online.money_daisuki.api.monkey.basegame.spatial.TranslatableSpatial;
@@ -340,9 +342,10 @@ public final class App extends ExtendedApplication {
 		exe.addCommand("SetChaseCameraTransform", new SetChaseCameraTransformCommand(spatialTarget));
 		exe.addCommand("SetChaseCameraEnabled", new SetChaseCameraEnabledCommand(spatialTarget));
 	}
+	@SuppressWarnings("deprecation")
 	private void installSpatialCommands(final CommandExecutor exe, final BulletAppState bullet, final BiConverter<String, Spatial, Spatial> spatialTarget,
 			final Setable sky) {
-		exe.addCommand("SetTranslation", new SetSpatialTranslationCommand(new Converter<String, Translatable>() {
+		exe.addCommand("SetTranslation", new SetTranslationCommand(new Converter<String, Translatable>() {
 			@Override
 			public Translatable convert(final String value) {
 				switch(value) {
@@ -356,7 +359,9 @@ public final class App extends ExtendedApplication {
 						return(new TranslatableSpatial(getRootNode().getChild(value)));
 				}
 			}
-		}));
+		})); // TODO change skripts and remove
+		exe.addCommand("SetSpatialTranslation", new SetSpatialTranslationCommand(spatialTarget));
+		exe.addCommand("SetSpatialRotation", new SetSpatialRotationCommand(spatialTarget));
 		exe.addCommand("SetCull", new SetVariableSpatialCullHintCommand(new Converter<String, HasSpatial>() {
 			@Override
 			public HasSpatial convert(final String value) {

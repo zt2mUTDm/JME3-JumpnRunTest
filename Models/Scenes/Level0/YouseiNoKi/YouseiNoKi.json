@@ -1,0 +1,10 @@
+{
+	"type": "node",
+	"name": "Yousei no ki",
+	"childs": [
+		{
+			"type": "model",
+			"url": "Models/Scenes/Level0/YouseiNoKi/YouseiNoKi.j3o"
+		}
+	]
+}

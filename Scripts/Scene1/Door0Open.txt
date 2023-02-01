@@ -1,0 +1,6 @@
+if Switch pressed == true
+  if Door0 rotated == false
+	MoveLinearTo this 3 -92.86 6 -160.86
+	SetVariable Door0 rotated true
+  endif
+endif

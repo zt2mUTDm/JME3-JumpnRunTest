@@ -74,6 +74,10 @@ public final class MoveControlledSpatialControl implements Control {
 	@Override
 	public void update(final float tpf) {
 		if(!enabled) {
+			if(hitted) {
+				spatial.setCullHint(CullHint.Dynamic);
+				hitted = false;
+			}
 			return;
 		}
 		

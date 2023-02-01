@@ -1,0 +1,10 @@
+{
+	"type": "node",
+	"name": "Door",
+	"childs": [
+		{
+			"type": "model",
+			"url": "Models/Generic/Door/Door.obj"
+		}
+	]
+}

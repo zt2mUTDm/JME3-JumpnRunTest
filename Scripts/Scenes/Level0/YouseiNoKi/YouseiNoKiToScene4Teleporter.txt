@@ -3,10 +3,10 @@ FadeOut
 waitfor 0
 UnloadScene
 
-Exec Scripts/Scene2/Scene2.txt
-SetTranslation player -7.6693344 0.9000001 0.8815934
+Exec Scripts/Scene4/Scene4.txt
+SetTranslation player -6.943355 2.1 -0.50549114
 SetSpatialRotation player 0 90 0
-SetChaseCameraTransform player 0.71695817 0.5371094 12.8
+SetChaseCameraTransform player 7.3136377 1.0634766 7.0
 
 SetCull player dynamic
 FadeIn

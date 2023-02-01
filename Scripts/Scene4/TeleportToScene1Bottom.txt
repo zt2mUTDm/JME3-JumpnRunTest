@@ -3,12 +3,12 @@ FadeOut
 waitfor 0
 UnloadScene
 
-Exec Scripts/Scene1/Scene1.txt
-SetTranslation player 0.3840977 7.1 -164.0222
-SetChaseCameraTransform player 2.4816065 0.78515625 23.799997
+Exec Scripts/Scenes/Level0/YouseiNoKi/YouseiNoKi.txt
+SetTranslation player 4.4317245 -5.9 -7.193571
+SetSpatialRotation player 0 -91.24122 0
+SetChaseCameraTransform player 8.422036 1.2666016 16.599998
 
 SetCull player dynamic
 FadeIn
 waitfor 0
 SetPlayerControlEnabled on
-

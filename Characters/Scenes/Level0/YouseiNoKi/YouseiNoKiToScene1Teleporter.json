@@ -1,0 +1,16 @@
+{
+	"model": "Models/Generic/Dummy/Dummy.json",
+	"physic": {
+		"shapes": [
+			{
+				"type": "Box",
+				"extends": [ 0.25, 2, 1 ],
+				"attach": "Main",
+				"collisionGroup": 2,
+				"purpose": "eventReceive",
+				"trigger": "touch",
+				"simpleScript": "Scripts/Scenes/Level0/YouseiNoKi/YouseiNoKiToScene1Teleporter.txt"
+			}
+		]
+	}
+}

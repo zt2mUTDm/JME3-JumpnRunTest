@@ -4,9 +4,9 @@ waitfor 0
 UnloadScene
 
 Exec Scripts/Scene1/Scene1.txt
-SetTranslation player 33 44 -200
-SetSpatialRotation player 0 90 0
-SetChaseCameraTransform player 0.7540674 0.71972656 30.999996
+SetTranslation player 0.3840977 7.1 -164.0222
+SetSpatialRotation player 0 2.5363724 0
+SetChaseCameraTransform player 2.4816065 0.78515625 23.799997
 
 SetCull player dynamic
 FadeIn
