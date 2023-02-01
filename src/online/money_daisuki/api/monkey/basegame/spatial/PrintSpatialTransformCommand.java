@@ -11,7 +11,7 @@ import online.money_daisuki.api.base.BiConverter;
 import online.money_daisuki.api.base.Requires;
 import online.money_daisuki.api.monkey.console.Command;
 
-public final class PrintSpatialTransformCommand  implements Command {
+public final class PrintSpatialTransformCommand implements Command {
 	private final BiConverter<? super String, ? super Spatial, ? extends Spatial> source;
 	private final PrintStream out;
 	

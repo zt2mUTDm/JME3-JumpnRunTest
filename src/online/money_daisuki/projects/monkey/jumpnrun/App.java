@@ -104,6 +104,7 @@ import online.money_daisuki.api.monkey.basegame.spatial.DetachSpatialCommand;
 import online.money_daisuki.api.monkey.basegame.spatial.HasSpatial;
 import online.money_daisuki.api.monkey.basegame.spatial.HasSpatialAdapter;
 import online.money_daisuki.api.monkey.basegame.spatial.MoveToCommand;
+import online.money_daisuki.api.monkey.basegame.spatial.PrintScenegraphJsonCommand;
 import online.money_daisuki.api.monkey.basegame.spatial.PrintSpatialTransformCommand;
 import online.money_daisuki.api.monkey.basegame.spatial.SetNodeCullHintCommand;
 import online.money_daisuki.api.monkey.basegame.spatial.SetSpatialRotationCommand;
@@ -385,6 +386,7 @@ public final class App extends ExtendedApplication {
 		exe.addCommand("MoveLinearTo", new MoveLinearToCommand(spatialTarget, this));
 		exe.addCommand("RotateLinearBy", new RotateLinearByCommand(spatialTarget));
 		exe.addCommand("PrintSpatialTransform", new PrintSpatialTransformCommand(spatialTarget, System.err));
+		exe.addCommand("PrintScenegraphJson", new PrintScenegraphJsonCommand(spatialTarget, System.err));
 		exe.addCommand("DetachSpatial", new DetachSpatialCommand(spatialTarget));
 	}
 	private void installAudioCommands(final CommandExecutor exe, final BiConverter<String, Spatial, Spatial> spatialTarget) {
