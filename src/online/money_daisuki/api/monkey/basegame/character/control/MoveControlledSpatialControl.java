@@ -62,6 +62,8 @@ public final class MoveControlledSpatialControl implements Control {
 	private PhysicsCollisionObject dragSource;
 	private Vector3f dragSourceLastLocation;
 	
+	private float fallTimer;
+	
 	public MoveControlledSpatialControl(final Application app, final float speed) {
 		this.app = Requires.notNull(app, "cam == null");
 		this.speed = Requires.greaterThanZero(speed, "speed <= 0");
@@ -74,10 +76,6 @@ public final class MoveControlledSpatialControl implements Control {
 	@Override
 	public void update(final float tpf) {
 		if(!enabled) {
-			if(hitted) {
-				spatial.setCullHint(CullHint.Dynamic);
-				hitted = false;
-			}
 			return;
 		}
 		
@@ -213,9 +211,10 @@ public final class MoveControlledSpatialControl implements Control {
 			return;
 		}
 		
-		if(!cc.isOnGround() && cc.getCharacter().getLinearVelocity(null).y != 0f) {
+		if(!cc.isOnGround() && cc.getCharacter().getLinearVelocity(tmpVec).y != 0f) {
 			cc.playAnimation("JumpMiddle", false);
 			state = State.FREE_FALL;
+			fallTimer = 0;
 		} else if(getPressedDirectionalKeyCombination() == -1) {
 			triggerEvent("Main", false);
 			cc.setMoveVector(Vector3f.ZERO);
@@ -260,17 +259,24 @@ public final class MoveControlledSpatialControl implements Control {
 		final CharControl cc = getUnderlyingControl();
 		
 		if(cc.isOnGround()) {
-			state = State.JUMP_END;
-			
-			cc.setMoveVector(Vector3f.ZERO);
-			
-			cc.playAnimation("JumpEnd", true, new Runnable() {
-				@Override
-				public void run() {
-					cc.playAnimation("Idle", false);
-					state = State.STAND;
-				}
-			});
+			if(fallTimer >= 0.3) {
+				state = State.JUMP_END;
+				
+				cc.setMoveVector(Vector3f.ZERO);
+				
+				cc.playAnimation("JumpEnd", true, new Runnable() {
+					@Override
+					public void run() {
+						cc.playAnimation("Idle", false);
+						state = State.STAND;
+					}
+				});
+			} else {
+				state = State.STAND;
+				cc.playAnimation("Idle", false);
+			}
+		} else {
+			fallTimer+= tpf;
 		}
 		
 		wantJump = false;
