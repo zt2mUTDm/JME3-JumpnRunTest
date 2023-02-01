@@ -60,7 +60,9 @@ import online.money_daisuki.api.monkey.basegame.cam.SetCameraTransformCommand;
 import online.money_daisuki.api.monkey.basegame.cam.SetChaseCameraEnabledCommand;
 import online.money_daisuki.api.monkey.basegame.cam.SetChaseCameraTransformCommand;
 import online.money_daisuki.api.monkey.basegame.character.AddCharacterCommand;
+import online.money_daisuki.api.monkey.basegame.character.AddCharacterControlCommand;
 import online.money_daisuki.api.monkey.basegame.character.FlexibleCharacterLoader;
+import online.money_daisuki.api.monkey.basegame.character.RemoveCharacterControlCommand;
 import online.money_daisuki.api.monkey.basegame.character.SetSpatialAnim;
 import online.money_daisuki.api.monkey.basegame.character.control.CharControl;
 import online.money_daisuki.api.monkey.basegame.character.control.MoveLinearToCommand;
@@ -215,6 +217,7 @@ public final class App extends ExtendedApplication {
 		installAudioCommands(exe, spatialTarget);
 		installParticleCommands(exe, spatialTarget);
 		installFilterCommands(exe);
+		installCharacterCommands(exe, spatialTarget);
 		
 		// Misc
 		exe.addCommand("DebugBullet", new DebugBulletCommand(bulletAppState));
@@ -502,6 +505,10 @@ public final class App extends ExtendedApplication {
 		exe.addCommand("FadeOut", new FadeOutCommand(this));
 		exe.addCommand("FadeIn", new FadeInCommand(this));
 		exe.addCommand("SetFadeDuration", new SetFadeDurationCommand(this));
+	}
+	private void installCharacterCommands(final CommandExecutor exe, final BiConverter<String, Spatial, Spatial> spatialTarget) {
+		exe.addCommand("AddCharacterControl", new AddCharacterControlCommand(spatialTarget, this));
+		exe.addCommand("RemoveCharacterControl", new RemoveCharacterControlCommand(spatialTarget));
 	}
 	
 	@Override
