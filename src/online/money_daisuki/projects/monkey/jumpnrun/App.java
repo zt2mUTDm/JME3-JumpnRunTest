@@ -55,7 +55,12 @@ import online.money_daisuki.api.monkey.basegame.cam.DebugCameraTransformCommand;
 import online.money_daisuki.api.monkey.basegame.cam.FlycamMoveSpeedCommand;
 import online.money_daisuki.api.monkey.basegame.cam.PrintCameraTransformCommand;
 import online.money_daisuki.api.monkey.basegame.cam.RemoveChaseCameraCommand;
+import online.money_daisuki.api.monkey.basegame.cam.SetCameraFrustumBottomCommand;
 import online.money_daisuki.api.monkey.basegame.cam.SetCameraFrustumFarCommand;
+import online.money_daisuki.api.monkey.basegame.cam.SetCameraFrustumLeftCommand;
+import online.money_daisuki.api.monkey.basegame.cam.SetCameraFrustumNearCommand;
+import online.money_daisuki.api.monkey.basegame.cam.SetCameraFrustumRightCommand;
+import online.money_daisuki.api.monkey.basegame.cam.SetCameraFrustumTopCommand;
 import online.money_daisuki.api.monkey.basegame.cam.SetCameraTransformCommand;
 import online.money_daisuki.api.monkey.basegame.cam.SetChaseCameraEnabledCommand;
 import online.money_daisuki.api.monkey.basegame.cam.SetChaseCameraTransformCommand;
@@ -336,10 +341,17 @@ public final class App extends ExtendedApplication {
 	}
 	
 	private void installCamCommands(final CommandExecutor exe, final BiConverter<String, Spatial, Spatial> spatialTarget) {
-		exe.addCommand("SetFlycamMoveSpeed", new FlycamMoveSpeedCommand(this));
 		exe.addCommand("SetCameraFrustumFar", new SetCameraFrustumFarCommand(getCamera()));
+		exe.addCommand("SetCameraFrustumNear", new SetCameraFrustumNearCommand(getCamera()));
+		exe.addCommand("SetCameraFrustumLeft", new SetCameraFrustumLeftCommand(getCamera()));
+		exe.addCommand("SetCameraFrustumRight", new SetCameraFrustumRightCommand(getCamera()));
+		exe.addCommand("SetCameraFrustumBottom", new SetCameraFrustumBottomCommand(getCamera()));
+		exe.addCommand("SetCameraFrustumTop", new SetCameraFrustumTopCommand(getCamera()));
+		
+		exe.addCommand("SetFlycamMoveSpeed", new FlycamMoveSpeedCommand(this));
+		
 		exe.addCommand("DebugChaseCamera", new DebugCameraTransformCommand(getGuiNode(), playerContainer, this));
-		exe.addCommand("PrintChaseCamera", new PrintCameraTransformCommand(playerContainer));
+		exe.addCommand("PrintChaseCamera", new PrintCameraTransformCommand(playerContainer, System.err));
 		exe.addCommand("SetCameraTransform", new SetCameraTransformCommand(playerContainer));
 		exe.addCommand("AddChaseCamera", new AddChaseCameraCommand(spatialTarget, this));
 		exe.addCommand("RemoveChaseCamera", new RemoveChaseCameraCommand(spatialTarget, this));
