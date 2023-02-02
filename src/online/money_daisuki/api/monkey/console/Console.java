@@ -16,4 +16,12 @@ public interface Console {
 	
 	String getInputText();
 	
+	void addConsoleShownListener(Runnable l);
+	
+	void addConsoleHiddenListener(Runnable l);
+	
+	void removeConsoleShownListener(Runnable l);
+	
+	void removeConsoleHiddenListener(Runnable l);
+	
 }

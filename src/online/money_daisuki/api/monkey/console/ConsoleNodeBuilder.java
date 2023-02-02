@@ -11,6 +11,7 @@ import com.jme3.math.ColorRGBA;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
+import com.jme3.scene.Spatial.CullHint;
 import com.jme3.scene.shape.Quad;
 
 import online.money_daisuki.api.base.DataSource;
@@ -113,6 +114,8 @@ public final class ConsoleNodeBuilder implements DataSource<ConsoleSpatial> {
 		//background scrolling text geom
 		scrollbackGeometry.setMesh(new Quad(bgFieldQuadWidth, lineHeight * numConsoleLines));
 		scrollbackGeometry.setLocalTranslation(horizontalPadding, viewportHeight - (lineHeight * numConsoleLines) - verticalPadding, .9f);
+		
+		node.setCullHint(CullHint.Always);
 		
 		return(new ConsoleImpl(node, inputBitmapText, scrollingBitmapText, numConsoleLines));
 	}

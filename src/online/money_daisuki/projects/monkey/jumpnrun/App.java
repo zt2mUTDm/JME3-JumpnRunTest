@@ -10,6 +10,7 @@ import java.util.Map.Entry;
 import com.jme3.asset.plugins.FileLocator;
 import com.jme3.bullet.BulletAppState;
 import com.jme3.font.BitmapText;
+import com.jme3.input.ChaseCamera;
 import com.jme3.input.KeyInput;
 import com.jme3.input.MouseInput;
 import com.jme3.input.controls.ActionListener;
@@ -19,7 +20,6 @@ import com.jme3.math.ColorRGBA;
 import com.jme3.post.FilterPostProcessor;
 import com.jme3.post.filters.CartoonEdgeFilter;
 import com.jme3.post.filters.FadeFilter;
-import com.jme3.renderer.RenderManager;
 import com.jme3.renderer.ViewPort;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
@@ -240,14 +240,7 @@ public final class App extends ExtendedApplication {
 		final Node relectNode = new Node();
 		getRootNode().attachChild(relectNode);
 		
-		
-		final ViewPort vp = getViewPort();
-		
-		final ConsoleNodeBuilder cnb = new ConsoleNodeBuilder(assetManager, vp.getCamera().getWidth(), vp.getCamera().getHeight());
-		final ConsoleSpatial console = cnb.source();
-		console.setVisible(false);
-		stateManager.attach(new ConsoleAppState(console, new CommandStringDataSink(exe, new Node("ConsoleDummyNode"))));
-		guiNode.attachChild(console.getRoot());
+		installConsole();
 		
 		final BitmapText tookScreenshotBitmapText = new BitmapText(guiFont);
 		tookScreenshotBitmapText.setText("Screenshot taken");
@@ -525,16 +518,43 @@ public final class App extends ExtendedApplication {
 		exe.addCommand("RemoveCharacterControl", new RemoveCharacterControlCommand(spatialTarget));
 	}
 	
-	@Override
-	public void simpleUpdate(final float tpf) {
-		//TODO: add update code
+	private void installConsole() {
+		final ViewPort vp = getViewPort();
+		final ConsoleNodeBuilder cnb = new ConsoleNodeBuilder(assetManager, vp.getCamera().getWidth(), vp.getCamera().getHeight());
+		final ConsoleSpatial console = cnb.source();
+		console.setVisible(false);
+		stateManager.attach(new ConsoleAppState(console, new CommandStringDataSink(exe, new Node("ConsoleDummyNode"))));
+		guiNode.attachChild(console.getRoot());
+		
+		final SetableMutableSingleValueModel<Boolean> cameraWasDisabledOnShow = new SetableMutableSingleValueModelImpl<>();
+		
+		console.addConsoleShownListener(new Runnable() {
+			@Override
+			public void run() {
+				// TODO more generic
+				if(playerContainer.isSet()) {
+					final ChaseCamera cam = playerContainer.source().getControl(ChaseCamera.class);
+					if(cam != null) {
+						if(cam.isEnabled()) {
+							cam.setEnabled(false);
+							cameraWasDisabledOnShow.sink(Boolean.TRUE);
+						}
+					}
+				}
+			}
+		});
+		console.addConsoleHiddenListener(new Runnable() {
+			@Override
+			public void run() {
+				if(cameraWasDisabledOnShow.isSet()) {
+					final ChaseCamera cam = playerContainer.source().getControl(ChaseCamera.class);
+					cam.setEnabled(true);
+					cameraWasDisabledOnShow.unset();
+				}
+			}
+		});
 	}
 	
-	@Override
-	public void simpleRender(final RenderManager rm) {
-		//TODO: add render code
-	}
-		
 	@Override
 	public void execute(final Spatial spatial, final String[] cmd, final Runnable done) {
 		exe.execute(spatial, cmd, done);

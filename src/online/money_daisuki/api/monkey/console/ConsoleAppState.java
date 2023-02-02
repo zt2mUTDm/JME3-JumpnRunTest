@@ -140,7 +140,7 @@ public class ConsoleAppState implements AppState {
 		return(null);
 	}
 	
-	private class ConsoleRawInputListener extends RawInputAdapter {
+	private final class ConsoleRawInputListener extends RawInputAdapter {
 		private boolean leftShiftPressed;
 		private boolean previousCursorVisibility;
 		
