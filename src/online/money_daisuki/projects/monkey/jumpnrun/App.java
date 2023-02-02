@@ -64,6 +64,7 @@ import online.money_daisuki.api.monkey.basegame.cam.SetCameraFrustumTopCommand;
 import online.money_daisuki.api.monkey.basegame.cam.SetCameraTransformCommand;
 import online.money_daisuki.api.monkey.basegame.cam.SetChaseCameraEnabledCommand;
 import online.money_daisuki.api.monkey.basegame.cam.SetChaseCameraTransformCommand;
+import online.money_daisuki.api.monkey.basegame.cam.SetFlycamEnabledCommand;
 import online.money_daisuki.api.monkey.basegame.character.AddCharacterCommand;
 import online.money_daisuki.api.monkey.basegame.character.AddCharacterControlCommand;
 import online.money_daisuki.api.monkey.basegame.character.FlexibleCharacterLoader;
@@ -349,6 +350,7 @@ public final class App extends ExtendedApplication {
 		exe.addCommand("SetCameraFrustumTop", new SetCameraFrustumTopCommand(getCamera()));
 		
 		exe.addCommand("SetFlycamMoveSpeed", new FlycamMoveSpeedCommand(this));
+		exe.addCommand("SetFlycamEnabled", new SetFlycamEnabledCommand(getFlyByCamera()));
 		
 		exe.addCommand("DebugChaseCamera", new DebugCameraTransformCommand(getGuiNode(), playerContainer, this));
 		exe.addCommand("PrintChaseCamera", new PrintCameraTransformCommand(playerContainer, System.err));
