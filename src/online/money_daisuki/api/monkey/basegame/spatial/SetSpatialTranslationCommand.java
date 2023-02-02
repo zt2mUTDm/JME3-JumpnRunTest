@@ -1,6 +1,7 @@
 package online.money_daisuki.api.monkey.basegame.spatial;
 
 import com.jme3.bullet.control.RigidBodyControl;
+import com.jme3.bullet.objects.PhysicsCharacter;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Spatial;
 import com.jme3.util.TempVars;
@@ -32,18 +33,24 @@ public final class SetSpatialTranslationCommand  implements Command {
 				
 				tmp.vect1.set(x, y, z);
 				
-				target.setLocalTranslation(tmp.vect1);
+				final Vector3f translation = target.getLocalTranslation();
+				tmp.vect1.subtractLocal(translation);
 				
-				final Vector3f worldTrans = target.getWorldTranslation();
+				target.setLocalTranslation(tmp.vect1);
 				
 				final RigidBodyControl rigid = target.getControl(RigidBodyControl.class);
 				if(rigid != null) {
-					rigid.setPhysicsLocation(worldTrans);
+					rigid.getPhysicsLocation(tmp.vect2);
+					tmp.vect2.addLocal(tmp.vect1);
+					rigid.setPhysicsLocation(tmp.vect2);
 				}
 				
 				final CharControl cc = target.getControl(CharControl.class);
 				if(cc != null) {
-					cc.setViewDirection(worldTrans);
+					final PhysicsCharacter c = cc.getCharacter();
+					c.getPhysicsLocation(tmp.vect2);
+					tmp.vect2.addLocal(tmp.vect1);
+					c.setPhysicsLocation(tmp.vect2);
 				}
 			} finally {
 				tmp.release();
