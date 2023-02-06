@@ -18,10 +18,37 @@ Clone the repo local and add at least following libaries to the class path:
 
 ## Grandle
 
-Use the Gradle script to set up the project automatic. (Thanks to "sgold")
+Use the Gradle script to set up the project automatic. (Thanks to Stephen Gold)
 
 ## Precompiled
 
 Here is a ready runnable jar version: https://mega.nz/file/aBpWgBiT#clNupyTkyjWE6xYAGeqC6H4dp8uGvEymO2ie8dMxqEM
 
 Contains all required libraries but no source and is proberly not up-to-date.
+
+## How to control
+
+Current control input is
+
+1) WASD - Move
+1) Mouse - Move camera
+1) Left mouse button - Jump and read sign
+1) Right mouse button - Strike
+1) Mouse wheel - Zoom
+1) Tab - Console
+
+## What if I falled througth the walls?
+
+The collision detect works not perfect, there are some spots where it is possible to fall througth walls. In this case, open the console with the Tabulator key and execute this command:
+
+SetSpatialTranslation player 0 2 0
+
+Or any other coordiantes. Please note, the camera control is disabled while the console is visible.
+
+## Where can I find the other console commands?
+
+Please take a look on this page:
+
+https://github.com/zt2mUTDm/JME3-JumpnRunTest/wiki/Console-commands
+
+Please note, some commands are currently unstabled and some will may change or get removed in the future.
