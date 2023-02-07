@@ -357,7 +357,7 @@ public final class CharacterLoader implements DataSource<Spatial> {
 		
 		final RigidBodyControl c = new RigidBodyControl(shape, mass);
 		loadPhysicalCollisionGroup(map, c);
-		Utils.getChildWithName(spatial, attachName).addControl(c);
+		Requires.notNull(Utils.getChildWithName(spatial, attachName), "Attach node not found").addControl(c);
 	}
 	private void loadEventTriggerPurpose(final JsonMap map, final CollisionShape shape, final Spatial spatial, final String attachName) {
 		final EventTriggerer c = new EventTriggerer(shape, bullet);

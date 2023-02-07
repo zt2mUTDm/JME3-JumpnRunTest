@@ -20,6 +20,7 @@ import online.money_daisuki.api.io.json.JsonDecoder;
 import online.money_daisuki.api.io.json.JsonElement;
 import online.money_daisuki.api.io.json.JsonList;
 import online.money_daisuki.api.io.json.JsonMap;
+import online.money_daisuki.api.monkey.basegame.spatial.TranslateControl;
 
 public final class ModelLoader implements DataSource<Spatial> {
 	private final String s;
@@ -48,6 +49,9 @@ public final class ModelLoader implements DataSource<Spatial> {
 		parseTranslation(map, spatial);
 		parseScale(map, spatial);
 		parseRotations(map, spatial);
+		
+		spatial.addControl(new TranslateControl());
+		
 		return(spatial);
 	}
 	private Spatial loadSpatialType(final JsonMap map) {
