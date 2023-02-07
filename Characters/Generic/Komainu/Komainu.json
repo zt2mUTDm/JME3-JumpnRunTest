@@ -1,10 +1,10 @@
 {
-	"model": "Models/Generic/SakuraTree/SakuraTree.json",
+	"model": "Models/Generic/Komainu/Komainu.json",
 	"physic": {
 		"shapes": [
 			{
 				"type": "Mesh",
-				"attach": "SakuraTree",
+				"attach": "Komainu",
 				"collisionGroup": 0,
 				"purpose": "rigid",
 				"mass": 0

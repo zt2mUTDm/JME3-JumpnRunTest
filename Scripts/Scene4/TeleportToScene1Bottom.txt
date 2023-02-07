@@ -6,7 +6,7 @@ UnloadScene
 Exec Scripts/Scenes/Level0/YouseiNoKi/YouseiNoKi.txt
 SetTranslation player 4.4317245 -5.9 -7.193571
 SetSpatialRotation player 0 -91.24122 0
-SetChaseCameraTransform player 8.422036 1.2666016 16.599998
+SetChaseCameraTransform player 8.364419 0.75683594 9.4
 
 SetCull player dynamic
 FadeIn

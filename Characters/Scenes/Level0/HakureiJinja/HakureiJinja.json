@@ -1,10 +1,10 @@
 {
-	"model": "Models/Generic/SakuraTree/SakuraTree.json",
+	"model": "Models/Scenes/Level0/HakureiJinja/HakureiJinja.json",
 	"physic": {
 		"shapes": [
 			{
 				"type": "Mesh",
-				"attach": "SakuraTree",
+				"attach": "HakureiJinja",
 				"collisionGroup": 0,
 				"purpose": "rigid",
 				"mass": 0

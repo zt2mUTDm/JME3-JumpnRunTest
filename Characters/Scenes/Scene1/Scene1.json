@@ -4,7 +4,7 @@
 		"shapes": [
 			{
 				"type": "Mesh",
-				"attach": "Main",
+				"attach": "Scene1",
 				"collisionGroup": 0,
 				"purpose": "rigid",
 				"mass": 0

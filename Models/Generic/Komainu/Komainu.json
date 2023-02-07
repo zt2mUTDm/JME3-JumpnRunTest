@@ -1,0 +1,10 @@
+{
+	"type": "node",
+	"name": "Komainu",
+	"childs": [
+		{
+			"type": "model",
+			"url": "Models/Generic/Komainu/Komainu.obj"
+		}
+	]
+}

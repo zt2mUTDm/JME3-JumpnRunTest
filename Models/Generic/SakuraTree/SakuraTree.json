@@ -1,6 +1,6 @@
 {
 	"type": "node",
-	"name": "Tree",
+	"name": "SakuraTree",
 	"childs": [
 		{
 			"type": "model",

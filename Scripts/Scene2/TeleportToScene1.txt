@@ -4,7 +4,7 @@ waitfor 0
 UnloadScene
 
 Exec Scripts/Scene1/Scene1.txt
-SetTranslation player 0 1 -81
+SetTranslation player 0.16180758 3.3000002 -83.51888
 SetSpatialRotation player 0 0 0
 SetChaseCameraTransform player 0.97770035 1.1210938 40.0
 

@@ -5,9 +5,8 @@ AddCharacter Characters/Scenes/Scene1/Scene1.json 0 0 0 1 1 1 0 0 0
 AddAmbientLight root 1 1 1 0.1
 
 AddCharacter Characters/Generic/Sign_Post/Sign_Post.json -40 0 -40 1 1 1 0 0 0
-AddCharacter Characters/Scenes/Scene1/Scene1ToScene2Teleporter.json 0 2 -83.5 1 1 1 0 0 0
-AddCharacter Characters/Scenes/Scene1/Scene1ToScene3Teleporter.json 0 10 -88 1 1 1 0 0 0
-AddCharacter Characters/Enemies/EnemySpawn/EnemySpawn.json 0 2 -100 1.0 1.0 1.0 0 0 0
+AddCharacter Characters/Scenes/Scene1/Scene1ToScene3Teleporter.json 13.5 17.5 -93 1 1 1 0 0 0
+AddCharacter Characters/Enemies/EnemySpawn/EnemySpawn.json -52.609447 1.1 -87.171906 1.0 1.0 1.0 0 0 0
 
 AddCharacter Characters/Onigiri/Onigiri0.json -68.48175 5.0 -246.0 1 1 1 0 0 0
 AddCharacter Characters/Onigiri/Onigiri1.json -97.0 25.0 11.0 1 1 1 0 0 0
@@ -19,7 +18,7 @@ AddCharacter Characters/Scenes/Scene1/Platforms/Platform2.json -105 20 -15 1 1 1
 AddCharacter Characters/Generic/Switch/Switch.json -120 0 -190 1.0 1.0 1.0 0 45 0
 AddCharacter Characters/Generic/Door/Door.json -92.86 2 -160.86 1.0 1.0 1.0 0 45 0
 
-AddCharacter Characters/Generic/Trampoline/Trampoline.json -10 1 -100 1 1 1 0 0 0
+AddCharacter Characters/Generic/Trampoline/Trampoline.json -27.951918 3.3000002 -96.607 1 1 1 0 0 0
 
 AddCharacter Characters/Scenes/Scene1/Platforms/Platform3.json -105.0 24.8 -239.0 1 1 1 0 0 0
 AddCharacter Characters/Scenes/Scene1/Platforms/Platform4.json -105.0 24.8 -209.0 1 1 1 0 0 0
@@ -44,8 +43,15 @@ SetAudioDirectional bgaudio false
 PlayAudio bgaudio
 
 AddCharacter Characters/Generic/Tree/Tree.json -10 4 -10 1 1 1 0 0 0
-AddCharacter Characters/Generic/SakuraTree/SakuraTree.json -10 7 -70 1 1 1 0 0 0
-AddCharacter Characters/Generic/SakuraTree/SakuraTree.json 10 7 -70 1 1 1 0 0 0
+AddCharacter Characters/Generic/SakuraTree/SakuraTree.json -10 7 -60 1 1 1 0 0 0
+AddCharacter Characters/Generic/SakuraTree/SakuraTree.json 10 7 -60 1 1 1 0 0 0
+
+AddCharacter Characters/Generic/Torii/Torii.json 0 0 -30 0.5 0.5 0.5 0 270 0
+AddCharacter Characters/Generic/Komainu/Komainu.json -10 0 -30 2 1 2 0 0 0
+AddCharacter Characters/Generic/Komainu/Komainu.json 10 0 -30 2 1 2 0 0 0
+
+AddCharacter Characters/Scenes/Level0/HakureiJinja/HakureiJinja.json 0 0 -90 1 1 1 0 180 0
+AddCharacter Characters/Scenes/Scene1/Scene1ToScene2Teleporter.json 0 4.2 -85.5 1 1 1 0 0 0
 
 CreateParticleEmitter root Particle1 ParticleEmitters/Particle0.json 0 18 -30
 EmitAllParticles Particle1

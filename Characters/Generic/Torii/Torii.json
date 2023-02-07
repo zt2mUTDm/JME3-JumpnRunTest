@@ -1,10 +1,10 @@
 {
-	"model": "Models/Generic/SakuraTree/SakuraTree.json",
+	"model": "Models/Generic/Torii/Torii.json",
 	"physic": {
 		"shapes": [
 			{
 				"type": "Mesh",
-				"attach": "SakuraTree",
+				"attach": "Torii",
 				"collisionGroup": 0,
 				"purpose": "rigid",
 				"mass": 0

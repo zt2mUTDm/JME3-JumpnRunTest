@@ -1,0 +1,10 @@
+{
+	"type": "node",
+	"name": "HakureiJinja",
+	"childs": [
+		{
+			"type": "model",
+			"url": "Models/Scenes/Level0/HakureiJinja/HakureiJinja.obj"
+		}
+	]
+}

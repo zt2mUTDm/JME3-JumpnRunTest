@@ -1,10 +1,10 @@
 {
 	"type": "node",
-	"name": "Scene1",
+	"name": "Torii",
 	"childs": [
 		{
 			"type": "model",
-			"url": "Models/Scenes/Scene1/Scene1.j3o"
+			"url": "Models/Generic/Torii/Torii.obj"
 		}
 	]
 }

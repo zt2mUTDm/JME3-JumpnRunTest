@@ -4,7 +4,7 @@
 		"shapes": [
 			{
 				"type": "Box",
-				"extends": [ 1.0, 2.0, 0.5 ],
+				"extends": [ 1.5, 2.0, 0.5 ],
 				"attach": "Main",
 				"collisionGroup": 2,
 				"purpose": "eventReceive",
