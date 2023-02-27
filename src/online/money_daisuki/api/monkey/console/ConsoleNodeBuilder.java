@@ -17,19 +17,22 @@ import com.jme3.scene.shape.Quad;
 import online.money_daisuki.api.base.DataSource;
 import online.money_daisuki.api.base.Requires;
 
-public final class ConsoleNodeBuilder implements DataSource<ConsoleSpatial> {
+public final class ConsoleNodeBuilder implements DataSource<ConsoleGui> {
 	private final AssetManager assetManager;
 	
 	private final int viewportWidth;
 	private final int viewportHeight;
 	
-	public ConsoleNodeBuilder(final AssetManager assetManager, final int viewportWidth, final int viewportHeight) {
+	private final Node parent;
+	
+	public ConsoleNodeBuilder(final AssetManager assetManager, final int viewportWidth, final int viewportHeight, final Node parent) {
 		this.assetManager = Requires.notNull(assetManager, "assetManager == null");
 		this.viewportWidth = viewportWidth;
 		this.viewportHeight = viewportHeight;
+		this.parent = Requires.notNull(parent, "parent == null");
 	}
 	@Override
-	public ConsoleSpatial source() {
+	public ConsoleGui source() {
 		final Node node = new Node("Console");
 		
 		final Material elementsMaterial = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
@@ -117,6 +120,6 @@ public final class ConsoleNodeBuilder implements DataSource<ConsoleSpatial> {
 		
 		node.setCullHint(CullHint.Always);
 		
-		return(new ConsoleImpl(node, inputBitmapText, scrollingBitmapText, numConsoleLines));
+		return(new ConsoleImpl(node, parent, inputBitmapText, scrollingBitmapText, numConsoleLines));
 	}
 }

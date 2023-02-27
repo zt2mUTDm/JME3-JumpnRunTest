@@ -4,13 +4,16 @@ import java.util.Collection;
 import java.util.LinkedList;
 
 import com.jme3.font.BitmapText;
+import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
 import com.jme3.scene.Spatial.CullHint;
 
 import online.money_daisuki.api.base.Requires;
 
-public final class ConsoleImpl implements ConsoleSpatial {
+public final class ConsoleImpl implements ConsoleGui {
 	private final Spatial root;
+	private final Node gui;
+	
 	private final BitmapText inputText;
 	private final BitmapText outputText;
 	private final int outputTextLineCount;
@@ -22,8 +25,10 @@ public final class ConsoleImpl implements ConsoleSpatial {
 	
 	private boolean visible;
 	
-	public ConsoleImpl(final Spatial root, final BitmapText inputText, final BitmapText outputText, final int outputTextLineCount) {
+	public ConsoleImpl(final Spatial root, final Node gui, final BitmapText inputText, final BitmapText outputText,
+			final int outputTextLineCount) {
 		this.root = Requires.notNull(root, "root == null");
+		this.gui = Requires.notNull(gui, "gui == null");
 		this.inputText = Requires.notNull(inputText, "inputText == null");
 		this.outputText = Requires.notNull(outputText, "outputText == null");
 		this.outputTextLineCount = Requires.greaterThanZero(outputTextLineCount, "outputTextLineCount <= 0");
@@ -102,8 +107,12 @@ public final class ConsoleImpl implements ConsoleSpatial {
 	}
 	
 	@Override
-	public Spatial getRoot() {
-		return (root);
+	public void attach() {
+		gui.attachChild(root);
+	}
+	@Override
+	public void detach() {
+		gui.detachChild(root);
 	}
 	
 	@Override
