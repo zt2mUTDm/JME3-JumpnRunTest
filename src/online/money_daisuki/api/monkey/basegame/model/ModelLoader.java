@@ -10,8 +10,15 @@ import com.jme3.material.Material;
 import com.jme3.math.FastMath;
 import com.jme3.math.Quaternion;
 import com.jme3.math.Vector3f;
+import com.jme3.scene.Geometry;
+import com.jme3.scene.Mesh;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
+import com.jme3.scene.shape.Box;
+import com.jme3.scene.shape.Cylinder;
+import com.jme3.scene.shape.Dome;
+import com.jme3.scene.shape.Sphere;
+import com.jme3.scene.shape.StripBox;
 
 import online.money_daisuki.api.base.Converter;
 import online.money_daisuki.api.base.DataSource;
@@ -61,6 +68,16 @@ public final class ModelLoader implements DataSource<Spatial> {
 				return(loadNode(map));
 			case("model"):
 				return(loadModel(map));
+			case("box"):
+				return(loadBox(map));
+			case("stripBox"):
+				return(loadStripBox(map));
+			case("cylinder"):
+				return(loadCylinder(map));
+			case("sphere"):
+				return(loadSphere(map));
+			case("dome"):
+				return(loadDome(map));
 			default:
 				throw new IllegalStateException("Unreconizable type: " + type);
 		}
@@ -79,6 +96,66 @@ public final class ModelLoader implements DataSource<Spatial> {
 	private Spatial loadModel(final JsonMap map) {
 		final String url = map.get("url").asData().asString();
 		return(app.getAssetManager().loadModel(url));
+	}
+	private Spatial loadBox(final JsonMap map) {
+		final JsonList e = map.get("extends").asList();
+		
+		final float x = e.get(0).asData().asNumber().asBigDecimal().floatValue();
+		final float y = e.get(1).asData().asNumber().asBigDecimal().floatValue();
+		final float z = e.get(2).asData().asNumber().asBigDecimal().floatValue();
+		
+		final Mesh mesh = new Box(x,  y, z);
+		return(meshToGeometry(map, mesh));
+	}
+	
+	private Spatial loadStripBox(final JsonMap map) {
+		final JsonList e = map.get("extends").asList();
+		
+		final float x = e.get(0).asData().asNumber().asBigDecimal().floatValue();
+		final float y = e.get(1).asData().asNumber().asBigDecimal().floatValue();
+		final float z = e.get(2).asData().asNumber().asBigDecimal().floatValue();
+		
+		final Mesh mesh = new StripBox(x,  y, z);
+		return(meshToGeometry(map, mesh));
+	}
+	private Spatial loadCylinder(final JsonMap map) {
+		final int axisSamples = map.get("axisSamples").asData().asNumber().asBigInteger().intValueExact();
+		final int radialSamples = map.get("radialSamples").asData().asNumber().asBigInteger().intValueExact();
+		final float radius = map.get("radius").asData().asNumber().asBigDecimal().floatValue();
+		final float height = map.get("height").asData().asNumber().asBigDecimal().floatValue();
+		
+		final boolean closed = map.containsKey("closed") ? map.get("closed").asData().asBool() : false;
+		final boolean inverted = map.containsKey("inverted") ? map.get("closed").asData().asBool() : false;
+		
+		final Mesh mesh = new Cylinder(axisSamples, radialSamples, radius, height, closed, inverted);
+		return(meshToGeometry(map, mesh));
+	}
+	private Spatial loadSphere(final JsonMap map) {
+		final int zSamples = map.get("zSamples").asData().asNumber().asBigInteger().intValueExact();
+		final int radialSamples = map.get("radialSamples").asData().asNumber().asBigInteger().intValueExact();
+		final float radius = map.get("radius").asData().asNumber().asBigDecimal().floatValue();
+		
+		final boolean useEvenSlices = map.containsKey("useEvenSlices") ? map.get("closed").asData().asBool() : false;
+		final boolean interior = map.containsKey("interior") ? map.get("closed").asData().asBool() : false;
+		
+		final Mesh mesh = new Sphere(zSamples, radialSamples, radius, useEvenSlices, interior);
+		return(meshToGeometry(map, mesh));
+	}
+	private Spatial loadDome(final JsonMap map) {
+		final int planes = map.get("planes").asData().asNumber().asBigInteger().intValueExact();
+		final int radialSamples = map.get("radialSamples").asData().asNumber().asBigInteger().intValueExact();
+		final float radius = map.get("radius").asData().asNumber().asBigDecimal().floatValue();
+		
+		final Mesh mesh = new Dome(planes, radialSamples, radius);
+		return(meshToGeometry(map, mesh));
+	}
+	
+	private Spatial meshToGeometry(final JsonMap map, final Mesh mesh) {
+		final Material mat = matLoader.convert(map.get("material").asData().asString());
+		
+		final Geometry geo = new Geometry("", mesh);
+		geo.setMaterial(mat);
+		return(geo);
 	}
 	
 	private void parseTranslation(final JsonMap map, final Spatial s) {
