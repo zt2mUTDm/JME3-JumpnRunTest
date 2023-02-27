@@ -1,107 +1,86 @@
 package online.money_daisuki.api.monkey.basegame.filter;
 
 import com.jme3.app.Application;
-import com.jme3.app.state.AppState;
-import com.jme3.app.state.AppStateManager;
+import com.jme3.app.state.BaseAppState;
 import com.jme3.post.filters.FadeFilter;
-import com.jme3.renderer.RenderManager;
 
-import online.money_daisuki.api.base.NullRunnable;
 import online.money_daisuki.api.base.Requires;
 
-public final class FadeAppState implements AppState {
+/**
+ * An AppState to provide global fading extended with a callback.
+ */
+public final class FadeAppState extends BaseAppState {
 	private final FadeFilter filter;
 	
-	private boolean initialized;
-	private boolean enabled;
-	
-	private boolean awaitListener;
 	private float listenerTarget;
 	private Runnable listener;
 	
 	public FadeAppState(final FadeFilter filter) {
 		this.filter = Requires.notNull(filter, "filter == null");
-		this.enabled = true;
 	}
 	
 	@Override
 	public void update(final float tpf) {
-		if(awaitListener) {
-			if(filter.getValue() == listenerTarget) {
-				listener.run();
-				listener = new NullRunnable();
-				awaitListener = false;
-			}
+		if(listener != null && filter.getValue() == listenerTarget) {
+			// Unset before call to prevent StackOverflowError.
+			final Runnable r = listener;
+			listener = null;
+			r.run();
 		}
 	}
 	
+	/**
+	 * Start fading the screen in. The callback is called when either fading is done or {@link #fadeIn(Runnable)} or
+	 * {@link #fadeOut(Runnable)} is called again, whatever occures first. Not Thread-safe, call only in JME-Thread!
+	 * @param l The callback.
+	 */
 	public void fadeIn(final Runnable l) {
 		Requires.notNull(l, "l == null");
-		if(awaitListener) {
+		if(listener != null) {
 			listener.run();
-		} else {
-			awaitListener = true;
 		}
 		
 		listenerTarget = 1.0f;
 		listener = l;
 		filter.fadeIn();
 	}
+	/**
+	 * Start fading the screen out. The callback is called when either fading is done or {@link #fadeIn(Runnable)} or
+	 * {@link #fadeOut(Runnable)} is called again, whatever occures first. Not Thread-safe, call only in JME-Thread!
+	 * @param l The callback.
+	 */
 	public void fadeOut(final Runnable l) {
 		Requires.notNull(l, "l == null");
-		if(awaitListener) {
+		if(listener != null) {
 			listener.run();
-		} else {
-			awaitListener = true;
 		}
 		
 		listenerTarget = 0.0f;
 		listener = l;
 		filter.fadeOut();
 	}
+	/**
+	 * Set the fade duration of the underlying {@link FadeFilter}.
+	 * @param duration Fade duration in seconds. Must be >= 0.
+	 */
 	public void setDuration(final float duration) {
-		filter.setDuration(duration);
+		filter.setDuration(Requires.positive(duration));
 	}
 	
 	@Override
-	public void initialize(final AppStateManager stateManager, final Application app) {
-		initialized = true;
-	}
-	@Override
-	public boolean isInitialized() {
-		return(initialized);
-	}
-	@Override
-	public String getId() {
-		return(null);
-	}
-	@Override
-	public void setEnabled(final boolean active) {
-		this.enabled = active;
-	}
-	@Override
-	public boolean isEnabled() {
-		return(enabled);
-	}
-	@Override
-	public void stateAttached(final AppStateManager stateManager) {
+	protected void cleanup(final Application app) {
 		
 	}
 	@Override
-	public void stateDetached(final AppStateManager stateManager) {
+	protected void initialize(final Application app) {
 		
 	}
 	@Override
-	public void render(final RenderManager rm) {
+	protected void onDisable() {
 		
 	}
 	@Override
-	public void postRender() {
+	protected void onEnable() {
 		
 	}
-	@Override
-	public void cleanup() {
-		
-	}
-
 }
