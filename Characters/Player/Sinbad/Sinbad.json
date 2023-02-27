@@ -23,11 +23,12 @@
 			{
 				"Hand.R": {
 					"type": "model",
-					"url": "Models/Player/Sword/Sword.json",
-					"translation": [ -1, 1, 0 ],
+					"url": "Models/Player/Gohei/Gohei.json",
+					"translation": [ -5, 1, 0 ],
 					"rotate": [
 						[ 270.0, 0, 1, 0 ],
-						[ 180.0, 0, 0, 1 ]
+						[ 180.0, 0, 0, 1 ],
+						[ 90.0, 1, 0, 0 ]
 					]
 				}
 			}
@@ -46,8 +47,8 @@
 			},
 			{
 				"type": "Box",
-				"extends": [ 0.1, 0.1, 0.7 ],
-				"attach": "SwordHit",
+				"extends": [ 0.1, 1.5, 0.7 ],
+				"attach": "Gohei",
 				"collisionGroup": 3,
 				"purpose": "eventTrigger",
 				"eventName": "HitEnemy"

@@ -1,0 +1,11 @@
+{
+	"type": "node",
+	"name": "Gohei",
+	"childs": [
+		{
+			"type": "model",
+			"url": "Models/Player/Gohei/Gohei.obj",
+			"translation": [ 0.0, 5.0, 0.0 ]
+		}
+	]
+}

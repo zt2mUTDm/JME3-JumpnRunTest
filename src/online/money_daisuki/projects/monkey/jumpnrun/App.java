@@ -25,6 +25,7 @@ import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
 import com.jme3.scene.Spatial.CullHint;
 import com.jme3.terrain.geomipmap.TerrainQuad;
+import com.simsilica.lemur.GuiGlobals;
 
 import online.money_daisuki.api.base.BiConverter;
 import online.money_daisuki.api.base.ConstantDataSource;
@@ -143,8 +144,8 @@ import online.money_daisuki.api.monkey.basegame.variables.VariableContainer;
 import online.money_daisuki.api.monkey.console.CommandExecutor;
 import online.money_daisuki.api.monkey.console.CommandStringDataSink;
 import online.money_daisuki.api.monkey.console.ConsoleAppState;
+import online.money_daisuki.api.monkey.console.ConsoleGui;
 import online.money_daisuki.api.monkey.console.ConsoleNodeBuilder;
-import online.money_daisuki.api.monkey.console.ConsoleSpatial;
 
 public final class App extends ExtendedApplication {
 	private CommandExecutor exe;
@@ -520,11 +521,11 @@ public final class App extends ExtendedApplication {
 	
 	private void installConsole() {
 		final ViewPort vp = getViewPort();
-		final ConsoleNodeBuilder cnb = new ConsoleNodeBuilder(assetManager, vp.getCamera().getWidth(), vp.getCamera().getHeight());
-		final ConsoleSpatial console = cnb.source();
+		final ConsoleNodeBuilder cnb = new ConsoleNodeBuilder(assetManager, vp.getCamera().getHeight(), vp.getCamera().getWidth(), getGuiNode());
+		final ConsoleGui console = cnb.source();
 		console.setVisible(false);
 		stateManager.attach(new ConsoleAppState(console, new CommandStringDataSink(exe, new Node("ConsoleDummyNode"))));
-		guiNode.attachChild(console.getRoot());
+		console.attach();
 		
 		final SetableMutableSingleValueModel<Boolean> cameraWasDisabledOnShow = new SetableMutableSingleValueModelImpl<>();
 		
@@ -553,6 +554,8 @@ public final class App extends ExtendedApplication {
 				}
 			}
 		});
+		
+		GuiGlobals.initialize(this);
 	}
 	
 	@Override
