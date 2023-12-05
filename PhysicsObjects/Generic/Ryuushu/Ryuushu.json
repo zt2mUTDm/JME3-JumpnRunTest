@@ -1,0 +1,14 @@
+{
+	"model": "Models/Generic/DragonGem/DragonGem.json",
+	"physics": {
+		"shapes": [
+			{
+				"type": "Box",
+				"extends": [ 1, 0.8, 1 ],
+				"attach": "Ryuudama",
+				"purpose": "ghost",
+				"collisionGroup": 0
+			}
+		]
+	}
+}

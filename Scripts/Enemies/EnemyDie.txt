@@ -1,3 +1,0 @@
-Unload
-SetVariable Enemy activated false
-SetVariable Enemy playerDetected false

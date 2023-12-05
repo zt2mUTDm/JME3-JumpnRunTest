@@ -1,0 +1,7 @@
+{
+	"className": "online.money_daisuki.api.monkey.basegame.py.PythonInitializer",
+	"dependencies": [
+		"console"
+	],
+	"waitForStateInit": false
+}

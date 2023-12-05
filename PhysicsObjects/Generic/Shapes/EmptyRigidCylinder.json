@@ -1,0 +1,16 @@
+{
+	"model": "Models/Generic/Dummy/Dummy.json",
+	"physics": {
+		"shapes": [
+			{
+				"type": "Cylinder",
+				"height": 1,
+				"radius": 1,
+				"attach": "Dummy",
+				"collisionGroup": 0,
+				"purpose": "rigid",
+				"mass": 0
+			}
+		]
+	}
+}

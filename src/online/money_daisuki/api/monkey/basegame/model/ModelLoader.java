@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.io.Reader;
 
 import com.jme3.app.Application;
+import com.jme3.audio.AudioData.DataType;
+import com.jme3.audio.AudioNode;
 import com.jme3.material.Material;
 import com.jme3.math.FastMath;
 import com.jme3.math.Quaternion;
@@ -66,6 +68,8 @@ public final class ModelLoader implements DataSource<Spatial> {
 		switch(type) {
 			case("node"):
 				return(loadNode(map));
+			case("audio"):
+				return(loadAudioNode(map));
 			case("model"):
 				return(loadModel(map));
 			case("box"):
@@ -93,10 +97,33 @@ public final class ModelLoader implements DataSource<Spatial> {
 		}
 		return(node);
 	}
+	private Spatial loadAudioNode(final JsonMap map) {
+		final JsonMap e = map.get("audio").asMap();
+		
+		final String url = map.get("url").asData().asString();
+		final DataType dType = Requires.notNull(DataType.valueOf(map.get("dataType").asData().asString()));
+		
+		final AudioNode audio = new AudioNode(app.getAssetManager(), url, dType);
+		audio.setDirectional(map.get("directional").asData().asBool());
+		audio.setPositional(map.get("positional").asData().asBool());
+		
+		if(map.containsKey("direction")) {
+			final JsonList direction = map.get("direction").asList();
+			final Vector3f vec = new Vector3f(
+					direction.get(0).asData().asNumber().asBigInteger().floatValue(),
+					direction.get(1).asData().asNumber().asBigInteger().floatValue(),
+					direction.get(2).asData().asNumber().asBigInteger().floatValue()
+			);
+			audio.setDirection(vec);
+		}
+		return(audio);
+	}
+	
 	private Spatial loadModel(final JsonMap map) {
 		final String url = map.get("url").asData().asString();
 		return(app.getAssetManager().loadModel(url));
 	}
+	
 	private Spatial loadBox(final JsonMap map) {
 		final JsonList e = map.get("extends").asList();
 		
@@ -107,7 +134,6 @@ public final class ModelLoader implements DataSource<Spatial> {
 		final Mesh mesh = new Box(x,  y, z);
 		return(meshToGeometry(map, mesh));
 	}
-	
 	private Spatial loadStripBox(final JsonMap map) {
 		final JsonList e = map.get("extends").asList();
 		

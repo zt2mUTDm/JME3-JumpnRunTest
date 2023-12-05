@@ -1,0 +1,24 @@
+{
+	"model": "Models/Generic/Sign_Post/Sign_Post.json",
+	"physics": {
+		"shapes": [
+			{
+				"type": "Cylinder",
+				"radius": 1.6,
+				"height": 10,
+				"attach": "Activatable-Trigger-Main",
+				"collisionGroup": 0,
+				"purpose": "ghost"
+			},
+			{
+				"type": "Capsule",
+				"radius": 0.6,
+				"height": 20,
+				"attach": "Sign Post",
+				"collisionGroup": 0,
+				"purpose": "rigid",
+				"mass": 0
+			}
+		]
+	}
+}

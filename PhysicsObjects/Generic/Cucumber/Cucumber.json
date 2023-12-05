@@ -1,0 +1,15 @@
+{
+	"model": "Models/Generic/Cucumber/Cucumber.json",
+	"physics": {
+		"shapes": [
+			{
+				"type": "Capsule",
+				"radius": 0.25,
+				"height": 1.75,
+				"attach": "Cucumber",
+				"purpose": "ghost",
+				"collisionGroup": 0
+			}
+		]
+	}
+}

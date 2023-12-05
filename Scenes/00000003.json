@@ -1,0 +1,44 @@
+{
+	"forms": [
+		{
+			"url": "Forms/Scenes/Scene3ToScene0Teleporter0.json",
+			"transform": {
+				"translation": [
+					0,
+					10,
+					0
+				],
+				"scale": [
+					0.25, 1.6, 1.2
+				],
+				"rotation": [
+					0,
+					0,
+					0
+				]
+			}
+		}
+	],
+	"physicsObjects": [
+		{
+			"url": "PhysicsObjects/Scenes/00000003/Environment.json",
+			"transform": {
+				"translation": [
+					0,
+					0,
+					0
+				],
+				"scale": [
+					1,
+					1,
+					1
+				],
+				"rotation": [
+					0,
+					0,
+					0
+ 				]
+ 			}
+		}
+	]
+}

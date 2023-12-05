@@ -1,0 +1,76 @@
+{
+	"model": "Models/Player/Sinbad/Sinbad.json",
+	"controls": [
+		{
+			"type": "CC",
+			"radius": 0.4,
+			"height": 1.4,
+			"mass": 60.0,
+			"attach": "Player"
+		}
+	],
+	"animations": {
+		"Idle": "IdleTop",
+		"LongIdle": "Dance",
+		"Run": "RunBase",
+		"JumpStart": "JumpStart",
+		"JumpMiddle": "JumpLoop",
+		"JumpEnd": "JumpEnd",
+		"Strike": "SliceVertical",
+		"StrikeWhileRunning": "SliceHorizontal"
+	},
+	"skinning": {
+		"attachments": [
+			{
+				"Hand.R": {
+					"type": "model",
+					"url": "Models/Player/Gohei/Gohei.json",
+					"translation": [ -5, 1, 0 ],
+					"rotate": [
+						[ 270.0, 0, 1, 0 ],
+						[ 180.0, 0, 0, 1 ],
+						[ 90.0, 1, 0, 0 ]
+					]
+				}
+			}
+		]
+	},
+	"physics": {
+		"shapes": [
+			{
+				"type": "Capsule",
+				"radius": 0.4,
+				"height": 1.2,
+				"attach": "Player",
+				"collisionGroup": 0,
+				"name": "PlayerShape",
+				"purpose": "ghost",
+				"eventName": "Main"
+			},
+			{
+				"type": "Box",
+				"extends": [ 0.1, 1.5, 0.7 ],
+				"attach": "Gohei",
+				"collisionGroup": 3,
+				"purpose": "ghost",
+				"eventName": "HitEnemy"
+			},
+			{
+				"type": "Box",
+				"extends": [ 0.25, 0.25, 0.25 ],
+				"attach": "Ground",
+				"collisionGroup": 0,
+				"purpose": "ghost"
+			},
+			{
+				"type": "Capsule",
+				"radius": 0.125,
+				"height": 0.75,
+				"extends": [ 0.25, 0.75, 0.25 ],
+				"attach": "Top",
+				"collisionGroup": 0,
+				"purpose": "ghost"
+			}
+		]
+	}
+}

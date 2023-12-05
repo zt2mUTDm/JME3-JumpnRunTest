@@ -5,23 +5,18 @@ import java.util.Iterator;
 import java.util.LinkedList;
 
 import com.jme3.app.Application;
-import com.jme3.app.state.AppState;
 import com.jme3.app.state.AppStateManager;
-import com.jme3.renderer.RenderManager;
+import com.jme3.app.state.BaseAppState;
 
 import online.money_daisuki.api.base.Requires;
 
-public final class RemoveDoneAppState implements AppState {
+public final class RemoveDoneAppState extends BaseAppState {
 	private final Collection<MayDoneAppState> states;
-	private final AppStateManager stateManager;
 	
-	private boolean initialized;
-	private boolean enabled;
+	private Application app;
 	
-	public RemoveDoneAppState(final AppStateManager stateManager) {
-		this.stateManager = Requires.notNull(stateManager, "stateManager == null");
+	public RemoveDoneAppState() {
 		this.states = new LinkedList<>();
-		this.enabled = true;
 	}
 	
 	public void addAppState(final MayDoneAppState state) {
@@ -33,58 +28,31 @@ public final class RemoveDoneAppState implements AppState {
 	
 	@Override
 	public void update(final float tpf) {
+		final AppStateManager stateMnr = app.getStateManager();
+		
 		final Iterator<MayDoneAppState> it = states.iterator();
 		while(it.hasNext()) {
 			final MayDoneAppState state = it.next();
 			if(state.isDone()) {
-				stateManager.detach(state);
+				stateMnr.detach(state);
 				it.remove();
 			}
 		}
 	}
-	
 	@Override
-	public void initialize(final AppStateManager stateManager, final Application app) {
-		this.initialized = true;
+	protected void initialize(final Application app) {
+		this.app = app;
 	}
 	@Override
-	public final boolean isInitialized() {
-		return(initialized);
+	protected void cleanup(final Application app) {
+		this.app = null;
 	}
 	@Override
-	public final String getId() {
-		return(getClass().getName());
-	}
-	@Override
-	public void setEnabled(final boolean active) {
-		this.enabled = active;
-	}
-	@Override
-	public final boolean isEnabled() {
-		return(enabled);
-	}
-
-	@Override
-	public void stateAttached(final AppStateManager stateManager) {
+	protected void onEnable() {
 		
 	}
 	@Override
-	public void stateDetached(final AppStateManager stateManager) {
-	
-	}
-	
-	@Override
-	public void render(final RenderManager rm) {
-	
-	}
-	
-	@Override
-	public void postRender() {
-	
-	}
-	
-	@Override
-	public void cleanup() {
-	
+	protected void onDisable() {
+		
 	}
 }

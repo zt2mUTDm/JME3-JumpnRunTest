@@ -1,0 +1,10 @@
+{
+	"type": "node",
+	"name": "Ground",
+	"childs": [
+		{
+			"type": "model",
+			"url": "Models/Scenes/00000000/Ground.j3o"
+		}
+	]
+}

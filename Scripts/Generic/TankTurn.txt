@@ -1,6 +1,0 @@
-if Switch pressed == true
-  if Tank rotated == false
-	RotateLinearBy Tank 0.5 0 90 0
-	SetVariable Tank rotated true
-  endif
-endif

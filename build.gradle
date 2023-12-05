@@ -28,6 +28,7 @@ dependencies {
     runtimeOnly 'org.jmonkeyengine:jme3-lwjgl:' + jme3Version  // LWJGL 2.x
     runtimeOnly 'org.jmonkeyengine:jme3-plugins:' + jme3Version
     runtimeOnly 'org.jmonkeyengine:jme3-testdata:' + jme3Version
+    implementation group: 'org.python', name: 'jython', version: '2.7.3'
 }
 
 // cleanup tasks:

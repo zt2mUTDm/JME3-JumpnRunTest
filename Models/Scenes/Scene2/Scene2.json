@@ -1,6 +1,6 @@
 {
 	"type": "node",
-	"name": "Main",
+	"name": "Scene2",
 	"childs": [
 		{
 			"type": "model",

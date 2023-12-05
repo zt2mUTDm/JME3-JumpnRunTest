@@ -22,6 +22,7 @@ public final class MutableSingleValueModelImpl<T> implements MutableSingleValueM
 	public MutableSingleValueModelImpl(final T value) {
 		this.value = Requires.notNull(value, "value == null");
 		this.changeHandlers = new LinkedList<>();
+		
 	}
 	public MutableSingleValueModelImpl(final DataSource<T> src) {
 		this(Requires.notNull(src, "src == null").source());

@@ -1,0 +1,11 @@
+{
+	"type": "node",
+	"name": "WhiteCube",
+	"childs": [
+		{
+			"type": "model",
+			"url": "Models/Generic/Primitives/WhiteCube/WhiteCube.obj",
+			"name": ""
+		}
+	]
+}

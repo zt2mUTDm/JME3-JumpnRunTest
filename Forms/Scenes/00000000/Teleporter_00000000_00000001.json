@@ -1,0 +1,8 @@
+{
+	"model": "PhysicsObjects/Teleporters/Box1.4x1.6x0.25.json",
+	"id": 5002,
+	"scripts": {
+		"module": "teleporters",
+		"class": "Teleporter_00000000_00000001"
+	}
+}

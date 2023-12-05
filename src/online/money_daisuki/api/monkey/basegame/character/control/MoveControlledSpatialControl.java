@@ -21,7 +21,6 @@ import com.jme3.util.TempVars;
 import online.money_daisuki.api.base.Requires;
 import online.money_daisuki.api.monkey.basegame.misc.Utils;
 import online.money_daisuki.api.monkey.basegame.player.control.NamedEventTriggerControl;
-import online.money_daisuki.api.monkey.basegame.player.control.NotifyReceiveControl;
 
 public final class MoveControlledSpatialControl implements Control {
 	private Spatial spatial;
@@ -150,14 +149,14 @@ public final class MoveControlledSpatialControl implements Control {
 			inLongIdle = false;
 			longIdleCounter = 0f;
 		} else if(wantJump) {
-			if(!triggerEvent("Main", true)) {
+			/*if(!triggerEvent("Main", true)) {
 				state = State.JUMP_START;
-			}
+			}*/
 			wantJump = false;
 			inLongIdle = false;
 			longIdleCounter = 0f;
 		} else if(getPressedDirectionalKeyCombination() >= 0) {
-			triggerEvent("Main", false);
+			//triggerEvent("Main", false);
 			
 			//anim.play("RunBase", false);
 			cc.playAnimation("Run", false);
@@ -165,7 +164,7 @@ public final class MoveControlledSpatialControl implements Control {
 			inLongIdle = false;
 			longIdleCounter = 0f;
 		} else {
-			triggerEvent("Main", false);
+			//triggerEvent("Main", false);
 			
 			readNotifies();
 			handleDrag();
@@ -211,17 +210,17 @@ public final class MoveControlledSpatialControl implements Control {
 			return;
 		}
 		
-		if(!cc.isOnGround() && cc.getCharacter().getLinearVelocity(tmpVec).y != 0f) {
+		if(!cc.isOnGround()) {
 			cc.playAnimation("JumpMiddle", false);
 			state = State.FREE_FALL;
 			fallTimer = 0;
 		} else if(getPressedDirectionalKeyCombination() == -1) {
-			triggerEvent("Main", false);
+			//triggerEvent("Main", false);
 			cc.setMoveVector(Vector3f.ZERO);
 			state = State.STAND;
 			cc.playAnimation("Idle", false);
 		}
-		triggerEvent("Main", false);
+		//triggerEvent("Main", false);
 		updateMoveDirection(true);
 		resetJumpSpeed();
 	}
@@ -247,7 +246,7 @@ public final class MoveControlledSpatialControl implements Control {
 	}
 	private void strikeMiddle(final float tpf) {
 		final NamedEventTriggerControl c = spatial.getControl(NamedEventTriggerControl.class);
-		c.run("HitEnemy", true);
+		//c.run("HitEnemy", true);
 		
 		readNotifies();
 		handleDrag();
@@ -290,7 +289,7 @@ public final class MoveControlledSpatialControl implements Control {
 		final CharControl cc = getUnderlyingControl();
 		readNotifies();
 		if(notifyTarget.containsKey("highjump")) {
-			cc.getCharacter().setJumpSpeed(40);
+			//cc.getCharacter().setJumpSpeed(40);
 			resetJumpSpeedOnSurface = true;
 		}
 		cc.jump();
@@ -347,10 +346,10 @@ public final class MoveControlledSpatialControl implements Control {
 			state = State.STRIKE_IN_AIR;
 			inDoubleJump = false;
 		} else if(wantJump && !inDoubleJump) {
-			final float jumpSpeed = cc.getCharacter().getJumpSpeed();
-			cc.getCharacter().setJumpSpeed(jumpSpeed * 0.85f);
+			//final float jumpSpeed = cc.getCharacter().getJumpSpeed();
+			///cc.getCharacter().setJumpSpeed(jumpSpeed * 0.85f);
 			cc.jump();
-			cc.getCharacter().setJumpSpeed(jumpSpeed);
+			//cc.getCharacter().setJumpSpeed(jumpSpeed);
 			
 			inDoubleJump = true;
 		} else {
@@ -393,10 +392,10 @@ public final class MoveControlledSpatialControl implements Control {
 			if(longIdleCounter > 0.3) {
 				longIdleCounter = 0;
 				
-				final float jumpSpeed = cc.getCharacter().getJumpSpeed();
-				cc.getCharacter().setJumpSpeed(jumpSpeed * 0.5f);
+				//final float jumpSpeed = cc.getCharacter().getJumpSpeed();
+				//cc.getCharacter().setJumpSpeed(jumpSpeed * 0.5f);
 				cc.jump();
-				cc.getCharacter().setJumpSpeed(jumpSpeed);
+				//cc.getCharacter().setJumpSpeed(jumpSpeed);
 				cc.getMoveVector(tmpVec);
 				tmpVec.multLocal(-0.50f);
 				cc.setMoveVector(tmpVec);
@@ -426,11 +425,12 @@ public final class MoveControlledSpatialControl implements Control {
 	}
 	
 	private boolean triggerEvent(final String name, final boolean b) {
-		return(spatial.getControl(NamedEventTriggerControl.class).run(name, b));
+		//return(spatial.getControl(NamedEventTriggerControl.class).run(name, b));
+		return(false);
 	}
 	private void readNotifies() {
 		notifyTarget.clear();
-		spatial.getControl(NotifyReceiveControl.class).run(notifyTarget);
+		//spatial.getControl(NotifyReceiveControl.class).run(notifyTarget);
 	}
 	
 	private void handleDrag() {
@@ -443,7 +443,7 @@ public final class MoveControlledSpatialControl implements Control {
 				final Vector3f thisLocation = dragSource.getPhysicsLocation();
 				final Vector3f difference = thisLocation.subtract(dragSourceLastLocation);
 				//difference.multLocal(1, 0, 1);
-				getUnderlyingControl().getCharacter().setPhysicsLocation(getUnderlyingControl().getCharacter().getPhysicsLocation().add(difference));
+				//getUnderlyingControl().getCharacter().setPhysicsLocation(getUnderlyingControl().getCharacter().getPhysicsLocation().add(difference));
 				
 				dragSourceLastLocation = thisLocation;
 			}
@@ -579,13 +579,13 @@ public final class MoveControlledSpatialControl implements Control {
 	
 	private void resetJumpSpeed() {
 		if(resetJumpSpeedOnSurface) {
-			getUnderlyingControl().getCharacter().setJumpSpeed(20.0f);
+			//getUnderlyingControl().getCharacter().setJumpSpeed(20.0f);
 			resetJumpSpeedOnSurface = false;
 		}
 	}
 	
 	public void setJumpSpeed(final float jumpSpeed) {
-		getUnderlyingControl().getCharacter().setJumpSpeed(jumpSpeed);
+		//getUnderlyingControl().getCharacter().setJumpSpeed(jumpSpeed);
 	}
 	
 	private CharControl getUnderlyingControl() {

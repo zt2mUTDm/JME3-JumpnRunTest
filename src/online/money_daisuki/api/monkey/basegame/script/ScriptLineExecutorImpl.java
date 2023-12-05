@@ -6,16 +6,21 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.jme3.app.Application;
+import com.jme3.app.state.AppStateManager;
 import com.jme3.scene.Spatial;
 
 import online.money_daisuki.api.base.Requires;
-import online.money_daisuki.api.monkey.basegame.ExtendedApplication;
 import online.money_daisuki.api.monkey.basegame.variables.CompareOperation;
+import online.money_daisuki.api.monkey.basegame.variables.VariablesManager;
+import online.money_daisuki.api.monkey.basegame.variables.VariablesManagerAppState;
+import online.money_daisuki.api.monkey.console.Command;
 
 public final class ScriptLineExecutorImpl implements ScriptLineExecutor {
 	private final List<String[]> commands;
 	private final Spatial spatial;
-	private final ExtendedApplication app;
+	private final VariablesManager vars;
+	private final Command exe;
 	
 	private final Set<Long> runningScripts;
 	
@@ -28,15 +33,19 @@ public final class ScriptLineExecutorImpl implements ScriptLineExecutor {
 	private boolean waits;
 	private Long waitingId;
 	
-	public ScriptLineExecutorImpl(final Collection<String[]> commands, final Spatial spatial, final ExtendedApplication app) {
+	public ScriptLineExecutorImpl(final Collection<String[]> commands, final Spatial spatial,
+			final Application app) {
 		this.commands = Requires.containsNotNull(new ArrayList<>(Requires.notNull(commands)));
 		for(final String[] s:commands) {
 			Requires.notNull(s, "s == null");
 		}
 		this.spatial = Requires.notNull(spatial, "spatial == null");
-		this.app = Requires.notNull(app, "app == null");
 		
 		this.runningScripts = new HashSet<>();
+		
+		final AppStateManager state = app.getStateManager();
+		this.vars = state.getState(VariablesManagerAppState.class);
+		this.exe = state.getState(CommandExecutorAppState.class);
 	}
 	@Override
 	public void sink(final float f) {
@@ -124,7 +133,7 @@ public final class ScriptLineExecutorImpl implements ScriptLineExecutor {
 			final Long id = Long.valueOf((run << 32) | pointer);
 			
 			runningScripts.add(id);
-			app.execute(spatial, realCommand, new Runnable() {
+			exe.execute(spatial, realCommand, new Runnable() {
 				@Override
 				public void run() {
 					runningScripts.remove(id);
@@ -157,10 +166,10 @@ public final class ScriptLineExecutorImpl implements ScriptLineExecutor {
 			final String op = command[3];
 			final String constant = command[4];
 			
-			if(!app.containsVariable(type, name)) {
+			if(!vars.containsVariable(type, name)) {
 				return(constant.equals("false") || constant.equals("0"));
 			}
-			return(app.getVariable(type, name).test(CompareOperation.getOp(op), constant));
+			return(vars.getVariable(type, name).test(CompareOperation.getOp(op), constant));
 		} else {
 			throw new UnsupportedOperationException();
 		}

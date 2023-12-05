@@ -2,11 +2,13 @@ package online.money_daisuki.api.monkey.basegame.character.anim;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import online.money_daisuki.api.base.Requires;
 
 public final class NameLinkedAnimPlayer implements AnimPlayer {
 	private final AnimPlayer parent;
+	// One-to-one linking
 	private final Map<String, String> links;
 	
 	public NameLinkedAnimPlayer(final AnimPlayer parent, final Map<String, String> links) {
@@ -14,13 +16,32 @@ public final class NameLinkedAnimPlayer implements AnimPlayer {
 		this.links = Requires.containsNotNull(new HashMap<>(Requires.notNull(links, "links == null")), "links contains null");
 	}
 	@Override
-	public void play(final String name, final boolean once) {
+	public void play(final String name, final boolean loop) {
 		final String realName = links.get(Requires.notNull(name, "name == null"));
-		parent.play(realName != null ? realName : name, once);
+		parent.play(realName != null ? realName : name, loop);
+	}
+	
+	@Override
+	public void setSpeed(final double d) {
+		parent.setSpeed(d);
+	}
+	
+	@Override
+	public void addAnimationListener(final AnimListener l) {
+		parent.addAnimationListener(new AnimListener() {
+			@Override
+			public void animationEvent(final String name, final boolean loop) {
+				// TODO 1:1
+				for(final Entry<String, String> e:links.entrySet()) {
+					if(e.getValue().equals(name)) {
+						l.animationEvent(e.getKey(), loop);
+					}
+				}
+			}
+		});
 	}
 	@Override
-	public void play(final String name, final boolean once, final Runnable l) {
-		final String realName = links.get(Requires.notNull(name, "name == null"));
-		parent.play(realName != null ? realName : name, once, l);
+	public boolean removeAnimationListener(final AnimListener l) {
+		return(parent.removeAnimationListener(l));
 	}
 }

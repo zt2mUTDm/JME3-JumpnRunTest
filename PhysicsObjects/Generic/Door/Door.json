@@ -1,0 +1,14 @@
+{
+	"model": "Models/Generic/Door/Door.json",
+	"physics": {
+		"shapes": [
+			{
+				"type": "Mesh",
+				"attach": "Door",
+				"collisionGroup": 0,
+				"purpose": "rigid",
+				"mass": 0
+			}
+		]
+	}
+}

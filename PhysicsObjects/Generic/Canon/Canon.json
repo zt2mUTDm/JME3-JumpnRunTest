@@ -1,0 +1,22 @@
+{
+	"model": "Models/Generic/Canon/Canon.json",
+	"physics": {
+		"shapes": [
+			{
+				"type": "Mesh",
+				"attach": "Canon",
+				"collisionGroup": 0,
+				"purpose": "rigid",
+				"mass": 0
+			},
+			{
+				"type": "Cylinder",
+				"attach": "CollisionActionAttach",
+				"radius": 2.5,
+				"height": 1,
+				"collisionGroup": 0,
+				"purpose": "ghost"
+			}
+		]
+	}
+}

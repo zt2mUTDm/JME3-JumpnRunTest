@@ -1,0 +1,7 @@
+{
+	"className": "online.money_daisuki.api.monkey.basegame.unsorted.ScreenshotInitializer",
+	"dependencies": [
+	
+	],
+	"waitForStateInit": false
+}

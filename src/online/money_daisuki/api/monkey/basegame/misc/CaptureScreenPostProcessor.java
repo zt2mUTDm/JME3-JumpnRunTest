@@ -14,7 +14,6 @@ import com.jme3.renderer.queue.RenderQueue;
 import com.jme3.texture.FrameBuffer;
 import com.jme3.util.BufferUtils;
 
-import online.money_daisuki.api.base.DataSink;
 import online.money_daisuki.api.base.Requires;
 
 public final class CaptureScreenPostProcessor implements SceneProcessor {
@@ -30,7 +29,7 @@ public final class CaptureScreenPostProcessor implements SceneProcessor {
 	
 	private final Collection<Runnable> capturedListeners;
 	
-	public CaptureScreenPostProcessor(final DataSink<? super ByteBuffer> target) {
+	public CaptureScreenPostProcessor() {
 		this.capturedListeners = new LinkedList<>();
 	}
 	public void addCapturedListener(final Runnable l) {

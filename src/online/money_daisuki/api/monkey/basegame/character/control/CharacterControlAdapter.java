@@ -2,7 +2,7 @@ package online.money_daisuki.api.monkey.basegame.character.control;
 
 import java.io.IOException;
 
-import com.jme3.app.SimpleApplication;
+import com.jme3.app.Application;
 import com.jme3.bullet.BulletAppState;
 import com.jme3.bullet.PhysicsSpace;
 import com.jme3.bullet.collision.shapes.BoxCollisionShape;
@@ -27,7 +27,7 @@ public final class CharacterControlAdapter implements CharControl {
 	
 	private final DataSource<Boolean> onGroundTester;
 	
-	public CharacterControlAdapter(final CharacterControl control, final SimpleApplication app,
+	public CharacterControlAdapter(final CharacterControl control, final Application app,
 			final Node collisionNode, final BulletAppState state) {
 		//this.app = app;
 		this.control = Requires.notNull(control, "control == null;");
@@ -82,7 +82,7 @@ public final class CharacterControlAdapter implements CharControl {
 	}
 	
 	@Override
-	public void setTranslation(final Vector3f location) {
+	public void setPhysicsLocation(final Vector3f location) {
 		control.setPhysicsLocation(location);
 	}
 	
@@ -150,12 +150,21 @@ public final class CharacterControlAdapter implements CharControl {
 	@Override
 	public void playAnimation(final String name, final boolean once, final Runnable l) {
 		final AnimControl c = control.getSpatial().getControl(AnimControl.class);
-		c.play(name, once, l);
+		c.play(name, once); // TODO
 		//player.play(name, once, l);
 	}
 	
-	@Override
 	public PhysicsCharacter getCharacter() {
 		return(control.getCharacter());
+	}
+	
+	@Override
+	public void setJumpSpeed(final float f) {
+		control.getCharacter().setJumpSpeed(f);
+	}
+	
+	@Override
+	public void getPhysicsLocation(final Vector3f store) {
+		control.getCharacter().getPhysicsLocation(store);
 	}
 }

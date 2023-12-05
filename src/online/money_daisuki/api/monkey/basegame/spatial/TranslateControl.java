@@ -3,7 +3,6 @@ package online.money_daisuki.api.monkey.basegame.spatial;
 import java.io.IOException;
 
 import com.jme3.bullet.control.RigidBodyControl;
-import com.jme3.bullet.objects.PhysicsCharacter;
 import com.jme3.export.JmeExporter;
 import com.jme3.export.JmeImporter;
 import com.jme3.math.Vector3f;
@@ -45,10 +44,9 @@ public final class TranslateControl implements Control {
 			
 			final CharControl cc = spatial.getControl(CharControl.class);
 			if(cc != null) {
-				final PhysicsCharacter c = cc.getCharacter();
-				c.getPhysicsLocation(tmp.vect1);
+				cc.getPhysicsLocation(tmp.vect1);
 				tmp.vect1.addLocal(newLocalTranslation);
-				c.setPhysicsLocation(tmp.vect1);
+				cc.setPhysicsLocation(tmp.vect1);
 			}
 		} finally {
 			tmp.release();

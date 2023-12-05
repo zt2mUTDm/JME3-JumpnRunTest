@@ -1,0 +1,8 @@
+{
+	"model": "PhysicsObjects/Generic/Cucumber/Cucumber.json",
+	"id": 10,
+	"scripts": {
+		"module": "cucumber",
+		"class": "Cucumber"
+	}
+}

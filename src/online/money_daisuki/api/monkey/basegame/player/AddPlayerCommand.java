@@ -10,6 +10,7 @@ import com.jme3.math.Vector3f;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
 
+import online.money_daisuki.api.base.BiConverter;
 import online.money_daisuki.api.base.Converter;
 import online.money_daisuki.api.base.DataSink;
 import online.money_daisuki.api.base.DataSource;
@@ -21,70 +22,72 @@ import online.money_daisuki.api.monkey.basegame.character.control.MoveControlled
 import online.money_daisuki.api.monkey.console.Command;
 
 /**
- * Player file x y z scaleX scaleY scaleZ
+ * Player file x y z scaleX scaleY scaleZ spatial
  * @author Money Daisuki Online
  *
  */
 public final class AddPlayerCommand implements Command {
 	private final Converter<? super String, ? extends Spatial> factory;
-	private final Node node;
-	private final DataSink<Spatial> playerTarget;
-	private final BulletAppState bulletAppState;
+	private final BiConverter<? super String, ? super Spatial, ? extends Node> nodeTarget;
+	private final DataSink<Spatial> playerContainer;
 	private final Application app;
 	
 	private Runnable remover;
 	
 	public AddPlayerCommand(final Converter<? super String, ? extends Spatial> factory,
-			final Node node,
-			final DataSink<Spatial> playerTarget,
-			final BulletAppState bulletAppState,
-			final Application app) {
+			final BiConverter<? super String, ? super Spatial, ? extends Node> nodeTarget,
+			final DataSink<Spatial> playerContainer, final Application app) {
 		this.factory = Requires.notNull(factory, "factory == null");
-		this.node = Requires.notNull(node, "node == null");
-		this.playerTarget = Requires.notNull(playerTarget, "playerTarget == null");
-		this.bulletAppState = Requires.notNull(bulletAppState, "bulletAppState == null");
+		this.nodeTarget = Requires.notNull(nodeTarget, "nodeTarget == null");
+		this.playerContainer = playerContainer; // TODO
 		this.app = Requires.notNull(app, "app == null");
 		
 		this.remover = new NullRunnable();
 	}
 	@Override
-	public void execute(final Spatial a, final String[] b, final Runnable done) {
-		Requires.lenEqual(b, 8);
+	public void execute(final Spatial caller, final String[] cmd, final Runnable done) {
+		Requires.lenEqual(cmd, 9);
 		//final File f = new File(b[1]);
 		//Requires.isTrue(Utils.isSubdirectory(f, new File("models")));
 		
-		final Spatial spatial = factory.convert(b[1]);
+		final Spatial spatial = factory.convert(cmd[1]);
 		
 		final Vector3f location = new Vector3f(
-				Float.parseFloat(b[2]),
-				Float.parseFloat(b[3]),
-				Float.parseFloat(b[4])
+				Float.parseFloat(cmd[2]),
+				Float.parseFloat(cmd[3]),
+				Float.parseFloat(cmd[4])
 		);
 		spatial.setLocalTranslation(location);
 		spatial.setLocalScale(
-				Float.parseFloat(b[5]),
-				Float.parseFloat(b[6]),
-				Float.parseFloat(b[7])
+				Float.parseFloat(cmd[5]),
+				Float.parseFloat(cmd[6]),
+				Float.parseFloat(cmd[7])
 		);
 		
 		remover.run();
 		
+		final BulletAppState bullet = Requires.notNull(app, "app == null").getStateManager().getState(BulletAppState.class);
+		
+		final String targetName = String.valueOf(cmd[8]);
+		
+		final Node target = nodeTarget.convert(targetName, caller);
 		app.enqueue(new Runnable() {
 			@Override
 			public void run() {
-				node.attachChild(spatial);
+				target.attachChild(spatial);
 				
 				final CharControl cc = spatial.getControl(CharControl.class);
-				cc.setTranslation(location);
+				cc.setPhysicsLocation(location);
 				
-				final PhysicsSpace space = bulletAppState.getPhysicsSpace();
+				final PhysicsSpace space = bullet.getPhysicsSpace();
 				space.addAll(spatial);
 				
 				final InputManager input = app.getInputManager();
 				
 				
 				final MoveControlledSpatialControl moveControl = new MoveControlledSpatialControl(app, 0.3f);
-				spatial.addControl(moveControl);
+				moveControl.setEnabled(true); // TODO
+				//spatial.addControl(moveControl);
 				
 				final ActionListener upListener = new ActionListener() {
 					@Override
@@ -201,7 +204,7 @@ public final class AddPlayerCommand implements Command {
 				remover = new Runnable() {
 					@Override
 					public void run() {
-						node.detachChild(spatial);
+						target.detachChild(spatial);
 						space.removeAll(spatial);
 						
 						cam.cleanupWithInput(input);
@@ -215,9 +218,9 @@ public final class AddPlayerCommand implements Command {
 					}
 				};
 				
-				playerTarget.sink(spatial);
-				
 				done.run();
+				
+				playerContainer.sink(spatial);
 			}
 		});
 	}

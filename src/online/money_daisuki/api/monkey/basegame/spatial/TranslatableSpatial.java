@@ -12,7 +12,7 @@ public final class TranslatableSpatial implements Translatable {
 		this.spatial = Requires.notNull(spatial, "spatial == null");
 	}
 	@Override
-	public void setTranslation(final Vector3f vector) {
+	public void setPhysicsLocation(final Vector3f vector) {
 		spatial.getLocalTranslation().set(vector);
 	}
 }

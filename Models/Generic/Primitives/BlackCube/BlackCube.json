@@ -1,0 +1,11 @@
+{
+	"type": "node",
+	"name": "BlackCube",
+	"childs": [
+		{
+			"type": "model",
+			"url": "Models/Generic/Primitives/BlackCube/BlackCube.obj",
+			"name": ""
+		}
+	]
+}

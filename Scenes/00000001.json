@@ -1,0 +1,158 @@
+{
+	"forms": [
+		{
+			"url": "Forms/Scenes/00000001/Teleporter_00000001_00000000.json",
+			"transform": {
+				"translation": [
+					-9.4,
+					2,
+					0.8
+				],
+				"scale": [
+					0.5, 3.2, 2.4
+				],
+				"rotation": [
+					0,
+					0,
+					0
+ 				]
+ 			}
+ 		},
+ 		{
+			"url": "Forms/Cucumbers/Cucumber006.json",
+			"transform": {
+				"translation": [
+					11,
+					1,
+					-5.5
+				],
+				"scale": [
+					1,
+					1,
+					1
+				],
+				"rotation": [
+					0,
+					0,
+					0
+				]
+ 			}
+		},
+		{
+			"url": "Forms/Cucumbers/Cucumber007.json",
+			"transform": {
+				"translation": [
+					-7,
+					1,
+					-5.5
+				],
+				"scale": [
+					1,
+					1,
+					1
+				],
+				"rotation": [
+					0,
+					0,
+					0
+				]
+ 			}
+		},
+		{
+			"url": "Forms/Cucumbers/Cucumber008.json",
+			"transform": {
+				"translation": [
+					11,
+					1,
+					7.5
+				],
+				"scale": [
+					1,
+					1,
+					1
+				],
+				"rotation": [
+					0,
+					0,
+					0
+				]
+ 			}
+		},
+		{
+			"url": "Forms/Cucumbers/Cucumber009.json",
+			"transform": {
+				"translation": [
+					-7,
+					1,
+					7.5
+				],
+				"scale": [
+					1,
+					1,
+					1
+				],
+				"rotation": [
+					0,
+					0,
+					0
+				]
+ 			}
+		}
+	],
+	"physicsObjects": [
+		{
+			"url": "PhysicsObjects/Scenes/00000001/Ground.json",
+			"transform": {
+				"translation": [
+					0,
+					0,
+					0
+				],
+				"scale": [
+					1,
+					1,
+					1
+				],
+				"rotation": [
+					0,
+					0,
+					0
+ 				]
+ 			}
+		},
+		{
+			"url": "PhysicsObjects/Generic/Shapes/Box6x2x4.json",
+			"transform": {
+				"translation": [
+					2,
+					4.5,
+					1
+				],
+				"scale": [
+					1,
+					6,
+					1
+				],
+				"rotation": [
+					0,
+					0,
+					0
+ 				]
+ 			}
+		},
+		{
+			"url": "PhysicsObjects/Generic/Primitives/WhiteCubeNoShape.json",
+			"transform": {
+				"translation": [
+					-20, 5, 1
+				],
+				"scale": [
+					20, 10, 18
+				],
+				"rotation": [
+					0, 0, 0
+				]
+ 			}
+		}
+	]
+}

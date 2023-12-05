@@ -3,17 +3,19 @@ package online.money_daisuki.api.monkey.basegame.filter;
 import com.jme3.app.Application;
 import com.jme3.app.state.BaseAppState;
 import com.jme3.post.filters.FadeFilter;
+import com.jme3.util.SafeArrayList;
 
 import online.money_daisuki.api.base.Requires;
 
-/**
- * An AppState to provide global fading extended with a callback.
- */
 public final class FadeAppState extends BaseAppState {
 	private final FadeFilter filter;
 	
-	private float listenerTarget;
-	private Runnable listener;
+	private boolean fade;
+	private float fadeTarget;
+	private SafeArrayList<Runnable> nextListeners;
+	
+	private SafeArrayList<Runnable> fadeInListeners;
+	private SafeArrayList<Runnable> fadeOutListeners;
 	
 	public FadeAppState(final FadeFilter filter) {
 		this.filter = Requires.notNull(filter, "filter == null");
@@ -21,55 +23,72 @@ public final class FadeAppState extends BaseAppState {
 	
 	@Override
 	public void update(final float tpf) {
-		if(listener != null && filter.getValue() == listenerTarget) {
-			// Unset before call to prevent StackOverflowError.
-			final Runnable r = listener;
-			listener = null;
-			r.run();
+		if(fade && filter.getValue() == fadeTarget) {
+			fade = false;
+			
+			if(nextListeners != null) {
+				for(final Runnable r:nextListeners.getArray()) {
+					r.run();
+				}
+			}
 		}
 	}
 	
-	/**
-	 * Start fading the screen in. The callback is called when either fading is done or {@link #fadeIn(Runnable)} or
-	 * {@link #fadeOut(Runnable)} is called again, whatever occures first. Not Thread-safe, call only in JME-Thread!
-	 * @param l The callback.
-	 */
-	public void fadeIn(final Runnable l) {
-		Requires.notNull(l, "l == null");
-		if(listener != null) {
-			listener.run();
-		}
-		
-		listenerTarget = 1.0f;
-		listener = l;
+	public void fadeIn() {
+		fadeTarget = 1.0f;
+		nextListeners = fadeInListeners;
+		fade = true;
 		filter.fadeIn();
 	}
-	/**
-	 * Start fading the screen out. The callback is called when either fading is done or {@link #fadeIn(Runnable)} or
-	 * {@link #fadeOut(Runnable)} is called again, whatever occures first. Not Thread-safe, call only in JME-Thread!
-	 * @param l The callback.
-	 */
-	public void fadeOut(final Runnable l) {
-		Requires.notNull(l, "l == null");
-		if(listener != null) {
-			listener.run();
-		}
-		
-		listenerTarget = 0.0f;
-		listener = l;
+	public void fadeOut() {
+		fadeTarget = 0.0f;
+		nextListeners = fadeOutListeners;
+		fade = true;
 		filter.fadeOut();
 	}
-	/**
-	 * Set the fade duration of the underlying {@link FadeFilter}.
-	 * @param duration Fade duration in seconds. Must be >= 0.
-	 */
+	
 	public void setDuration(final float duration) {
 		filter.setDuration(Requires.positive(duration));
 	}
 	
+	public void addFadeInListener(final Runnable l) {
+		if(fadeInListeners == null) {
+			fadeInListeners = new SafeArrayList<>(Runnable.class);
+		}
+		fadeInListeners.add(Requires.notNull(l, "l == null"));
+	}
+	
+	public void addFadeOutListener(final Runnable l) {
+		if(fadeOutListeners == null) {
+			fadeOutListeners = new SafeArrayList<>(Runnable.class);
+		}
+		fadeOutListeners.add(Requires.notNull(l, "l == null"));
+	}
+	
+	public void removeFadeInListener(final Runnable l) {
+		if(fadeInListeners.remove(Requires.notNull(l, "l == null")) && fadeInListeners.isEmpty()) {
+			fadeInListeners = null;
+		}
+	}
+	public void removeFadeOutListener(final Runnable l) {
+		if(fadeOutListeners.remove(Requires.notNull(l, "l == null")) && fadeOutListeners.isEmpty()) {
+			fadeOutListeners = null;
+		}
+	}
+	
 	@Override
 	protected void cleanup(final Application app) {
+		nextListeners = null;
 		
+		if(fadeInListeners != null) {
+			fadeInListeners.clear();
+			fadeInListeners = null;
+		}
+		
+		if(fadeOutListeners != null) {
+			fadeOutListeners.clear();
+			fadeOutListeners = null;
+		}
 	}
 	@Override
 	protected void initialize(final Application app) {

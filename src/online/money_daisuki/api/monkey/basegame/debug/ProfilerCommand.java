@@ -21,7 +21,7 @@ public final class ProfilerCommand implements Command {
 	public void execute(final Spatial a, final String[] b, final Runnable done) {
 		switch(b[1]) {
 			case("basic"):
-				setProfiler(new BasicProfilerState());
+				setProfiler(new BasicProfilerState(true));
 			break;
 			case("detail"):
 				setProfiler(new DetailedProfilerState());

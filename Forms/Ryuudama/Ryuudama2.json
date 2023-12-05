@@ -1,0 +1,8 @@
+{
+	"model": "PhysicsObjects/Generic/Ryuushu/Ryuushu.json",
+	"id": 1002,
+	"scripts": {
+		"module": "ryuudama",
+		"class": "Ryuudama"
+	}
+}

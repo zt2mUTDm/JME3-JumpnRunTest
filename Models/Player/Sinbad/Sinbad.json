@@ -1,11 +1,33 @@
 {
 	"type": "node",
-	"name": "Main",
+	"name": "Player",
 	"childs": [
 		{
-			"type": "model",
-			"url": "Models/Player/Sinbad/Sinbad.mesh.xml",
-			"translation": [ 0.0, 0.9, 0.0 ]
+			"type": "node",
+			"name": "PlayerCenter",
+			"translation": [ 0.0, 0.6, 0.0 ],
+			"childs": [
+				{
+					"type": "model",
+					"url": "Models/Player/Sinbad/Sinbad.mesh.xml",
+					"name": "PlayerGeom"
+				},
+				{
+					"type": "node",
+					"name": "Ground",
+					"translation": [ 0.0, -5.0, 0.0 ]
+				},
+				{
+					"type": "node",
+					"name": "Top",
+					"translation": [ 0.0, 3.0, 0.0 ]
+				}
+			]
+		},
+		{
+			"type": "node",
+			"name": "RyuudamaCollectAttach",
+			"translation": [ 0.0, 6.0, 0.0 ]
 		}
 	]
 }

@@ -1,0 +1,26 @@
+{
+	"model": "Models/Generic/Platform/Platform.json",
+	"physics": {
+		"shapes": [
+			{
+				"type": "Mesh",
+				"attach": "Platform",
+				"collisionGroup": 0,
+				"purpose": "rigid",
+				"mass": 1.0,
+				"kinematic": true
+			},
+			{
+				"type": "Mesh",
+				"attach": "PlatformTop",
+				"collisionGroup": 0,
+				"purpose": "ghost"
+			}
+		]
+	},
+	"controls": [
+	],
+	"conditions": [
+		
+	]
+}

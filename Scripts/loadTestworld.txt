@@ -1,5 +1,8 @@
-AddPlayer Characters/Player/Sinbad/Sinbad.json 0 20 0 0.25 0.25 0.25
-Exec Scripts/Scene1/Scene1.txt
+#AddPlayer Forms/Player.json 0 20 0 0.25 0.25 0.25 root
+ExecScript initScript InitScript
+AddScene Scenes/00000000.json
+#Exec Scripts/Scene1/Scene1.txt
 waitfor 0
 FadeIn
 waitfor 0
+SetCollisionEnabled true

@@ -1,0 +1,8 @@
+{
+	"model": "Models/Generic/Primitives/WhiteCube/WhiteCube.json",
+	"physics": {
+		"shapes": [
+			
+		]
+	}
+}

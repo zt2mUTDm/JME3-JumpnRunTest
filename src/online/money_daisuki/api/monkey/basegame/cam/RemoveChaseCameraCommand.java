@@ -1,6 +1,6 @@
 package online.money_daisuki.api.monkey.basegame.cam;
 
-import com.jme3.app.LegacyApplication;
+import com.jme3.app.Application;
 import com.jme3.input.ChaseCamera;
 import com.jme3.scene.Spatial;
 
@@ -10,9 +10,9 @@ import online.money_daisuki.api.monkey.console.Command;
 
 public final class RemoveChaseCameraCommand implements Command {
 	private final BiConverter<String, Spatial, Spatial> spatialTarget;
-	private final LegacyApplication app;
+	private final Application app;
 	
-	public RemoveChaseCameraCommand(final BiConverter<String, Spatial, Spatial> spatialTarget, final LegacyApplication app) {
+	public RemoveChaseCameraCommand(final BiConverter<String, Spatial, Spatial> spatialTarget, final Application app) {
 		this.spatialTarget = Requires.notNull(spatialTarget, "spatialTarget == null");
 		this.app = Requires.notNull(app, "app == null");
 	}

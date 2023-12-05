@@ -7,18 +7,16 @@ import online.money_daisuki.api.base.Requires;
 import online.money_daisuki.api.monkey.console.Command;
 
 public final class FadeInCommand implements Command {
-	private final SimpleApplication app;
-	
-	public FadeInCommand(final SimpleApplication app) {
-		this.app = Requires.notNull(app, "app == null");
-	}
 	@Override
-	public void execute(final Spatial caller, final String[] cmd, final Runnable done) {
+	public void execute(final Spatial caller, final String[] cmd, final Runnable done, final SimpleApplication app) {
 		Requires.notNull(caller, "caller == null");
+		Requires.notNull(cmd, "cmd == null");
 		Requires.containsNotNull(cmd, "cmd contains null");
 		Requires.lenEqual(cmd, 1);
+		Requires.notNull(app, "app contains null");
 		
 		final FadeAppState state = Requires.notNull(app.getStateManager().getState(FadeAppState.class), "No FadeAppState registered");
-		state.fadeIn(done);
+		state.fadeIn();
+		done.run();
 	}
 }

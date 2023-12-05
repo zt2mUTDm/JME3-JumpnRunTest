@@ -1,0 +1,10 @@
+{
+	"type": "node",
+	"name": "Cucumber",
+	"childs": [
+		{
+			"type": "model",
+			"url": "Models/Generic/Cucumber/Cucumber.obj"
+		}
+	]
+}

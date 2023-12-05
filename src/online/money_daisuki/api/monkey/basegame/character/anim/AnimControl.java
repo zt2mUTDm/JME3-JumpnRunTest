@@ -18,11 +18,19 @@ public final class AnimControl implements Control {
 		this.player = Requires.notNull(player, "player == null");
 	}
 	
-	public void play(final String name, final boolean once) {
-		player.play(name, once);
+	public void play(final String name, final boolean loop) {
+		player.play(name, loop);
 	}
-	public void play(final String name, final boolean once, final Runnable l) {
-		player.play(name, once, l);
+	
+	public void setSpeed(final double speed) {
+		player.setSpeed(speed);
+	}
+	
+	public void addAnimationListener(final AnimListener l) {
+		player.addAnimationListener(l);
+	}
+	public boolean removeAnimationListener(final AnimListener l) {
+		return(player.removeAnimationListener(l));
 	}
 	
 	@Override

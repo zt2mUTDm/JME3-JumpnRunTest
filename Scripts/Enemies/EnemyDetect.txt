@@ -1,1 +1,0 @@
-SetVariable Enemy playerDetected true

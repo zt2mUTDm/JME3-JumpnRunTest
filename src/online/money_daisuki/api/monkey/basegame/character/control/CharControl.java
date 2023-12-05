@@ -1,7 +1,6 @@
 package online.money_daisuki.api.monkey.basegame.character.control;
 
 import com.jme3.bullet.control.PhysicsControl;
-import com.jme3.bullet.objects.PhysicsCharacter;
 import com.jme3.math.Vector3f;
 
 import online.money_daisuki.api.monkey.basegame.spatial.HasSpatial;
@@ -16,7 +15,7 @@ public interface CharControl extends PhysicsControl, Cloneable, Translatable, Ha
 	void setViewDirection(Vector3f direction);
 	
 	@Override
-	void setTranslation(Vector3f location);
+	void setPhysicsLocation(Vector3f location);
 	
 	void jump();
 	
@@ -28,6 +27,10 @@ public interface CharControl extends PhysicsControl, Cloneable, Translatable, Ha
 	
 	Vector3f getLinearVelocity(Vector3f vec);
 	
-	PhysicsCharacter getCharacter();
+	void setJumpSpeed(float f);
+	
+	void getPhysicsLocation(Vector3f vect1);
+	
+	//PhysicsCharacter getCharacter();
 	
 }

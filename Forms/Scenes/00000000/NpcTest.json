@@ -1,0 +1,8 @@
+{
+	"model": "PhysicsObjects/Generic/Sign_Post/Sign_Post.json",
+	"id": 200002,
+	"scripts": {
+		"module": "npctest",
+		"class": "NpcTest"
+	}
+}

@@ -3,7 +3,6 @@ package online.money_daisuki.api.monkey.basegame.misc;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
-import java.nio.ByteBuffer;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
@@ -15,7 +14,6 @@ import com.jme3.renderer.RenderManager;
 import com.jme3.renderer.ViewPort;
 import com.jme3.system.JmeSystem;
 
-import online.money_daisuki.api.base.DataSink;
 import online.money_daisuki.api.base.DataSource;
 import online.money_daisuki.api.base.Requires;
 
@@ -25,6 +23,8 @@ public final class OwnScreenshotAppState implements AppState {
 	
 	private CaptureScreenPostProcessor cspp;
 	private ViewPort vp;
+	
+	private File directory;
 	
 	private final DataSource<? extends File> fileGenerator;
 	
@@ -74,12 +74,7 @@ public final class OwnScreenshotAppState implements AppState {
 		final List<ViewPort> vps = app.getRenderManager().getPostViews();
 		vp = vps.get(vps.size() - 1);
 		
-		cspp = new CaptureScreenPostProcessor(new DataSink<ByteBuffer>() {
-			@Override
-			public void sink(final ByteBuffer value) {
-				
-			}
-		});
+		cspp = new CaptureScreenPostProcessor();
 		cspp.addCapturedListener(new Runnable() {
 			@Override
 			public void run() {

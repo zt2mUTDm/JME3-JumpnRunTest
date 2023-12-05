@@ -1,0 +1,8 @@
+{
+	"model": "PhysicsObjects/Switch0/Switch.json",
+	"id": 200000,
+	"scripts": {
+		"module": "switches.switchA",
+		"class": "SwitchA"
+	}
+}

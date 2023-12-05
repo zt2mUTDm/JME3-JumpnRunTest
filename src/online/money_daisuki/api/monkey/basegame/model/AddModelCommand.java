@@ -10,6 +10,7 @@ import com.jme3.math.Vector3f;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
 
+import online.money_daisuki.api.base.BiConverter;
 import online.money_daisuki.api.base.Converter;
 import online.money_daisuki.api.base.Requires;
 import online.money_daisuki.api.monkey.console.Command;
@@ -21,38 +22,39 @@ import online.money_daisuki.api.monkey.console.Command;
  */
 public final class AddModelCommand implements Command {
 	private final Converter<? super String, ? extends Spatial> factory;
-	private final Node node;
+	private final BiConverter<? super String, ? super Spatial, ? extends Node> nodeTarget;
 	private final Application app;
 	
 	public AddModelCommand(final Converter<? super String, ? extends Spatial> factory,
-			final Node node, final Application app) {
+			final BiConverter<? super String, ? super Spatial, ? extends Node> nodeTarget,
+			final Application app) {
 		this.factory = Requires.notNull(factory, "factory == null");
-		this.node = Requires.notNull(node, "node == null");
+		this.nodeTarget = Requires.notNull(nodeTarget, "nodeTarget == null");
 		this.app = Requires.notNull(app, "app == null");
 	}
 	@Override
-	public void execute(final Spatial a, final String[] b, final Runnable done) {
-		Requires.lenEqual(b, 11);
-		final File f = new File(b[1]);
+	public void execute(final Spatial caller, final String[] cmd, final Runnable done) {
+		Requires.lenEqual(cmd, 12);
+		final File f = new File(cmd[1]);
 		//Requires.isTrue(Utils.isSubdirectory(f, new File("models")));
 		
-		final Spatial spatial = factory.convert(b[1]);
+		final Spatial spatial = factory.convert(cmd[1]);
 		
 		spatial.setLocalTranslation(new Vector3f(
-				Float.parseFloat(b[2]),
-				Float.parseFloat(b[3]),
-				Float.parseFloat(b[4])
+				Float.parseFloat(cmd[2]),
+				Float.parseFloat(cmd[3]),
+				Float.parseFloat(cmd[4])
 		));
 		
 		final Vector3f scale = new Vector3f(
-				Float.parseFloat(b[5]),
-				Float.parseFloat(b[6]),
-				Float.parseFloat(b[7])
+				Float.parseFloat(cmd[5]),
+				Float.parseFloat(cmd[6]),
+				Float.parseFloat(cmd[7])
 		);
 		final Quaternion q = new Quaternion().fromAngles(new float[] {
-				Float.parseFloat(b[8]) * FastMath.DEG_TO_RAD,
-				Float.parseFloat(b[9]) * FastMath.DEG_TO_RAD,
-				Float.parseFloat(b[10]) * FastMath.DEG_TO_RAD
+				Float.parseFloat(cmd[8]) * FastMath.DEG_TO_RAD,
+				Float.parseFloat(cmd[9]) * FastMath.DEG_TO_RAD,
+				Float.parseFloat(cmd[10]) * FastMath.DEG_TO_RAD
 		});
 		
 		spatial.setLocalScale(scale);
@@ -63,10 +65,13 @@ public final class AddModelCommand implements Command {
 			rigid.setPhysicsScale(scale);
 		}
 		
+		final String targetName = String.valueOf(cmd[11]);
+		
+		final Node target = nodeTarget.convert(targetName, caller);
 		app.enqueue(new Runnable() {
 			@Override
 			public void run() {
-				node.attachChild(spatial);
+				target.attachChild(spatial);
 				done.run();
 			}
 		});

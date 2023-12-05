@@ -1,6 +1,6 @@
 {
 	"type": "node",
-	"name": "Main",
+	"name": "Environment",
 	"childs": [
 		{
 			"type": "model",

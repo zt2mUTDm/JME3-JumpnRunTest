@@ -3,14 +3,13 @@ package online.money_daisuki.api.monkey.basegame.variables;
 import com.jme3.scene.Spatial;
 
 import online.money_daisuki.api.base.Requires;
-import online.money_daisuki.api.monkey.basegame.ExtendedApplication;
 import online.money_daisuki.api.monkey.console.Command;
 
 public final class SetVariableCommand implements Command {
-	private final ExtendedApplication app;
+	private final VariablesManager vars;
 	
-	public SetVariableCommand(final ExtendedApplication app) {
-		this.app = Requires.notNull(app, "app == null");
+	public SetVariableCommand(final VariablesManager vars) {
+		this.vars = Requires.notNull(vars, "vars == null");
 	}
 	@Override
 	public void execute(final Spatial caller, final String[] cmd, final Runnable done) {
@@ -30,7 +29,7 @@ public final class SetVariableCommand implements Command {
 			break;
 		}
 		
-		app.setVariable(cmd[1], cmd[2], var);
+		vars.setVariable(cmd[1], cmd[2], var);
 		done.run();
 	}
 }

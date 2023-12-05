@@ -1,0 +1,8 @@
+{
+	"className": "online.money_daisuki.api.monkey.basegame.scene.SceneInitializer",
+	"dependencies": [
+		"form",
+		"console"
+	],
+	"waitForStateInit": false
+}

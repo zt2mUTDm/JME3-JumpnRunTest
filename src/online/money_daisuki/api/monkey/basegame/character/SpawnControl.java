@@ -2,6 +2,7 @@ package online.money_daisuki.api.monkey.basegame.character;
 
 import java.io.IOException;
 
+import com.jme3.app.Application;
 import com.jme3.bullet.BulletAppState;
 import com.jme3.bullet.control.RigidBodyControl;
 import com.jme3.export.JmeExporter;
@@ -17,17 +18,17 @@ import online.money_daisuki.api.base.Converter;
 import online.money_daisuki.api.base.NullRunnable;
 import online.money_daisuki.api.base.Requires;
 import online.money_daisuki.api.monkey.basegame.ControlTemplate;
-import online.money_daisuki.api.monkey.basegame.ExtendedApplication;
 import online.money_daisuki.api.monkey.basegame.character.control.CharControl;
 import online.money_daisuki.api.monkey.basegame.material.FlexibleMaterialLoader;
 import online.money_daisuki.api.monkey.basegame.model.FlexibleModelLoader;
+import online.money_daisuki.api.monkey.basegame.variables.VariablesManagerAppState;
 
 public final class SpawnControl implements Control {
 	private final float firstSpawn;
 	private final float respawnRate;
 	private final String characterUrl;
 	private final Vector3f scale;
-	private final ExtendedApplication app;
+	private final Application app;
 	
 	private Node spatial;
 	
@@ -36,7 +37,7 @@ public final class SpawnControl implements Control {
 	private float counter;
 	
 	public SpawnControl(final float firstSpawn, final float respawnRate, final String characterUrl, final Vector3f scale,
-			final ExtendedApplication app) {
+			final Application app) {
 		this.firstSpawn = firstSpawn;
 		this.respawnRate = respawnRate;
 		this.characterUrl = characterUrl;
@@ -62,14 +63,15 @@ public final class SpawnControl implements Control {
 		}
 	}
 	private void doSpawn() {
+		final VariablesManagerAppState vars = app.getStateManager().getState(VariablesManagerAppState.class);
 		final BulletAppState bullet = app.getStateManager().getState(BulletAppState.class);
 		
 		final Converter<String, Spatial> modelLoader = new FlexibleModelLoader(new FlexibleMaterialLoader(app), app);
 		actualSpawn = new LoadCharacterCommand(
-				new FlexibleCharacterLoader(modelLoader, bullet, app),
+				new FlexibleCharacterLoader(modelLoader, app),
 				spatial,
 				bullet,
-				app
+				vars
 		).execute(spatial, new String[] {
 				"AddCharacter",
 				characterUrl,
@@ -88,7 +90,7 @@ public final class SpawnControl implements Control {
 		
 		final CharControl cc = actualSpawn.getControl(CharControl.class);
 		if(cc != null) {
-			cc.setTranslation(spatial.getWorldTranslation());
+			cc.setPhysicsLocation(spatial.getWorldTranslation());
 		}
 		
 		if(actualSpawn != null) {

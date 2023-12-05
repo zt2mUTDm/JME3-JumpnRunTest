@@ -9,27 +9,27 @@ import online.money_daisuki.api.monkey.basegame.character.control.CharControl;
 import online.money_daisuki.api.monkey.console.Command;
 
 public final class TurnToCommand implements Command {
-	private final BiConverter<String, Spatial, Spatial> target;
+	private final BiConverter<? super String, ? super Spatial, ? extends Spatial> target;
 	
-	public TurnToCommand(final BiConverter<String, Spatial, Spatial> biConverter) {
-		this.target = Requires.notNull(biConverter, "target == null");
+	public TurnToCommand(final BiConverter<? super String, ? super Spatial, ? extends Spatial> target) {
+		this.target = Requires.notNull(target, "target == null");
 	}
 	@Override
-	public void execute(final Spatial a, final String[] b, final Runnable done) {
-		Requires.notNull(a, "a == null");
-		Requires.containsNotNull(b, "contains null");
-		Requires.lenEqual(b, 3);
+	public void execute(final Spatial  caller, final String[] cmd, final Runnable done) {
+		Requires.notNull(caller, "caller == null");
+		Requires.containsNotNull(cmd, "cmd contains null");
+		Requires.lenEqual(cmd, 3);
 		
-		final Spatial targetSpatial = target.convert(b[1], a);
+		final Spatial targetSpatial = target.convert(cmd[1], caller);
 		
 		final Vector3f targetVector = new Vector3f(targetSpatial.getWorldTranslation());
-		targetVector.subtractLocal(a.getWorldTranslation());
+		targetVector.subtractLocal(caller.getWorldTranslation());
 		
-		if(b[2].equals("true")) {
+		if(cmd[2].equals("true")) {
 			targetVector.multLocal(1, 0, 1);
 		}
 		
-		final CharControl cc = a.getControl(CharControl.class);
+		final CharControl cc = caller.getControl(CharControl.class);
 		if(cc != null) {
 			cc.setViewDirection(targetVector);
 		}

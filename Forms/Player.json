@@ -1,0 +1,8 @@
+{
+	"model": "PhysicsObjects/Player/Sinbad/Sinbad.json",
+	"id": 1100,
+	"scripts": {
+		"module": "basicplayer",
+		"class": "BasicPlayer"
+	}
+}

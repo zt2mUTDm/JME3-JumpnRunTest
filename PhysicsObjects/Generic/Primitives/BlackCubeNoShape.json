@@ -1,0 +1,8 @@
+{
+	"model": "Models/Generic/Primitives/BlackCube/BlackCube.json",
+	"physics": {
+		"shapes": [
+			
+		]
+	}
+}

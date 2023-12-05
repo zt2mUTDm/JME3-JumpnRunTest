@@ -1,0 +1,48 @@
+grant {
+  permission java.io.FilePermission "_Template:PolicyFilePathAbs_", "read,delete";
+  permission java.io.FilePermission "_Template:ExtractDirectoryAbs_", "read,write,delete";
+  permission java.io.FilePermission "_Template:BinDirAbs_", "read";
+  
+  permission java.awt.AWTPermission "accessClipboard";
+  permission java.awt.AWTPermission "setWindowAlwaysOnTop";
+  permission java.awt.AWTPermission "showWindowWithoutWarningBanner";
+  
+  permission java.lang.RuntimePermission "preferences";
+  
+  permission java.util.PropertyPermission "user.dir", "read";
+  permission java.util.PropertyPermission "user.home", "read";
+  permission java.util.PropertyPermission "java.class.path", "read";
+  
+  permission java.lang.RuntimePermission "accessDeclaredMembers";
+  permission java.lang.RuntimePermission "modifyThreadGroup";
+  permission java.lang.RuntimePermission "shutdownHooks";
+  permission java.lang.RuntimePermission "createClassLoader";
+  permission java.lang.RuntimePermission "getProtectionDomain";
+  
+  permission java.lang.RuntimePermission "loadLibrary._Template:ExtractDirectoryAbs_\\bulletjme.dll";
+  permission java.lang.RuntimePermission "loadLibrary._Template:ExtractDirectoryAbs_\\OpenAL64.dll";
+  permission java.lang.RuntimePermission "loadLibrary._Template:ExtractDirectoryAbs_\\jinput-dx8_64.dll";
+  permission java.lang.RuntimePermission "loadLibrary._Template:ExtractDirectoryAbs_\\jinput-raw_64.dll";
+  permission java.lang.RuntimePermission "loadLibrary._Template:ExtractDirectoryAbs_\\lwjgl64.dll";
+  
+  permission java.lang.RuntimePermission "loadLibrary.bulletjme";
+  permission java.lang.RuntimePermission "loadLibrary.OpenAL64";
+  permission java.lang.RuntimePermission "loadLibrary.jinput-dx8_64";
+  permission java.lang.RuntimePermission "loadLibrary.lwjgl64";
+  
+  permission java.lang.RuntimePermission "accessClassInPackage.jdk.internal.loader";
+  permission java.lang.RuntimePermission "accessClassInPackage.sun.misc";
+  
+  permission java.util.PropertyPermission "net.java.games.input.*", "read,write";
+  permission java.util.PropertyPermission "org.lwjgl.*", "read,write";
+  permission java.util.PropertyPermission "com.jme3.*", "read,write";
+  permission java.util.PropertyPermission "jinput.*", "read,write";
+  permission java.util.PropertyPermission "java.home", "read";
+  permission java.util.PropertyPermission "java.library.path", "read";
+  permission java.util.PropertyPermission "jnr.ffi.provider", "read";
+  permission java.util.PropertyPermission "sun.arch.data.model", "read";
+  permission java.util.PropertyPermission "jnr.constants.fake", "read";
+  permission java.util.PropertyPermission "accessDeclaredMembers", "read";
+  
+  permission java.lang.reflect.ReflectPermission "suppressAccessChecks";
+};

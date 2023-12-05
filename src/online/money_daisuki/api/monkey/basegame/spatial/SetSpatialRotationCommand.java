@@ -12,23 +12,23 @@ import online.money_daisuki.api.monkey.console.Command;
 
 public final class SetSpatialRotationCommand  implements Command {
 	private final BiConverter<? super String, ? super Spatial, ? extends Spatial> source;
-
+	
 	public SetSpatialRotationCommand(final BiConverter<? super String, ? super Spatial, ? extends Spatial> source) {
 		this.source = Requires.notNull(source, "source == null");
 	}
 	@Override
-	public void execute(final Spatial a, final String[] b, final Runnable done) {
-		Requires.notNull(a, "a == null");
-		Requires.containsNotNull(b, "contains null");
-		Requires.lenEqual(b, 5);
+	public void execute(final Spatial caller, final String[] cmd, final Runnable done) {
+		Requires.notNull(caller, "caller == null");
+		Requires.containsNotNull(cmd, "contains null");
+		Requires.lenEqual(cmd, 5);
 		
-		final Spatial target = source.convert(b[1], a);
+		final Spatial target = source.convert(cmd[1], caller);
 		if(target != null) {
 			final TempVars tmp = TempVars.get();
 			try {
-				final float x = Float.parseFloat(b[2]) * FastMath.DEG_TO_RAD;
-				final float y = Float.parseFloat(b[3]) * FastMath.DEG_TO_RAD;
-				final float z = Float.parseFloat(b[4]) * FastMath.DEG_TO_RAD;
+				final float x = Float.parseFloat(cmd[2]) * FastMath.DEG_TO_RAD;
+				final float y = Float.parseFloat(cmd[3]) * FastMath.DEG_TO_RAD;
+				final float z = Float.parseFloat(cmd[4]) * FastMath.DEG_TO_RAD;
 				
 				tmp.quat1.fromAngles(new float[] {
 						x, y, z

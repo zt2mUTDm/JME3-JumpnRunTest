@@ -140,6 +140,19 @@ public class ConsoleAppState implements AppState {
 		return(null);
 	}
 	
+	public void addConsoleShownListener(final Runnable l) {
+		console.addConsoleShownListener(l);
+	}
+	public void addConsoleHiddenListener(final Runnable l) {
+		console.addConsoleHiddenListener(l);
+	}
+	public void removeConsoleShownListener(final Runnable l) {
+		console.removeConsoleShownListener(l);
+	}
+	public void removeConsoleHiddenListener(final Runnable l) {
+		console.removeConsoleHiddenListener(l);
+	}
+	
 	private final class ConsoleRawInputListener extends RawInputAdapter {
 		private boolean leftShiftPressed;
 		private boolean previousCursorVisibility;

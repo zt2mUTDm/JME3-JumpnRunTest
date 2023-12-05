@@ -16,10 +16,10 @@ import online.money_daisuki.api.io.json.JsonDecoder;
 import online.money_daisuki.api.io.json.JsonElement;
 import online.money_daisuki.api.io.json.JsonList;
 import online.money_daisuki.api.io.json.JsonMap;
-import online.money_daisuki.api.monkey.basegame.ExtendedApplication;
 import online.money_daisuki.api.monkey.basegame.misc.Utils;
 import online.money_daisuki.api.monkey.basegame.variables.CompareOperation;
 import online.money_daisuki.api.monkey.basegame.variables.VariableContainer;
+import online.money_daisuki.api.monkey.basegame.variables.VariablesManager;
 
 /**
  * AddTerrain file x y z scaleX scaleY scaleZ
@@ -30,14 +30,14 @@ public final class LoadCharacterCommand {
 	private final Converter<? super String, ? extends Spatial> factory;
 	private final Node node;
 	private final BulletAppState bulletAppState;
-	private final ExtendedApplication app;
+	private final VariablesManager vars;
 	
 	public LoadCharacterCommand(final Converter<? super String, ? extends Spatial> factory,
-			final Node node, final BulletAppState bulletAppState, final ExtendedApplication app) {
+			final Node node, final BulletAppState bulletAppState, final VariablesManager vars) {
 		this.factory = Requires.notNull(factory, "factory == null");
 		this.node = Requires.notNull(node, "node == null");
 		this.bulletAppState = Requires.notNull(bulletAppState, "bulletAppState == null");
-		this.app = Requires.notNull(app, "app == null");
+		this.vars = Requires.notNull(vars, "vars == null");
 	}
 	public Spatial execute(final Spatial a, final String[] b, final Runnable done) {
 		Requires.lenEqual(b, 8);
@@ -89,14 +89,14 @@ public final class LoadCharacterCommand {
 			final String name = condition.get("name").asData().asString();
 			
 			final boolean def = condition.get("default").asData().asBool();
-			if(!app.containsVariable(type, name)) {
+			if(!vars.containsVariable(type, name)) {
 				return(def);
 			}
 			
 			final CompareOperation op = Requires.notNull(CompareOperation.getOp(condition.get("op").asData().asString()), "Unknown op");
 			final String value = condition.get("value").asData().asString();
 			
-			final VariableContainer container = app.getVariable(type, name);
+			final VariableContainer container = vars.getVariable(type, name);
 			if(!container.test(op, value)) {
 				return(true);
 			}

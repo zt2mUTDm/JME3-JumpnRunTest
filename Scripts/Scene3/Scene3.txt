@@ -1,5 +1,0 @@
-AddAmbientLight root 1 1 1 0.1
-
-AddCharacter Characters/Scenes/Scene3/Scene3.json 0 0 0 1 1 1 0 0 0
-AddCharacter Characters/Scenes/Scene3/Scene3ToScene2Teleporter.json 9 -1.75 1.5 1 1 1 0 0 0
-AddCharacter Characters/Onigiri/Onigiri2.json -5 0 4 1 1 1 0 0 0

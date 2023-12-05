@@ -4,7 +4,7 @@
 	"childs": [
 		{
 			"type": "node",
-			"name": "shapes",
+			"name": "Activatable-Trigger-Main",
 			"translation": [ 0.0, 2.0, 0.0 ],
 			"childs": []
 		},

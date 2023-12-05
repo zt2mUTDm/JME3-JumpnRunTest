@@ -1,0 +1,14 @@
+{
+	"model": "Models/Generic/Torii/Torii.json",
+	"physics": {
+		"shapes": [
+			{
+				"type": "Mesh",
+				"attach": "Torii",
+				"collisionGroup": 0,
+				"purpose": "rigid",
+				"mass": 0
+			}
+		]
+	}
+}

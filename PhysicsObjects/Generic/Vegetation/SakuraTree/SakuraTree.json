@@ -1,0 +1,14 @@
+{
+	"model": "Models/Generic/SakuraTree/SakuraTree.json",
+	"physics": {
+		"shapes": [
+			{
+				"type": "Mesh",
+				"attach": "SakuraTree",
+				"collisionGroup": 0,
+				"purpose": "rigid",
+				"mass": 0
+			}
+		]
+	}
+}

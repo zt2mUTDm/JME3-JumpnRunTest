@@ -1,0 +1,8 @@
+{
+	"className": "online.money_daisuki.api.monkey.basegame.form.FormInitializer",
+	"dependencies": [
+		"python",
+		"spatialload"
+	],
+	"waitForStateInit": false
+}

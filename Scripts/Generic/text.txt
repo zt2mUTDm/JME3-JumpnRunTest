@@ -1,7 +1,0 @@
-SetPlayerControlEnabled off
-SetTextCull dynamic
-ShowControlledTextFromFile Texts/text
-waitfor 0
-SetTextCull always
-SetPlayerControlEnabled on
-ClearText

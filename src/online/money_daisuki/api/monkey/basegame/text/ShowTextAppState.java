@@ -85,6 +85,9 @@ public final class ShowTextAppState implements MayDoneAppState {
 		return (done);
 	}
 	
+	public void showText(final String text) {
+		showText(new StringReader(text));
+	}
 	public void showText(final Reader textIn) {
 		this.textIn = Requires.notNull(textIn, "textIn == null");
 		this.showAll = false;

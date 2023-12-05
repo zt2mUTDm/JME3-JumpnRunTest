@@ -1,0 +1,8 @@
+{
+	"model": "PhysicsObjects/Generic/Shapes/EmptyGhostBox.json",
+	"id": 5003,
+	"scripts": {
+		"module": "teleporters",
+		"class": "Teleporter_00000001_00000000"
+	}
+}

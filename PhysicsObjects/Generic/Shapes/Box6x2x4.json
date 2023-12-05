@@ -1,0 +1,15 @@
+{
+	"model": "Models/Generic/Dummy/Dummy.json",
+	"physics": {
+		"shapes": [
+			{
+				"type": "Box",
+				"extends": [ 3, 1, 2 ],
+				"attach": "Dummy",
+				"collisionGroup": 0,
+				"purpose": "rigid",
+				"mass": 0
+			}
+		]
+	}
+}

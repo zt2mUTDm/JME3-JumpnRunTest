@@ -11,6 +11,7 @@ import java.util.Map.Entry;
 
 import com.jme3.anim.AnimComposer;
 import com.jme3.anim.SkinningControl;
+import com.jme3.app.Application;
 import com.jme3.bullet.BulletAppState;
 import com.jme3.bullet.collision.PhysicsCollisionObject;
 import com.jme3.bullet.collision.shapes.BoxCollisionShape;
@@ -34,13 +35,14 @@ import com.jme3.scene.Spatial;
 import com.jme3.scene.control.Control;
 
 import online.money_daisuki.api.base.Converter;
+import online.money_daisuki.api.base.DataSink;
 import online.money_daisuki.api.base.DataSource;
 import online.money_daisuki.api.base.Requires;
 import online.money_daisuki.api.io.json.JsonDecoder;
 import online.money_daisuki.api.io.json.JsonElement;
 import online.money_daisuki.api.io.json.JsonList;
 import online.money_daisuki.api.io.json.JsonMap;
-import online.money_daisuki.api.monkey.basegame.ExtendedApplication;
+import online.money_daisuki.api.misc.mapping.Mapping;
 import online.money_daisuki.api.monkey.basegame.character.anim.AnimControl;
 import online.money_daisuki.api.monkey.basegame.character.anim.AnimPlayer;
 import online.money_daisuki.api.monkey.basegame.character.anim.AnimPlayerImpl;
@@ -59,11 +61,12 @@ import online.money_daisuki.api.monkey.basegame.player.control.OnOffEventReceive
 import online.money_daisuki.api.monkey.basegame.script.ScriptControl;
 import online.money_daisuki.api.monkey.basegame.script.ScriptFileLoader;
 import online.money_daisuki.api.monkey.basegame.script.ScriptLineExecutorImpl;
+import online.money_daisuki.api.monkey.basegame.script.SimpleScriptHook;
 import online.money_daisuki.api.monkey.basegame.spatial.RotateControl;
 
 public final class CharacterLoader implements DataSource<Spatial> {
 	private final String s;
-	private final ExtendedApplication app;
+	private final Application app;
 	private final Converter<String, Spatial> modelLoader;
 	private final BulletAppState bullet;
 	
@@ -71,12 +74,11 @@ public final class CharacterLoader implements DataSource<Spatial> {
 	
 	public CharacterLoader(final String s,
 			final Converter<String, Spatial> modelLoader,
-			final BulletAppState bullet,
-			final ExtendedApplication app) {
+			final Application app) {
 		this.s = Requires.notNull(s, "s == null");
 		this.modelLoader = Requires.notNull(modelLoader, "modelLoader == null");
-		this.bullet = Requires.notNull(bullet, "bullet == null");
-		this.app = Requires.notNull(app, "app == null");
+		this.bullet = Requires.notNull(app, "app == null").getStateManager().getState(BulletAppState.class);
+		this.app = app;
 		
 		this.trigger = new HashMap<>();
 	}
@@ -103,6 +105,7 @@ public final class CharacterLoader implements DataSource<Spatial> {
 		loadControls(map, spatial);
 		return(spatial);
 	}
+	
 	private void loadControls(final JsonMap map, final Spatial spatial) {
 		if(!map.containsKey("controls")) {
 			return;
@@ -155,8 +158,12 @@ public final class CharacterLoader implements DataSource<Spatial> {
 	private Control loadScriptControl(final JsonMap map, final Spatial spatial) {
 		final String url = map.get("url").asData().asString();
 		
-		final Collection<String[]> commands = new ScriptFileLoader(url).source();
-		return(new ScriptControl(new ScriptLineExecutorImpl(commands, spatial, app), 0.1f, true));
+		try(final Reader in = new FileReader(url)){
+			final Collection<String[]> commands = new ScriptFileLoader(in).source();
+			return(new ScriptControl(new ScriptLineExecutorImpl(commands, spatial, app), 0.1f, true));
+		} catch (final IOException e) {
+			throw new RuntimeException(e);
+		}
 	}
 	
 	private void loadAnimations(final JsonMap map, final Spatial spatial) {
@@ -369,13 +376,13 @@ public final class CharacterLoader implements DataSource<Spatial> {
 		}
 	}
 	private void loadEventReceivePurpose(final JsonMap map, final CollisionShape shape, final Spatial spatial, final String attachName) {
-		final String simpleScript = map.get("simpleScript").asData().asString();
+		final DataSink<Mapping<Spatial, Runnable>> hook = parseScriptHook(map);
 		
-		final GhostControl c = new EventReceiver(shape, spatial, parseEventReceiveTriggerType(map), simpleScript, app);
+		final GhostControl c = new EventReceiver(shape, spatial, parseEventReceiveTriggerType(map), hook);
 		loadPhysicalCollisionGroup(map, c);
 		
 		final Spatial attachSpatial = Utils.getChildWithName(spatial, attachName);
-		Requires.notNull(attachSpatial, "Node to attach shape not found");
+		Requires.notNull(attachSpatial, "Attaching Shape failed: Node \"" + attachName + "\" in \"" + s + "\" not found.");
 		attachSpatial.addControl(c);
 	}
 	private void loadOnOffEventReceivePurpose(final JsonMap map, final CollisionShape shape, final Spatial spatial, final String attachName) {
@@ -415,6 +422,20 @@ public final class CharacterLoader implements DataSource<Spatial> {
 		attachSpatial.addControl(c);
 	}
 	
+	private DataSink<Mapping<Spatial, Runnable>> parseScriptHook(final JsonMap map) {
+		final JsonMap scriptMap = map.get("script").asMap();
+		final String url = scriptMap.get("url").asData().asString();
+		final String type = scriptMap.get("type").asData().asString();
+		
+		switch(type) {
+			case("simple"):
+				return(new SimpleScriptHook(url, app));
+			/* case("python"):
+				return(new PythonScriptHook(url, app));*/
+			default:
+				throw new IllegalArgumentException("Unknown script type: " + type);
+		}
+	}
 	private TriggerType parseEventReceiveTriggerType(final JsonMap map) {
 		final String triggerType = map.get("trigger").asData().asString();
 		switch(triggerType) {

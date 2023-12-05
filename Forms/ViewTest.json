@@ -1,0 +1,8 @@
+{
+	"model": "PhysicsObjects/Enemies/Jaime/Jaime.json",
+	"id": 500000,
+	"scripts": {
+		"module": "viewtest",
+		"class": "ViewTest"
+	}
+}

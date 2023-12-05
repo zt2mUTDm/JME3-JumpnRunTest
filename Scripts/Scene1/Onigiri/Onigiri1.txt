@@ -1,2 +1,0 @@
-Unload
-SetVariable global Onigiri1 true

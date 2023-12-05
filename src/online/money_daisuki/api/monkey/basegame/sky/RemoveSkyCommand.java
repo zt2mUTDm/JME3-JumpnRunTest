@@ -7,9 +7,9 @@ import online.money_daisuki.api.base.SetableDataSource;
 import online.money_daisuki.api.monkey.console.Command;
 
 public final class RemoveSkyCommand implements Command {
-	private final SetableDataSource<Spatial> skyTarget;
+	private final SetableDataSource<? extends Spatial> skyTarget;
 	
-	public RemoveSkyCommand(final SetableDataSource<Spatial> skyTarget) {
+	public RemoveSkyCommand(final SetableDataSource<? extends Spatial> skyTarget) {
 		this.skyTarget = Requires.notNull(skyTarget, "skyTarget == null");
 	}
 	@Override

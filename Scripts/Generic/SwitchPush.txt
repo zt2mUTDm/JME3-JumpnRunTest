@@ -1,3 +1,0 @@
-MoveLinearTo SwitchMiddle 0.5 0 -0.1 0
-waitfor 0
-SetVariable Switch pressed true

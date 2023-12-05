@@ -7,9 +7,9 @@ import online.money_daisuki.api.base.Requires;
 import online.money_daisuki.api.monkey.console.Command;
 
 public final class DetachSpatialCommand implements Command {
-	private final BiConverter<String, Spatial, Spatial> spatialTarget;
+	private final BiConverter<? super String, ? super Spatial, ? extends Spatial> spatialTarget;
 	
-	public DetachSpatialCommand(final BiConverter<String, Spatial, Spatial> spatialTarget) {
+	public DetachSpatialCommand(final BiConverter<? super String, ? super Spatial, ? extends Spatial> spatialTarget) {
 		this.spatialTarget = Requires.notNull(spatialTarget, "spatialTarget == null");
 	}
 	@Override

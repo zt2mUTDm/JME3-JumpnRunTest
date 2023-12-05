@@ -6,13 +6,13 @@ import com.jme3.anim.tween.action.BaseAction;
 import online.money_daisuki.api.base.Requires;
 
 public final class ListenableAction extends BaseAction {
-	private final boolean once;
+	private final boolean loop;
 	private final Runnable listener;
 	
-	public ListenableAction(final Tween parent, final boolean once,
+	public ListenableAction(final Tween parent, final boolean loop,
 			final Runnable listener) {
 		super(parent);
-		this.once = once;
+		this.loop = loop;
 		this.listener = Requires.notNull(listener, "listener == null");
 	}
 	@Override
@@ -21,7 +21,7 @@ public final class ListenableAction extends BaseAction {
 		if (!running) {
 			listener.run();
 			
-			if(once) {
+			if(!loop) {
 				setSpeed(0);
 			}
 		}

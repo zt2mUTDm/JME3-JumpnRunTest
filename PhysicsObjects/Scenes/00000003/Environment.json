@@ -1,0 +1,14 @@
+{
+	"model": "Models/Scenes/00000003/Environment.json",
+	"physics": {
+		"shapes": [
+			{
+				"type": "Mesh",
+				"attach": "Environment",
+				"collisionGroup": 0,
+				"purpose": "rigid",
+				"mass": 0
+			}
+		]
+	}
+}

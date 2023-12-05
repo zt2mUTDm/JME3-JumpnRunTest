@@ -1,0 +1,174 @@
+{
+	"forms": [
+		{
+			"url": "Forms/Scenes/00000002/Teleporter_00000002_00000001.json",
+			"transform": {
+				"translation": [
+					9,
+					-1.75,
+					1.5
+				],
+				"scale": [
+					3.7, 0.5, 3.7
+				],
+				"rotation": [
+					0,
+					0,
+					0
+ 				]
+ 			}
+ 		},
+ 		{
+			"url": "Forms/Cucumbers/Cucumber010.json",
+			"transform": {
+				"translation": [
+					11,
+					1,
+					-5.5
+				],
+				"scale": [
+					1,
+					1,
+					1
+				],
+				"rotation": [
+					0,
+					0,
+					0
+				]
+ 			}
+		},
+		{
+			"url": "Forms/Cucumbers/Cucumber011.json",
+			"transform": {
+				"translation": [
+					-7,
+					1,
+					-5.5
+				],
+				"scale": [
+					1,
+					1,
+					1
+				],
+				"rotation": [
+					0,
+					0,
+					0
+				]
+ 			}
+		},
+		{
+			"url": "Forms/Cucumbers/Cucumber012.json",
+			"transform": {
+				"translation": [
+					11,
+					1,
+					7.5
+				],
+				"scale": [
+					1,
+					1,
+					1
+				],
+				"rotation": [
+					0,
+					0,
+					0
+				]
+ 			}
+		},
+		{
+			"url": "Forms/Cucumbers/Cucumber013.json",
+			"transform": {
+				"translation": [
+					-7,
+					1,
+					7.5
+				],
+				"scale": [
+					1,
+					1,
+					1
+				],
+				"rotation": [
+					0,
+					0,
+					0
+				]
+ 			}
+		},
+		{
+			"url": "Forms/Ryuudama/Ryuudama2.json",
+			"transform": {
+				"translation": [
+					-5,
+					2,
+					-0
+				],
+				"scale": [
+					1,
+					1,
+					1
+				],
+				"rotation": [
+					0,
+					0,
+					0
+ 				]
+ 			}
+		}
+	],
+	"physicsObjects": [
+		{
+			"url": "PhysicsObjects/Scenes/00000002/Ground.json",
+			"transform": {
+				"translation": [
+					0,
+					0,
+					0
+				],
+				"scale": [
+					1,
+					1,
+					1
+				],
+				"rotation": [
+					0,
+					0,
+					0
+ 				]
+ 			}
+		},
+		{
+			"url": "PhysicsObjects/Generic/Primitives/BlackCubeNoShape.json",
+			"transform": {
+				"translation": [
+					9, -3, 1.5
+				],
+				"scale": [
+					4, 1, 4
+				],
+				"rotation": [
+					0, 0, 0
+				]
+ 			}
+		},
+		{
+			"url": "PhysicsObjects/Generic/Shapes/EmptyRigidCylinder.json",
+			"transform": {
+				"translation": [
+					-5.998874,
+					4,
+					0.13646314
+				],
+				"scale": [
+					1, 8, 1
+				],
+				"rotation": [
+					0, 0, 0
+				]
+ 			}
+		}
+	]
+}

@@ -9,18 +9,10 @@ import online.money_daisuki.api.base.DataSource;
 import online.money_daisuki.api.base.Requires;
 
 public final class FlexibleModelLoader implements Converter<String, Spatial> {
-	private final Converter<String, Spatial> cache;
+	private final Converter<String, Spatial> c;
 	
 	public FlexibleModelLoader(final Converter<String, Material> matLoader, final Application app) {
-		/*this.cache = new WeakHashMapRefresher<>(new Converter<String, Spatial>() {
-			@Override
-			public Spatial convert(final String value) {
-				final DataSource<Spatial> ldr = new ModelLoader(Requires.notNull(value, "value == null"), matLoader,
-						app);
-				return(ldr.source());
-			}
-		});*/
-		this.cache = new Converter<String, Spatial>() {
+		this.c = new Converter<String, Spatial>() {
 			@Override
 			public Spatial convert(final String value) {
 				final DataSource<Spatial> ldr = new ModelLoader(Requires.notNull(value, "value == null"), matLoader,
@@ -31,6 +23,6 @@ public final class FlexibleModelLoader implements Converter<String, Spatial> {
 	}
 	@Override
 	public Spatial convert(final String value) {
-		return(cache.convert(value));
+		return(c.convert(value));
 	}
 }

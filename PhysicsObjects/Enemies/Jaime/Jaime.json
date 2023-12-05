@@ -1,0 +1,19 @@
+{
+	"model": "Models/Enemies/Jaime/Jaime.json",
+	"physics": {
+		"shapes": [
+			{
+				"type": "Box",
+				"extends": [ 1, 1, 1 ],
+				"attach": "Jaime",
+				"collisionGroup": 0,
+				"purpose": "cc",
+				"kinmetic": "true",
+				"stepHeight": 0.5
+			}
+		]
+	},
+	"controls": [
+	
+	]
+}

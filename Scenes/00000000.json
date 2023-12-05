@@ -1,0 +1,658 @@
+{
+	"preScripts": [
+		{
+			"module": "preloadScript",
+			"class": "PreloadScript"
+		}
+	],
+	"forms": [
+		{
+			"url": "Forms/Scenes/00000000/NpcTest.json",
+			"transform": {
+				"translation": [
+					-85,
+					0,
+					-240
+				],
+				"scale": [
+					1,
+					1,
+					1
+				],
+				"rotation": [
+					0,
+					0,
+					0
+				]
+ 			}
+		},
+		{
+			"url": "Forms/Generic/Platform0.json",
+			"transform": {
+				"translation": [
+					-135,
+					20,
+					-45
+				],
+				"scale": [
+					1,
+					1,
+					1
+				],
+				"rotation": [
+					0,
+					0,
+					0
+				]
+ 			}
+		},
+		{
+			"url": "Forms/Generic/Platform1.json",
+			"transform": {
+				"translation": [
+					-135,
+					20,
+					-15
+				],
+				"scale": [
+					1,
+					1,
+					1
+				],
+				"rotation": [
+					0,
+					0,
+					0
+				]
+ 			}
+		},
+		{
+			"url": "Forms/Generic/Platform2.json",
+			"transform": {
+				"translation": [
+					-135,
+					32,
+					-81
+				],
+				"scale": [
+					1,
+					1,
+					1
+				],
+				"rotation": [
+					0,
+					0,
+					0
+				]
+ 			}
+		},
+		{
+			"url": "Forms/Generic/Platform3.json",
+			"transform": {
+				"translation": [
+					-105.0, 24.8, -239.0
+				],
+				"scale": [
+					1,
+					1,
+					1
+				],
+				"rotation": [
+					0,
+					0,
+					0
+				]
+ 			}
+		},
+		{
+			"url": "Forms/Generic/Platform4.json",
+			"transform": {
+				"translation": [
+					-105.0, 24.8, -209.0
+				],
+				"scale": [
+					1,
+					1,
+					1
+				],
+				"rotation": [
+					0,
+					0,
+					0
+				]
+ 			}
+		},
+		{
+			"url": "Forms/SwitchA.json",
+			"transform": {
+				"translation": [
+					10, 0, -20
+				],
+				"scale": [
+					1,
+					1,
+					1
+				],
+				"rotation": [
+					0,
+					0,
+					0
+				]
+ 			}
+		},
+		{
+			"url": "Forms/SwitchB.json",
+			"transform": {
+				"translation": [
+					9.5, 0, -20
+				],
+				"scale": [
+					1,
+					1,
+					1
+				],
+				"rotation": [
+					0,
+					0,
+					0
+				]
+ 			}
+		},
+		{
+			"url": "Forms/Cucumbers/Cucumber000.json",
+			"transform": {
+				"translation": [
+					-135,
+					11,
+					-45
+				],
+				"scale": [
+					1,
+					1,
+					1
+				],
+				"rotation": [
+					0,
+					0,
+					0
+				]
+ 			}
+		},
+		{
+			"url": "Forms/Cucumbers/Cucumber001.json",
+			"transform": {
+				"translation": [
+					-135,
+					14,
+					-45
+				],
+				"scale": [
+					1,
+					1,
+					1
+				],
+				"rotation": [
+					0,
+					0,
+					0
+				]
+ 			}
+		},
+		{
+			"url": "Forms/Cucumbers/Cucumber002.json",
+			"transform": {
+				"translation": [
+					-135,
+					17,
+					-45
+				],
+				"scale": [
+					1,
+					1,
+					1
+				],
+				"rotation": [
+					0,
+					0,
+					0
+				]
+ 			}
+		},
+		{
+			"url": "Forms/Cucumbers/Cucumber003.json",
+			"transform": {
+				"translation": [
+					-135,
+					23,
+					-15
+				],
+				"scale": [
+					1,
+					1,
+					1
+				],
+				"rotation": [
+					0,
+					0,
+					0
+				]
+ 			}
+		},
+		{
+			"url": "Forms/Cucumbers/Cucumber004.json",
+			"transform": {
+				"translation": [
+					-135,
+					26,
+					-15
+				],
+				"scale": [
+					1,
+					1,
+					1
+				],
+				"rotation": [
+					0,
+					0,
+					0
+				]
+ 			}
+		},
+		{
+			"url": "Forms/Cucumbers/Cucumber005.json",
+			"transform": {
+				"translation": [
+					-135,
+					29,
+					-15
+				],
+				"scale": [
+					1,
+					1,
+					1
+				],
+				"rotation": [
+					0,
+					0,
+					0
+				]
+ 			}
+		},
+		{
+			"url": "Forms/Scenes/00000000/Teleporter_00000000_00000002.json",
+			"transform": {
+				"translation": [
+					13.5,
+					16,
+					-91.5
+				],
+				"scale": [
+					3,
+					0.5,
+					3
+				],
+				"rotation": [
+					0,
+					0,
+					0
+				]
+ 			}
+		},
+		{
+			"url": "Forms/Scenes/00000000/Teleporter_00000000_00000001.json",
+			"transform": {
+				"translation": [
+					0,
+					4.2,
+					-86.5
+				],
+				"scale": [
+					1,
+					1,
+					1
+				],
+				"rotation": [
+					0,
+					0,
+					0
+				]
+ 			}
+		},
+		{
+			"url": "Forms/Ryuudama/Ryuudama0.json",
+			"transform": {
+				"translation": [
+					-68.48175,
+					6.0,
+					-246
+				],
+				"scale": [
+					1,
+					1,
+					1
+				],
+				"rotation": [
+					0,
+					0,
+					0
+ 				]
+ 			}
+		},
+		{
+			"url": "Forms/Ryuudama/Ryuudama1.json",
+			"transform": {
+				"translation": [
+					-97.0,
+					26.0,
+					11.0
+				],
+				"scale": [
+					1,
+					1,
+					1
+				],
+				"rotation": [
+					0,
+					0,
+					0
+ 				]
+ 			}
+		},
+		{
+			"url": "Forms/ViewTest.json",
+			"transform": {
+				"translation": [
+					-52.609447,
+					1.1,
+					-87.171906
+				],
+				"scale": [
+					1,
+					1,
+					1
+				],
+				"rotation": [
+					0,
+					0,
+					0
+ 				]
+ 			}
+		}
+	],
+	"physicsObjects": [
+		{
+			"url": "PhysicsObjects/Scenes/00000000/Ground.json",
+			"transform": {
+				"translation": [
+					0,
+					0,
+					0
+				],
+				"scale": [
+					1,
+					1,
+					1
+				],
+				"rotation": [
+					0,
+					0,
+					0
+ 				]
+ 			}
+		},
+		{
+			"url": "PhysicsObjects/Scenes/00000000/HakureiJinja/HakureiJinja.json",
+			"transform": {
+				"translation": [
+					0,
+					0,
+					-90
+				],
+				"scale": [
+					1,
+					1,
+					1
+				],
+				"rotation": [
+					0,
+					180,
+					0
+				]
+ 			}
+		},
+		{
+			"url": "PhysicsObjects/Generic/Vegetation/Tree/Tree.json",
+			"transform": {
+				"translation": [
+					-10,
+					4,
+					-10
+				],
+				"scale": [
+					1,
+					1,
+					1
+				],
+				"rotation": [
+					0,
+					0,
+					0
+				]
+ 			}
+		},
+		{
+			"url": "PhysicsObjects/Generic/Vegetation/SakuraTree/SakuraTree.json",
+			"transform": {
+				"translation": [
+					-10,
+					7,
+					-60
+				],
+				"scale": [
+					1,
+					1,
+					1
+				],
+				"rotation": [
+					0,
+					0,
+					0
+				]
+ 			}
+		},
+		{
+			"url": "PhysicsObjects/Generic/Vegetation/SakuraTree/SakuraTree.json",
+			"transform": {
+				"translation": [
+					10,
+					7,
+					-60
+				],
+				"scale": [
+					1,
+					1,
+					1
+				],
+				"rotation": [
+					0,
+					0,
+					0
+				]
+ 			}
+		},
+		{
+			"url": "PhysicsObjects/Generic/Torii/Torii.json",
+			"transform": {
+				"translation": [
+					0,
+					0,
+					-30
+				],
+				"scale": [
+					0.5,
+					0.5,
+					0.5
+				],
+				"rotation": [
+					0,
+					270,
+					0
+				]
+ 			}
+		},
+		{
+			"url": "PhysicsObjects/Generic/Komainu/Komainu.json",
+			"transform": {
+				"translation": [
+					-10,
+					0,
+					-30
+				],
+				"scale": [
+					2,
+					1,
+					2
+				],
+				"rotation": [
+					0,
+					0,
+					0
+				]
+ 			}
+		},
+		{
+			"url": "PhysicsObjects/Generic/Komainu/Komainu.json",
+			"transform": {
+				"translation": [
+					10,
+					0,
+					-30
+				],
+				"scale": [
+					2,
+					1,
+					2
+				],
+				"rotation": [
+					0,
+					0,
+					0
+				]
+ 			}
+		},
+		{
+			"url": "PhysicsObjects/Generic/Trampoline/Trampoline.json",
+			"transform": {
+				"translation": [
+					-27.951918,
+					3.3000002,
+					-96.607
+				],
+				"scale": [
+					1,
+					1,
+					1
+				],
+				"rotation": [
+					0,
+					0,
+					0
+				]
+ 			}
+		},
+		{
+			"url": "PhysicsObjects/Generic/Bridge/Bridge.json",
+			"transform": {
+				"translation": [
+					45,
+					-0.7,
+					-135
+				],
+				"scale": [
+					2,
+					1,
+					6
+				],
+				"rotation": [
+					0,
+					0,
+					0
+				]
+ 			}
+		},
+		{
+			"url": "PhysicsObjects/Generic/Canon/Canon.json",
+			"transform": {
+				"translation": [
+					20,
+					0,
+					-20
+				],
+				"scale": [
+					1,
+					1,
+					1
+				],
+				"rotation": [
+					0,
+					0,
+					0
+				]
+ 			}
+		},
+		{
+			"url": "PhysicsObjects/Generic/Switch/Switch.json",
+			"transform": {
+				"translation": [
+					-120, 0, -190
+				],
+				"scale": [
+					1, 1, 1
+				],
+				"rotation": [
+					0, 45, 0
+				]
+ 			}
+		},
+		{
+			"url": "PhysicsObjects/Generic/Door/Door.json",
+			"transform": {
+				"translation": [
+					-92.86, 2, -160.86
+				],
+				"scale": [
+					1, 1, 1
+				],
+				"rotation": [
+					0, 45, 0
+				]
+ 			}
+		},
+		{
+			"url": "PhysicsObjects/Generic/Primitives/BlackCubeNoShape.json",
+			"transform": {
+				"translation": [
+					0, 8.51, -90
+				],
+				"scale": [
+					38.5, 14.01, 6
+				],
+				"rotation": [
+					0, 0, 0
+				]
+ 			}
+		}
+	],
+	"lights": [
+		{
+			"type": "ambient",
+			"color": [ 1, 1, 1, 0.1 ]
+		}
+	],
+	"skies": [
+		{
+			"url": "Textures/Sky/Bright/BrightSky.dds",
+			"type": "cube"
+		}
+	]
+}

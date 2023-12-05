@@ -11,12 +11,12 @@ import online.money_daisuki.api.base.Requires;
 import online.money_daisuki.api.monkey.console.Command;
 
 public final class CreateParticleEmitterCommand implements Command {
-	private final BiConverter<String, Spatial, Spatial> spatialTarget;
+	private final BiConverter<? super String, ? super Spatial, ? extends Node> nodeTarget;
 	private final Converter<String, ParticleEmitter> particleConverter;
 	
-	public CreateParticleEmitterCommand(final BiConverter<String, Spatial, Spatial> spatialTarget,
+	public CreateParticleEmitterCommand(final BiConverter<? super String, ? super Spatial, ? extends Node> nodeTarget,
 			final Converter<String, ParticleEmitter> particleConverter) {
-		this.spatialTarget = Requires.notNull(spatialTarget, "spatialTarget == null");
+		this.nodeTarget = Requires.notNull(nodeTarget, "nodeTarget == null");
 		this.particleConverter = Requires.notNull(particleConverter, "particleConverter == null");
 	}
 	@Override
@@ -25,7 +25,7 @@ public final class CreateParticleEmitterCommand implements Command {
 		Requires.containsNotNull(cmd, "cmd contains null");
 		Requires.lenEqual(cmd, 7);
 		
-		final Spatial target = spatialTarget.convert(cmd[1], caller);
+		final Node target = nodeTarget.convert(cmd[1], caller);
 		
 		final String nodename = cmd[2];
 		
@@ -40,11 +40,7 @@ public final class CreateParticleEmitterCommand implements Command {
 		);
 		emitter.setLocalTranslation(translation);
 		
-		if(target instanceof Node) {
-			((Node) target).attachChild(emitter);
-		} else {
-			throw new IllegalArgumentException("Target spatial must be a node");
-		}
+		target.attachChild(emitter);
 		done.run();
 	}
 }

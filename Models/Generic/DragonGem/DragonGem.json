@@ -1,0 +1,11 @@
+{
+	"type": "node",
+	"name": "Ryuudama",
+	"childs": [
+		{
+			"type": "model",
+			"url": "Models/Generic/DragonGem/DragonGem.obj",
+			"translation": [ 0, -0.75, 0 ]
+		}
+	]
+}

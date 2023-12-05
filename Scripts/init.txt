@@ -1,2 +1,11 @@
 DebugBullet on
 Exec Scripts/loadTestworld.txt
+
+#AddPlayer Characters/Player/Sinbad/Sinbad.json 0 20 0 0.25 0.25 0.25
+#AddScene Scenes/Testscene.json
+#FadeIn
+#SetPlayerEnabled on
+#SetPlayerControlEnabled on
+
+#CreateParticleEmitter root Particle1 ParticleEmitters/Particle0.json 0 18 -30
+#EmitAllParticles Particle1
