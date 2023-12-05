@@ -12,7 +12,6 @@ import com.jme3.scene.Spatial;
 
 import online.money_daisuki.api.base.Requires;
 import online.money_daisuki.api.monkey.basegame.misc.RemoveDoneControlsAppState;
-import online.money_daisuki.api.monkey.basegame.variables.VariablesManager;
 import online.money_daisuki.api.monkey.console.Command;
 import online.money_daisuki.api.monkey.console.CommandExecutor;
 import online.money_daisuki.api.utils.NoDataListenerContainer;
@@ -22,7 +21,6 @@ public final class CommandExecutorAppState extends BaseAppState implements Comma
 	private final Queue<ExecControl> foregroundQueue;
 	
 	private final CommandExecutor exe;
-	private final VariablesManager vars;
 	
 	private final Node parent;
 	private RemoveDoneControlsAppState removeDoneControls;
@@ -32,9 +30,8 @@ public final class CommandExecutorAppState extends BaseAppState implements Comma
 	
 	private SimpleApplication app;
 	
-	public CommandExecutorAppState(final CommandExecutor exe, final VariablesManager vars, final Node parent) {
+	public CommandExecutorAppState(final CommandExecutor exe, final Node parent) {
 		this.exe = Requires.notNull(exe, "exe == null");
-		this.vars = Requires.notNull(vars, "vars == null");
 		
 		this.foregroundQueue = new LinkedList<>();
 		this.parent = Requires.notNull(parent, "parent == null");
@@ -90,7 +87,7 @@ public final class CommandExecutorAppState extends BaseAppState implements Comma
 			return;
 		}
 		
-		final ExecControl s = new ExecControl(new StepByStepScriptLineExecutor(commands, caller, exe, vars, app), false, new Runnable() {
+		final ExecControl s = new ExecControl(new StepByStepScriptLineExecutor(commands, caller, exe, app), false, new Runnable() {
 			@Override
 			public void run() {
 				if(foreground) {

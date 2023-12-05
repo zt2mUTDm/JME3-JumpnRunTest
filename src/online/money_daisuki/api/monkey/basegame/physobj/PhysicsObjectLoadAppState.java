@@ -41,7 +41,6 @@ import online.money_daisuki.api.io.json.JsonDecoder;
 import online.money_daisuki.api.io.json.JsonElement;
 import online.money_daisuki.api.io.json.JsonList;
 import online.money_daisuki.api.io.json.JsonMap;
-import online.money_daisuki.api.monkey.basegame.character.SpawnControl;
 import online.money_daisuki.api.monkey.basegame.character.anim.AnimControl;
 import online.money_daisuki.api.monkey.basegame.character.anim.AnimPlayer;
 import online.money_daisuki.api.monkey.basegame.character.anim.AnimPlayerImpl;
@@ -108,8 +107,6 @@ public final class PhysicsObjectLoadAppState extends BaseAppState {
 				return(loadCharacterControl(map, spatial));
 			case("rotate"):
 				return(loadRotateControl(map, spatial));
-			case("spawn"):
-				return(loadSpawnControl(map, spatial));
 			case("script"):
 				return(loadScriptControl(map, spatial));
 			default:
@@ -124,13 +121,6 @@ public final class PhysicsObjectLoadAppState extends BaseAppState {
 				list.get(2).asData().asNumber().asBigDecimal().floatValue() * FastMath.DEG_TO_RAD
 		};
 		return(new RotateControl(axises));
-	}
-	private Control loadSpawnControl(final JsonMap map, final Spatial spatial) {
-		final float firstSpawn = map.get("firstspawn").asData().asNumber().asBigDecimal().floatValue();
-		final float respawn = map.get("respawn").asData().asNumber().asBigDecimal().floatValue();
-		final String characterUrl = map.get("character").asData().asString();
-		final Vector3f scale = parseScale(map);
-		return(new SpawnControl(firstSpawn, respawn, characterUrl, scale, app));
 	}
 	private Control loadScriptControl(final JsonMap map, final Spatial spatial) {
 		final String url = map.get("url").asData().asString();

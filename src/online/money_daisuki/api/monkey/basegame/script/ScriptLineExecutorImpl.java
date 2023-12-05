@@ -11,15 +11,11 @@ import com.jme3.app.state.AppStateManager;
 import com.jme3.scene.Spatial;
 
 import online.money_daisuki.api.base.Requires;
-import online.money_daisuki.api.monkey.basegame.variables.CompareOperation;
-import online.money_daisuki.api.monkey.basegame.variables.VariablesManager;
-import online.money_daisuki.api.monkey.basegame.variables.VariablesManagerAppState;
 import online.money_daisuki.api.monkey.console.Command;
 
 public final class ScriptLineExecutorImpl implements ScriptLineExecutor {
 	private final List<String[]> commands;
 	private final Spatial spatial;
-	private final VariablesManager vars;
 	private final Command exe;
 	
 	private final Set<Long> runningScripts;
@@ -44,7 +40,6 @@ public final class ScriptLineExecutorImpl implements ScriptLineExecutor {
 		this.runningScripts = new HashSet<>();
 		
 		final AppStateManager state = app.getStateManager();
-		this.vars = state.getState(VariablesManagerAppState.class);
 		this.exe = state.getState(CommandExecutorAppState.class);
 	}
 	@Override
@@ -115,19 +110,6 @@ public final class ScriptLineExecutorImpl implements ScriptLineExecutor {
 		} while(true);
 	}
 	private void run() {
-		final String[] command = commands.get(pointer);
-		switch(command[0]) {
-			case("if"):
-				parseIfPart(command);
-				return;
-			case("elseif"):
-			case("else"):
-				searchEndIf();
-			case("endif"):
-				pointer++;
-				return;
-		}
-		
 		if(!afterLastCommand()) {
 			final String[] realCommand = commands.get(pointer);
 			final Long id = Long.valueOf((run << 32) | pointer);
@@ -142,93 +124,6 @@ public final class ScriptLineExecutorImpl implements ScriptLineExecutor {
 			pointer++;
 		}
 	}
-	private void parseIfPart(final String[] command) {
-		pointer++;
-		switch(command[0]) {
-			case("if"):
-			case("elseif"):
-				if(!evaluateIf(command)) {
-					searchNextIfPart();
-					parseIfPart(commands.get(pointer));
-				}
-			break;
-			case("else"):
-			case("endif"):
-			break;
-			default:
-				throw new IllegalStateException();
-		}
-	}
-	private boolean evaluateIf(final String[] command) {
-		if(command.length == 5) {
-			final String type = command[1];
-			final String name = command[2];
-			final String op = command[3];
-			final String constant = command[4];
-			
-			if(!vars.containsVariable(type, name)) {
-				return(constant.equals("false") || constant.equals("0"));
-			}
-			return(vars.getVariable(type, name).test(CompareOperation.getOp(op), constant));
-		} else {
-			throw new UnsupportedOperationException();
-		}
-	}
-	private void searchNextIfPart() {
-		int deep = 0;
-		
-		for(; ; pointer++) {
-			final String[] cmd = commands.get(pointer);
-			
-			if(isDone()) {
-				throw new IllegalArgumentException("Missing endif");
-			}
-			
-			switch(cmd[0]) {
-				case("if"):
-					deep++;
-				break;
-				case("elseif"):
-				case("else"):
-					if(deep == 0) {
-						return;
-					}
-				break;
-				case("endif"):
-					if(deep == 0) {
-						return;
-					} else {
-						deep--;
-					}
-				break;
-			}
-		}
-	}
-	private void searchEndIf() {
-		int deep = 0;
-		
-		for(; ; pointer++) {
-			final String[] cmd = commands.get(pointer);
-			
-			if(isDone()) {
-				throw new IllegalArgumentException("Missing endif");
-			}
-			
-			switch(cmd[0]) {
-				case("if"):
-					deep++;
-				return;
-				case("endif"):
-					if(deep == 0) {
-						return;
-					} else {
-						deep--;
-					}
-				break;
-			}
-		}
-	}
-	
 	private boolean afterLastCommand() {
 		return(pointer >= commands.size());
 	}
