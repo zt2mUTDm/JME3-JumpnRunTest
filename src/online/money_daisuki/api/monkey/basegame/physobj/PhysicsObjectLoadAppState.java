@@ -52,8 +52,7 @@ import online.money_daisuki.api.monkey.basegame.model.ModelLoadAppState;
 import online.money_daisuki.api.monkey.basegame.script.ScriptControl;
 import online.money_daisuki.api.monkey.basegame.script.ScriptFileLoader;
 import online.money_daisuki.api.monkey.basegame.script.ScriptLineExecutorImpl;
-import online.money_daisuki.api.monkey.basegame.spatial.RotateControl;
-import online.money_daisuki.api.monkey.basegame.unsorted.CharacterControlTransformControl;
+import online.money_daisuki.api.monkey.basegame.spatial.CharacterControlTransformControl;
 
 public final class PhysicsObjectLoadAppState extends BaseAppState {
 	private Application app;
@@ -105,22 +104,11 @@ public final class PhysicsObjectLoadAppState extends BaseAppState {
 				return(loadBetterCharacterControl(map));
 			case("CC"):
 				return(loadCharacterControl(map, spatial));
-			case("rotate"):
-				return(loadRotateControl(map, spatial));
 			case("script"):
 				return(loadScriptControl(map, spatial));
 			default:
 				throw new IllegalArgumentException("Unknown type: " + type);
 		}
-	}
-	private Control loadRotateControl(final JsonMap map, final Spatial spatial) {
-		final JsonList list = map.get("axises").asList();
-		final float[] axises = new float[] {
-				list.get(0).asData().asNumber().asBigDecimal().floatValue() * FastMath.DEG_TO_RAD,
-				list.get(1).asData().asNumber().asBigDecimal().floatValue() * FastMath.DEG_TO_RAD,
-				list.get(2).asData().asNumber().asBigDecimal().floatValue() * FastMath.DEG_TO_RAD
-		};
-		return(new RotateControl(axises));
 	}
 	private Control loadScriptControl(final JsonMap map, final Spatial spatial) {
 		final String url = map.get("url").asData().asString();

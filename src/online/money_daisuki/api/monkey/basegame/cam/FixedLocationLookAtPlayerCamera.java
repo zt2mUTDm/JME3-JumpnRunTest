@@ -6,9 +6,14 @@ import com.jme3.renderer.RenderManager;
 import com.jme3.renderer.ViewPort;
 import com.jme3.scene.Spatial;
 import com.jme3.scene.control.AbstractControl;
+import com.jme3.scene.control.Control;
 
 import online.money_daisuki.api.base.Requires;
 
+/**
+ * A simple {@link Control} that update the {@link Camera} to look at a target {@link Spatial}.
+ * @author Money Daisuki Online
+ */
 public final class FixedLocationLookAtPlayerCamera extends AbstractControl implements GameCamera {
 	private final Camera cam;
 	private final Vector3f worldUpVector;
