@@ -5,7 +5,7 @@ Try to implement the usual functions of a classical 3D Jump'n run/Platformer gam
 ## Manual
 Clone the repo local and add at least following libaries to the class path:
 
-1) Java standard library (8+)
+1) Java standard library (11+)
 1) jme3-core (3.5.2)
 1) jme3-desktop (3.5.2)
 1) jme3-effects (3.5.2)
