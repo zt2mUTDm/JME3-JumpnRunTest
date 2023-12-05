@@ -394,6 +394,7 @@ class JumpEndState(PlayerState):
                 self.player.setState(JumpStartState())
 
     def register(self):
+        self.player.setAnimationSpeed(1)
         self.player.playAnimation("JumpEnd", False)
         self.player.setJumpSpeed(DEFAULT_JUMP_SPEED)
 

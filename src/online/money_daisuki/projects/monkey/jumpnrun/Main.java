@@ -10,7 +10,11 @@ import java.io.Reader;
 import java.io.Writer;
 
 import com.jme3.app.state.AppState;
-import com.jme3.scene.Node;
+import com.jme3.asset.AssetManager;
+import com.jme3.asset.plugins.FileLocator;
+import com.jme3.bullet.BulletAppState;
+import com.jme3.light.AmbientLight;
+import com.jme3.math.ColorRGBA;
 import com.jme3.system.AppSettings;
 import com.jme3.system.NativeLibraryLoader;
 
@@ -20,7 +24,7 @@ import online.money_daisuki.api.base.DataSink;
 import online.money_daisuki.api.io.CharacterStreamConcater;
 import online.money_daisuki.api.monkey.basegame.ModulesApp;
 import online.money_daisuki.api.monkey.basegame.cam.MoveCameraLinearToAppState;
-import online.money_daisuki.api.monkey.basegame.script.CommandExecutorAppState;
+import online.money_daisuki.api.monkey.basegame.py.PythonAppState;
 import online.money_daisuki.api.monkey.basegame.state.OneRunAppState;
 
 public final class Main {
@@ -42,12 +46,17 @@ public final class Main {
 				final OneRunAppState initAppState = new OneRunAppState(new DataSink<AppState>() {
 					@Override
 					public void sink(final AppState value) {
-						app.getStateManager().getState(CommandExecutorAppState.class).execute(new Node(), "Exec Scripts/init.txt".split(" "), new Runnable() {
-							@Override
-							public void run() {
-								
-							}
-						});
+						// Temporary bootstrap
+						
+						app.getStateManager().getState(BulletAppState.class).setDebugEnabled(true);
+						
+						final AssetManager assetManager = app.getAssetManager();
+						assetManager.registerLocator("", FileLocator.class);
+						
+						app.getRootNode().addLight(new AmbientLight(ColorRGBA.White));
+						app.getStateManager().getState(PythonAppState.class).addSingleScript("initScript", "InitScript");
+						
+						//app.getStateManager().getState(FadeAppState.class).fadeIn();
 					}
 				});
 				app.getStateManager().attach(initAppState);

@@ -46,6 +46,9 @@ public final class FadeAppState extends BaseAppState {
 		fade = true;
 		filter.fadeOut();
 	}
+	public float getValue() {
+		return(filter.getValue());
+	}
 	
 	public void setDuration(final float duration) {
 		filter.setDuration(Requires.positive(duration));

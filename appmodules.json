@@ -1,8 +1,12 @@
 [
-	"full",
-	"screenshotconsole",
+	"physics",
+	"scene",
+	
+	"screenshot",
 	"spatialload",
 	"python",
 	"form",
-	"scene"
+	
+	"filter",
+	"messages"
 ]

@@ -37,12 +37,21 @@ class Form(Script):
     def setAnimationSpeed(self, speed):
         spatial = forms.getSpatialFromInstance(self)
         anim = spatial.getControl(AnimControl)
-        if anim == None:
+        if anim is None:
             return False
         
         anim.setSpeed(speed)
         return True
+
+    def getAnimationSpeed(self):
+        spatial = forms.getSpatialFromInstance(self)
+        anim = spatial.getControl(AnimControl)
+        if anim is None:
+            return 0
         
+        print anim
+        return anim.getSpeed()
+
     def cleanup(self):
         self.onCleanup()
     

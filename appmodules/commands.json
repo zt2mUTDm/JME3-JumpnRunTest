@@ -1,0 +1,7 @@
+{
+	"className": "online.money_daisuki.api.monkey.basegame.script.CommandInitializer",
+	"dependencies": [
+	
+	],
+	"waitForStateInit": false
+}

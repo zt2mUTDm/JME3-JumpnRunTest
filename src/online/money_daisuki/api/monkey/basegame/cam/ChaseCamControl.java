@@ -14,7 +14,6 @@ import com.jme3.scene.control.Control;
 
 import online.money_daisuki.api.base.DataSource;
 import online.money_daisuki.api.base.Requires;
-import online.money_daisuki.api.monkey.basegame.ControlTemplate;
 
 public final class ChaseCamControl implements Control {
 	private Spatial spatial;
@@ -125,7 +124,7 @@ public final class ChaseCamControl implements Control {
 	
 	@Override
 	public Control cloneForSpatial(final Spatial spatial) {
-		return(new ControlTemplate());
+		return(new ChaseCamControl(collisionDetection));
 	}
 	
 	@Override

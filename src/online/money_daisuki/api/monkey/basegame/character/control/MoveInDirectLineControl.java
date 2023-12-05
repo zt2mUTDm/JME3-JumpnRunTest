@@ -14,7 +14,6 @@ import com.jme3.util.TempVars;
 
 import online.money_daisuki.api.base.DataSink;
 import online.money_daisuki.api.base.Requires;
-import online.money_daisuki.api.monkey.basegame.ControlTemplate;
 import online.money_daisuki.api.monkey.basegame.misc.Utils;
 
 public final class MoveInDirectLineControl implements Control {
@@ -87,7 +86,7 @@ public final class MoveInDirectLineControl implements Control {
 	
 	@Override
 	public Control cloneForSpatial(final Spatial spatial) {
-		return(new ControlTemplate());
+		throw new UnsupportedOperationException();
 	}
 	
 	@Override

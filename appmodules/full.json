@@ -1,7 +1,0 @@
-{
-	"className": "online.money_daisuki.projects.monkey.jumpnrun.FullInitializer",
-	"dependencies": [
-	
-	],
-	"waitForStateInit": true
-}

@@ -15,7 +15,10 @@ public final class ModulesApp extends SimpleApplication {
 	@Override
 	public void simpleInitApp() {
 		getFlyByCamera().setEnabled(false);
+		
+		setDisplayFps(false);
 		setDisplayStatView(false);
+		
 		getStateManager().attach(initAppState);
 		initAppState = null;
 	}
