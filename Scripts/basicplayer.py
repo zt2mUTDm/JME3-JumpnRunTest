@@ -371,12 +371,13 @@ class JumpMiddleState(PlayerState):
             self.isDoubleJumped = True
             
         if self.player.inputHandler.isDirectionMovement() and self.player.isControlEnabled():
-            self.player._updateMoveDirection(True, tpf)
+            self.player._updateMoveDirection(True, tpf, updateAnimationSpeed=False)
         else:
             self.player.stopMoving()
             self.player.internalMovementVector.setTranslation(0, 0)
 
     def register(self):
+        self.player.setAnimationSpeed(1)
         self.isDoubleJumped = False
 
         self.player.playAnimation("JumpMiddle", True)
@@ -593,7 +594,7 @@ class BasicPlayer(Player):
     def onUpdate(self, tpf):
         self.state.onUpdate(tpf)
 
-    def _updateMoveDirection(self, updateFromControl, tpf):
+    def _updateMoveDirection(self, updateFromControl, tpf, updateAnimationSpeed=True):
         global moveRotationAngles
 
         if not self.isControlEnabled():
@@ -608,7 +609,8 @@ class BasicPlayer(Player):
         
         self._doMoving(targetX, targetY, tpf)
         
-        self.setAnimationSpeed(self.internalMovementVector.getDistance())
+        if updateAnimationSpeed:
+            self.setAnimationSpeed(self.internalMovementVector.getDistance())
 
     def _doMoving(self, targetX, targetY, tpf):
         global moveRotationAngles
