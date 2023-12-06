@@ -9,7 +9,7 @@ from com.jme3.math import FastMath
 from online.money_daisuki.api.monkey.basegame.character.control import CharacterControlAdapter
 from online.money_daisuki.api.monkey.basegame.mayunused import LookForFormControl
 from online.money_daisuki.api.monkey.basegame.test import ActorLineOfSightState
-from online.money_daisuki.api.monkey.basegame.unsorted import CharacterControlTransformControl
+from online.money_daisuki.api.monkey.basegame.spatial import CharacterControlTransformControl
 
 from online.money_daisuki.api.monkey.basegame.cam import MoveCameraLinearToAppState
 
