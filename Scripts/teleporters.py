@@ -30,6 +30,22 @@ class Teleporter_00000000_00000002(Teleporter):
         #self.setChaseCamera(Vector3f(0.71695817, 0.5371094, 12.8))
         self.setFixedLocationLookAtPlayerCamera(Vector3f(-5.998874, 9.899775, 0.13646314))
 
+class Teleporter_00000000_00000003(Teleporter):
+    def initTeleporter(self):
+        self.setTarget("Scenes/00000003.json",
+                       Vector3f(-0.8542036, -1.9, -26.535295),
+                       Vector3f(0, 0, 1),
+                       Vector3f(0.25, 0.25, 0.25))
+        self.setChaseCamera(Vector3f(1.576333, 0.5546875, 13.599998))
+        
+class Teleporter_00000000_00000003_1(Teleporter):
+    def initTeleporter(self):
+        self.setTarget("Scenes/00000003.json",
+                       Vector3f(0.029496597, 6.6, 25.788351),
+                       Vector3f(0.010267003, 0.0, -0.9999473),
+                       Vector3f(0.25, 0.25, 0.25))
+        self.setChaseCamera(Vector3f(1.576333, 0.5546875, 13.599998))
+
 class Scene0ToScene3Teleporter(Teleporter):
     def initTeleporter(self):
         self.setTarget("Scenes/00000003.json",
@@ -53,3 +69,20 @@ class Teleporter_00000002_00000001(Teleporter):
                        Vector3f(0, 0, 1),
                        Vector3f(0.25, 0.25, 0.25))
         self.setFixedLocationLookAtPlayerCamera(Vector3f(2.3474307, 11.299786, 1.1437591))
+        
+class Teleporter_00000003_00000000(Teleporter):
+    def initTeleporter(self):
+        self.setTarget("Scenes/00000000.json",
+                       Vector3f(-33.47248, 9.2942505, -237.90424),
+                       Vector3f(-0.943453, 0.0, -0.3315067),
+                       Vector3f(0.25, 0.25, 0.25))
+        self.setChaseCamera(Vector3f(1.576333, 0.5546875, 13.599998))
+        
+class Teleporter_00000003_00000000_1(Teleporter):
+    def initTeleporter(self):
+        self.setTarget("Scenes/00000000.json",
+                       Vector3f(27.110155, 45.294243, -218.82939),
+                       Vector3f(0.9518678, 0.0, 0.30650896),
+                       Vector3f(0.25, 0.25, 0.25))
+        self.setChaseCamera(Vector3f(1.576333, 0.5546875, 13.599998))
+

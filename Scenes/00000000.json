@@ -279,6 +279,44 @@
  			}
 		},
 		{
+			"url": "Forms/Scenes/00000000/Teleporter_00000000_00000003_1.json",
+			"transform": {
+				"translation": [
+					25.078411, 47.294247, -219.51826
+				],
+				"scale": [
+					3,
+					5,
+					0.25
+				],
+				"rotation": [
+					0,
+					-107.54058,
+					0
+				]
+ 			}
+		},
+		{
+			"url": "Forms/Scenes/00000000/Teleporter_00000000_00000003.json",
+			"transform": {
+				"translation": [
+					-30.5,
+					11.5,
+					-237
+				],
+				"scale": [
+					3,
+					5,
+					0.25
+				],
+				"rotation": [
+					0,
+					-107.54058,
+					0
+				]
+ 			}
+		},
+		{
 			"url": "Forms/Scenes/00000000/Teleporter_00000000_00000002.json",
 			"transform": {
 				"translation": [
@@ -639,6 +677,34 @@
 				],
 				"rotation": [
 					0, 0, 0
+				]
+ 			}
+		},
+		{
+			"url": "PhysicsObjects/Generic/Primitives/BlackCubeNoShape.json",
+			"transform": {
+				"translation": [
+					-27.1, 11.5, -235.9
+				],
+				"scale": [
+					5, 7, 7
+				],
+				"rotation": [
+					0, -107.54058, 0
+				]
+ 			}
+		},
+		{
+			"url": "PhysicsObjects/Generic/Primitives/BlackCubeNoShape.json",
+			"transform": {
+				"translation": [
+					25.078411, 47.294247, -219.51826
+				],
+				"scale": [
+					6, 8, 0.25
+				],
+				"rotation": [
+					0, -107.54058, 0
 				]
  			}
 		}
