@@ -32,10 +32,17 @@ public final class NameLinkedAnimPlayer implements AnimPlayer {
 			@Override
 			public void animationEvent(final String name, final boolean loop) {
 				// TODO 1:1
+				boolean found = false;
 				for(final Entry<String, String> e:links.entrySet()) {
 					if(e.getValue().equals(name)) {
 						l.animationEvent(e.getKey(), loop);
+						
+						found = true;
 					}
+				}
+				
+				if(!found) {
+					l.animationEvent(name, loop);
 				}
 			}
 		});
