@@ -22,6 +22,7 @@ public final class AnimPlayerImpl implements AnimPlayer {
 	
 	public AnimPlayerImpl(final AnimComposer composer) {
 		this.composer = Requires.notNull(composer, "composer == null");
+		this.speed = 1.0d;
 	}
 	
 	@Override
