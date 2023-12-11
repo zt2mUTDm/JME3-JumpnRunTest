@@ -1,0 +1,10 @@
+{
+	"type": "node",
+	"name": "SPSTTouchKeepButton0",
+	"childs": [
+		{
+			"type": "model",
+			"url": "Models/Generic/Switches/SPSTTouchKeepButton0/SPSTTouchKeepButton0.j3o"
+		}
+	]
+}

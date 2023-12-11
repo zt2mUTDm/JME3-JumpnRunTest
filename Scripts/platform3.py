@@ -5,14 +5,15 @@ from base.actor import Actor
 from com.jme3.math import Vector3f
 
 WAYPOINTS = (Vector3f(-85.0, 24.8, -249.0), Vector3f(-125.0, 24.8, -249.0))
-SPEED = 2.5
+SPEED = 6
 REPEAT = True
 
 class Platform3(Actor):
     def init(self):
         super(Platform3, self).__init__()
-        self.waypointCounter = -1;
+        self.waypointCounter = -1
         physics.registerForTouchTest(self, "PlatformTop")
+        self.registerForMovementEvents()
 
     def onUpdate(self, tpf):
         global WAYPOINTS
@@ -20,7 +21,7 @@ class Platform3(Actor):
             self.waypointCounter = 0
             self._startNextMove()
     
-    def onMovingDone(self, canceled):
+    def onMovingEvent(self, eventName, source):
         global WAYPOINTS
         global REPEAT
         

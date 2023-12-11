@@ -11,12 +11,14 @@ class Platform(Actor):
         self.waypointCounter = -1
         self.started = False
         self.moving = False
-        self.speed = 1
+        self.speed = 3
         self.waypoints = None
         self.repeat = False
         
         physics.registerForTouchTest(self, "PlatformTop")
         
+        self.registerForMovementEvents()
+
         self.onPlatformInit()
         
     def onPlatformInit(self):
@@ -29,7 +31,7 @@ class Platform(Actor):
                 self._startNextMove()
                 self.moving = True
     
-    def onMovingDone(self, canceled):
+    def onMovingEvent(self, eventName, source):
         self.waypointCounter = self.waypointCounter + 1
         if self.waypointCounter < len(self.waypoints):
             self._startNextMove()

@@ -1,0 +1,15 @@
+{
+	"model": "Models/Generic/Switches/SPSTTouchKeepButton0/SPSTTouchKeepButton0.json",
+	"physics": {
+		"shapes": [
+			{
+				"type": "Mesh",
+				"extends": [ 1.0, 0.17, 0.17 ],
+				"attach": "SPSTTouchKeepButton0",
+				"collisionGroup": 0,
+				"purpose": "rigid",
+				"mass": 0
+			}
+		]
+	}
+}

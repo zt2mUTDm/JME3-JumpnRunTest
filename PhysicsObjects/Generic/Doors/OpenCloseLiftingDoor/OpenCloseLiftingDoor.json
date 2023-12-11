@@ -1,0 +1,15 @@
+{
+	"model": "Models/Generic/Doors/OpenCloseLiftingDoor/OpenCloseLiftingDoor.json",
+	"physics": {
+		"shapes": [
+			{
+				"type": "Mesh",
+				"attach": "OpenCloseLiftingDoor",
+				"collisionGroup": 0,
+				"purpose": "rigid",
+				"mass": 30,
+				"kinematic": true
+			}
+		]
+	}
+}

@@ -1,0 +1,8 @@
+{
+	"model": "PhysicsObjects/Generic/Switches/SPSTTouchKeepButton0/SPSTTouchKeepButton0.json",
+	"id": 2000,
+	"scripts": {
+		"module": "switchimpls",
+		"class": "Switch0"
+	}
+}

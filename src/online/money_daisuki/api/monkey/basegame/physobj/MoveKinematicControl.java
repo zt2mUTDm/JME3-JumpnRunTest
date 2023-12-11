@@ -1,66 +1,66 @@
 package online.money_daisuki.api.monkey.basegame.physobj;
 
-import org.python.core.PyBoolean;
-import org.python.core.PyObject;
-
 import com.jme3.math.Vector3f;
 import com.jme3.renderer.RenderManager;
 import com.jme3.renderer.ViewPort;
 import com.jme3.scene.control.AbstractControl;
+import com.jme3.util.SafeArrayList;
 
 import online.money_daisuki.api.base.Requires;
 
 public final class MoveKinematicControl extends AbstractControl {
-	private final Vector3f target;
-	private final float speed;
-	private final PyObject owner;
+	private final Vector3f targetLocation;
+	private final float speedMod;
 	
-	private boolean done;
+	private final Vector3f curLocation;
 	
-	private Vector3f moveDistance;
-	private Vector3f moveDirection;
+	private float counter;
+	private Vector3f startLocation;
 	
-	public MoveKinematicControl(final Vector3f target, final float speed, final PyObject owner) {
-		this.target = Requires.notNull(target, "target == null");
-		this.speed = Requires.positive(speed, "speed < 0");
-		this.owner = Requires.notNull(owner, "owner < 0");
+	private SafeArrayList<Runnable> listeners;
+	
+	public MoveKinematicControl(final Vector3f target, final float speed) {
+		this.targetLocation = new Vector3f(Requires.notNull(target, "target == null"));
+		this.speedMod = (1.0f / Requires.positive(speed, "speed < 0"));
+		
+		this.curLocation = new Vector3f();
 	}
 	@Override
 	protected void controlUpdate(final float tpf) {
-		if(done) {
-			return;
-		} else if(moveDistance == null) {
-			moveDistance = target.subtract(spatial.getLocalTranslation());
-			moveDirection = moveDistance.normalize();
+		if(startLocation == null) {
+			this.startLocation = new Vector3f(getSpatial().getLocalTranslation());
+		}
+		counter+= (tpf * speedMod);
+		
+		if(counter >= 1.0f) {
+			getSpatial().setLocalTranslation(targetLocation);
 			
-			moveDistance.x = Math.abs(moveDistance.x);
-			moveDistance.y = Math.abs(moveDistance.y);
-			moveDistance.z = Math.abs(moveDistance.z);
-		}
-		
-		final float x = get(tpf, 0);
-		final float y = get(tpf, 1);
-		final float z = get(tpf, 2);
-		
-		if(x == 0 && y == 0 && z == 0) {
-			owner.invoke("signalMovingDone", new PyBoolean(false));
-			done = true;
+			if(listeners != null) {
+				for(final Runnable l:listeners.getArray()) {
+					l.run();
+				}
+			}
 		} else {
-			spatial.move(x, y, z);
+			curLocation.interpolateLocal(startLocation, targetLocation, counter);
+			getSpatial().setLocalTranslation(curLocation);
 		}
 	}
-	private float get(final float tpf, final int axis) {
-		float distance = tpf * speed * moveDirection.get(axis);
-		final float distanceAbs = Math.abs(distance);
-		final float max = moveDistance.get(axis);
-		if(distanceAbs > max) {
-			distance = max;
-			moveDistance.set(axis, 0);
-		} else {
-			moveDistance.set(axis, max - distanceAbs);
+	
+	public void addListener(final Runnable listener) {
+		assert listener != null : "listener == null";
+		if(listeners == null) {
+			listeners = new SafeArrayList<>(Runnable.class);
 		}
-		return(distance);
+		listeners.add(listener);
 	}
+	public void removeListener(final Runnable listener) {
+		assert listener != null : "listener == null";
+		
+		if(listeners.remove(listener) && listeners.isEmpty()) {
+			listeners = null;
+		}
+	}
+	
 	@Override
 	protected void controlRender(final RenderManager rm, final ViewPort vp) {
 		

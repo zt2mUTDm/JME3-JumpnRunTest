@@ -1,3 +1,15 @@
+from java.lang import Object
+from java.lang import Runnable
+
+
+from com.jme3.bullet.control import RigidBodyControl
+from com.jme3.math import Vector3f
+from com.jme3.util import SafeArrayList
+
+
+from online.money_daisuki.api.monkey.basegame.physobj import MoveKinematicControl
+
+
 from base import globals as glob
 
 from base import physics
@@ -5,10 +17,14 @@ from base import forms
 
 from base.form import Form
 
-from com.jme3.bullet.control import RigidBodyControl
-from com.jme3.math import Vector3f
+class MoveKinematicControlListener(Runnable):
+        def __init__(self, parent, control):
+            self.parent = parent
+            self.control = control
 
-from online.money_daisuki.api.monkey.basegame.physobj import MoveKinematicControl
+        def run(self):
+            self.control.removeListener(self)
+            self.parent._fireMovementEvents("LinearMoving")
 
 class ScriptReference(Form):
     def __init__(self):
@@ -103,8 +119,10 @@ class ScriptReference(Form):
         else:
             raise Exception("Not implemented")
     
+
+    # Moving
     def moveLinearTo(self, target, speed):
-        self.stopMoving()
+        #self.stopMoving()
         
         spatial = forms.getSpatialFromInstance(self)
         rigid = spatial.getControl(RigidBodyControl)
@@ -112,8 +130,9 @@ class ScriptReference(Form):
             if rigid.isStatic():
                 raise Exception("A static object must not move linear")
             elif rigid.isKinematic():
-                self.movingControl = MoveKinematicControl(target, speed, self)
-                spatial.addControl(self.movingControl)
+                movingControl = MoveKinematicControl(target, speed)
+                movingControl.addListener(MoveKinematicControlListener(self, movingControl))
+                spatial.addControl(movingControl)
             elif rigid.isDynamic():
                 raise Exception("Not implemented")
             else:
@@ -121,5 +140,31 @@ class ScriptReference(Form):
         else:
             raise Exception("Not implemented")
         
-    def stopMoving(self):
-        self.signalMovingDone(True)
+    def _fireMovementEvents(self, eventName):
+        if not hasattr(self, "movementListeners"):
+            return
+
+        for listener in self.movementListeners:
+            listener.onMovingEvent(eventName, self)
+
+    def registerForMovementEvents(self, target=None):
+        if target is None:
+            target = self
+
+        if not hasattr(self, "movementListeners"):
+            self.movementListeners = SafeArrayList(Object)
+        self.movementListeners.add(target)
+
+    def unregisterForMovementEvents(self, target=None):
+        if not hasattr(self, "movementListeners"):
+            return
+        
+        if target is None:
+            target = self
+
+        self.movementListeners.remove(target)
+        if self.movementListeners.isEmpty():
+            del self.movementListeners
+
+    def onMovingEvent(self, eventName, source):
+        pass

@@ -1,0 +1,10 @@
+{
+	"type": "node",
+	"name": "OpenCloseLiftingDoor",
+	"childs": [
+		{
+			"type": "model",
+			"url": "Models/Generic/Doors/OpenCloseLiftingDoor/OpenCloseLiftingDoor.j3o"
+		}
+	]
+}

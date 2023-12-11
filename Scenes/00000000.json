@@ -7,6 +7,34 @@
 	],
 	"forms": [
 		{
+			"url": "Forms/Generic/Door.json",
+			"transform": {
+				"translation": [
+					-92.86, -1.35, -160.86
+				],
+				"scale": [
+					1, 1, 1
+				],
+				"rotation": [
+					0, 45, 0
+				]
+ 			}
+		},
+		{
+			"url": "Forms/Generic/Button.json",
+			"transform": {
+				"translation": [
+					-50.71016, 46.3, -243.34674
+				],
+				"scale": [
+					1, 1, 1
+				],
+				"rotation": [
+					0, -107.54058, 0
+				]
+ 			}
+		},
+		{
 			"url": "Forms/Scenes/00000000/NpcTest.json",
 			"transform": {
 				"translation": [
@@ -109,42 +137,6 @@
 			"transform": {
 				"translation": [
 					-105.0, 24.8, -209.0
-				],
-				"scale": [
-					1,
-					1,
-					1
-				],
-				"rotation": [
-					0,
-					0,
-					0
-				]
- 			}
-		},
-		{
-			"url": "Forms/SwitchA.json",
-			"transform": {
-				"translation": [
-					10, 0, -20
-				],
-				"scale": [
-					1,
-					1,
-					1
-				],
-				"rotation": [
-					0,
-					0,
-					0
-				]
- 			}
-		},
-		{
-			"url": "Forms/SwitchB.json",
-			"transform": {
-				"translation": [
-					9.5, 0, -20
 				],
 				"scale": [
 					1,

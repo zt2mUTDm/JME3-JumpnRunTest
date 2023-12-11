@@ -8,7 +8,6 @@ from online.money_daisuki.api.monkey.basegame.character.anim import OnAnimationE
 class Form(Script):
     def __init__(self):
         super(Form, self).__init__()
-        self.animationListener = None
     
     def requestLoad(self, data):
         return True
@@ -22,9 +21,15 @@ class Form(Script):
     def onAnalogInputEvent(self, mapping, value, tpf):
         pass
     
-    def onAnimationEvent(self, animation, loop):
+
+    def cleanup(self):
+        self.clearAnimationEvents()
+        self.onCleanup()
+    
+    def onCleanup(self):
         pass
     
+
     def playAnimation(self, animation, loop):
         spatial = forms.getSpatialFromInstance(self)
         anim = spatial.getControl(AnimControl)
@@ -49,38 +54,61 @@ class Form(Script):
         if anim is None:
             return 0
         
-        print anim
         return anim.getSpeed()
 
-    def cleanup(self):
-        self.onCleanup()
-    
-    def onCleanup(self):
+    def registerForAnimationEvents(self, target=None):
+        spatial = forms.getSpatialFromInstance(self)
+        anim = spatial.getControl(AnimControl)
+        
+        if anim is None:
+            return
+        
+        if target is None:
+            target = self
+
+        animationListener = OnAnimationEventListener(target, self)
+        anim.addAnimationListener(animationListener)
+
+        if not hasattr(self, "animationListeners"):
+            self.animationListeners = {}
+
+        if target not in self.animationListeners:
+            self.animationListeners[target] = []
+
+        self.animationListeners[target].append(animationListener)
+        
+    def unregisterForAnimationEvents(self, target=None):
+        if not hasattr(self, "animationListeners"):
+            return
+        
+        if target is None:
+            target = self
+
+        if target not in self.animationListeners:
+            return
+
+        spatial = forms.getSpatialFromInstance(self)
+        anim = spatial.getControl(AnimControl)
+        
+        for listener in self.animationListeners[target]:
+            anim.removeAnimationListener(listener)
+        del self.animationListeners[target]
+
+        if len(self.animationListeners) == 0:
+            del self.animationListeners
+
+    def clearAnimationEvents(self):
+        if not hasattr(self, "animationListeners"):
+            return
+
+        spatial = forms.getSpatialFromInstance(self)
+        anim = spatial.getControl(AnimControl)
+        
+        for key in self.animationListeners:
+            for listener in self.animationListeners[key]:
+                anim.removeAnimationListener(listener)
+            del self.animationListeners[key]
+        del self.animationListeners
+
+    def onAnimationEvent(self, animation, loop, source):
         pass
-    
-    def registerForAnimationEvents(self):
-        if self.animationListener != None:
-            return
-        
-        spatial = forms.getSpatialFromInstance(self)
-        anim = spatial.getControl(AnimControl)
-        
-        if anim == None:
-            return
-        
-        self.animationListener = OnAnimationEventListener(self)
-        anim.addAnimationListener(self.animationListener)
-        
-    def unregisterForAnimationEvents(self):
-        if self.animationListener == None:
-            return
-        
-        spatial = forms.getSpatialFromInstance(self)
-        anim = spatial.getControl(AnimControl)
-        
-        b = anim.removeAnimationListener(self.animationListener)
-        self.animationListener = None
-        
-        return b
-        
-        

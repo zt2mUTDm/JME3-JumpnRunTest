@@ -1,0 +1,8 @@
+{
+	"model": "PhysicsObjects/Generic/Doors/OpenCloseLiftingDoor/OpenCloseLiftingDoor.json",
+	"id": 2001,
+	"scripts": {
+		"module": "base.doors",
+		"class": "OpenLiftingPersistentDoor"
+	}
+}

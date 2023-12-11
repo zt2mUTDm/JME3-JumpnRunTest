@@ -1,0 +1,36 @@
+{
+	"model": "Models/Generic/Switches/SPSTTouchKeepButton0/SPSTTouchKeepButton0.json",
+	"physics": {
+		"shapes": [
+			{
+				"type": "Compound",
+				"childs": [
+					{
+						"type": "Box",
+						"extends": [ 1.0, 0.17, 0.17 ],
+						"translation": [ 0.0, 0.0, 1.15 ]
+					},
+					{
+						"type": "Box",
+						"extends": [ 1.0, 0.17, 0.17 ],
+						"translation": [ 0.0, 0.0, -1.15 ]
+					},
+					{
+						"type": "Box",
+						"extends": [ 0.17, 0.17, 1.0 ],
+						"translation": [ 1.15, 0.0, 0.0 ]
+					},
+					{
+						"type": "Box",
+						"extends": [ 0.17, 0.17, 1.0 ],
+						"translation": [ -1.15, 0.0, 0.0 ]
+					}
+				],
+				"attach": "SPSTTouchKeepButton0",
+				"collisionGroup": 0,
+				"purpose": "rigid",
+				"mass": 0
+			}
+		]
+	}
+}

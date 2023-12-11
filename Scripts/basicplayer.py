@@ -202,7 +202,7 @@ class PlayerJoystickInputHandler(object):
         input.registerForJoystickAxisInputEvents(self, "Joystick0AxisH")
         input.registerForJoystickAxisInputEvents(self, "Joystick0AxisV")
         
-        input.addJoystickButtonMappings(glob.getInputManager().getJoysticks() [0].getButtons().get(0), "PlayerActionA")
+        input.addJoystickButtonMappings(glob.getInputManager().getJoysticks()[0].getButtons().get(0), "PlayerActionA")
         input.registerForJoystickButtonInputEvents(self, "PlayerActionA")
         
     def onJoystickButtonEvent(self, mapping, button, pressed):
@@ -649,7 +649,7 @@ class BasicPlayer(Player):
         self.internalMovementVector.setTranslation(0, 0)
         self.setMoveDirection(Vector3f.ZERO)
 
-    def onAnimationEvent(self, mapping, loop):
+    def onAnimationEvent(self, mapping, loop, sender):
         self.glob.onAnimationEvent(mapping, loop)
         self.state.onAnimationEvent(mapping, loop)
     
