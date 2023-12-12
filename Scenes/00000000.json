@@ -631,34 +631,6 @@
  			}
 		},
 		{
-			"url": "PhysicsObjects/Generic/Switch/Switch.json",
-			"transform": {
-				"translation": [
-					-120, 0, -190
-				],
-				"scale": [
-					1, 1, 1
-				],
-				"rotation": [
-					0, 45, 0
-				]
- 			}
-		},
-		{
-			"url": "PhysicsObjects/Generic/Door/Door.json",
-			"transform": {
-				"translation": [
-					-92.86, 2, -160.86
-				],
-				"scale": [
-					1, 1, 1
-				],
-				"rotation": [
-					0, 45, 0
-				]
- 			}
-		},
-		{
 			"url": "PhysicsObjects/Generic/Primitives/BlackCubeNoShape.json",
 			"transform": {
 				"translation": [
@@ -697,6 +669,20 @@
 				],
 				"rotation": [
 					0, -107.54058, 0
+				]
+ 			}
+		},
+		{
+			"url": "PhysicsObjects/Generic/Primitives/BlackCubeNoShape.json",
+			"transform": {
+				"translation": [
+					-93.570175, 2, -161.57018
+				],
+				"scale": [
+					2, 4, 0.5
+				],
+				"rotation": [
+					0, 45, 0
 				]
  			}
 		}

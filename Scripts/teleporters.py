@@ -36,7 +36,7 @@ class Teleporter_00000000_00000003(Teleporter):
                        Vector3f(-0.8542036, -1.9, -26.535295),
                        Vector3f(0, 0, 1),
                        Vector3f(0.25, 0.25, 0.25))
-        self.setChaseCamera(Vector3f(1.576333, 0.5546875, 13.599998))
+        self.setChaseCamera(Vector3f(1.5673828, 0.6515285, 15.999998))
         
 class Teleporter_00000000_00000003_1(Teleporter):
     def initTeleporter(self):
@@ -44,7 +44,7 @@ class Teleporter_00000000_00000003_1(Teleporter):
                        Vector3f(0.029496597, 6.6, 25.788351),
                        Vector3f(0.010267003, 0.0, -0.9999473),
                        Vector3f(0.25, 0.25, 0.25))
-        self.setChaseCamera(Vector3f(1.576333, 0.5546875, 13.599998))
+        self.setChaseCamera(Vector3f(-2.484375, 0.5626613, 18.399998))
 
 class Scene0ToScene3Teleporter(Teleporter):
     def initTeleporter(self):
@@ -76,7 +76,7 @@ class Teleporter_00000003_00000000(Teleporter):
                        Vector3f(-33.47248, 9.2942505, -237.90424),
                        Vector3f(-0.943453, 0.0, -0.3315067),
                        Vector3f(0.25, 0.25, 0.25))
-        self.setChaseCamera(Vector3f(1.576333, 0.5546875, 13.599998))
+        self.setChaseCamera(Vector3f(3.0205078, 0.58219254, 25.599997))
         
 class Teleporter_00000003_00000000_1(Teleporter):
     def initTeleporter(self):
@@ -84,5 +84,5 @@ class Teleporter_00000003_00000000_1(Teleporter):
                        Vector3f(27.110155, 45.294243, -218.82939),
                        Vector3f(0.9518678, 0.0, 0.30650896),
                        Vector3f(0.25, 0.25, 0.25))
-        self.setChaseCamera(Vector3f(1.576333, 0.5546875, 13.599998))
+        self.setChaseCamera(Vector3f(0.29882812, 0.581216, 15.999998))
 

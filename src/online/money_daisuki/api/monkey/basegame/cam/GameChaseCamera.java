@@ -100,43 +100,14 @@ public final class GameChaseCamera implements GameCamera {
 	}
 	public void setDefaultVerticalRotation(final float f) {
 		assertCam();
-		cam.setDefaultHorizontalRotation(f);
+		cam.setDefaultVerticalRotation(f);
 	}
 	public void setDefaultDistance(final float f) {
 		assertCam();
 		cam.setDefaultDistance(f);
 	}
 	
-	/*@Override
-	public void write(final JmeExporter ex) throws IOException {
-		assertCam();
-		cam.write(ex);
-	}
-	@Override
-	public void read(final JmeImporter im) throws IOException {
-		assertCam();
-		cam.read(im);
-	}
-	@Override
-	public Control cloneForSpatial(final Spatial spatial) {
-		throw new UnsupportedOperationException();
-	}
-	@Override
-	public void setSpatial(final Spatial spatial) {
-		assertCam();
-		cam.setSpatial(spatial);
-	}
-	@Override
-	public void update(final float tpf) {
-		assertCam();
-		cam.update(tpf);
-	}
-	@Override
-	public void render(final RenderManager rm, final ViewPort vp) {
-		assertCam();
-		cam.render(rm, vp);
-	}*/
 	private void assertCam() {
-		assert (cam == null) : "Cam not aquired.";
+		assert (cam != null) : "Cam not aquired.";
 	}
 }

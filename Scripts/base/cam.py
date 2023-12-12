@@ -96,10 +96,12 @@ def popCamera():
         camStack = None
 
 def clearCameras():
+    global camStack
     if camStack is not None:
         for i in range(len(camStack)):
             popCamera()
     
+    global activeCamera
     if activeCamera is not None:
         activeCamera.dispose()
         activeCamera = None

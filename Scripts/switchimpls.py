@@ -15,7 +15,7 @@ class Switch0(switches.SPSTTouchKeepButton):
 
         cam.pushCameraTransform()
         self.registerForCameraEvents()
-        cam.moveLinearTo(Vector3f(0, 0, 0), Quaternion(0, 1, 0, 0), 1)
+        cam.moveLinearTo(Vector3f(-76.63241, 7.578371, -142.84584), Quaternion(-0.06557904, 0.9201565, -0.17551114, -0.3438128), 2)
 
     def onCameraEvent(self, eventName):
         if self.step == 0:
@@ -43,6 +43,6 @@ class Switch0(switches.SPSTTouchKeepButton):
             self.registerForCameraEvents()
 
             data = cam.popCameraTransform()
-            cam.moveLinearTo(data[0], data[1], 1)
+            cam.moveLinearTo(data[0], data[1], 2)
             
             self.step = 2

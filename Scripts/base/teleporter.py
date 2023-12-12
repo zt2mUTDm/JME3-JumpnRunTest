@@ -83,6 +83,7 @@ class Teleporter(ScriptReference):
     def onFadeOut(self):
         misc.setCollisionEnabled(False)
         scene.unloadScene(self)
+        cam.clearCameras()
         
     def onFadeIn(self):
         filters.unregisterForFadeEvents(self)
