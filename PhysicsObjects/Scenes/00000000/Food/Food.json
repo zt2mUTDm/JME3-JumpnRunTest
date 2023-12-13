@@ -1,0 +1,14 @@
+{
+	"model": "Models/Scenes/00000000/Food/Food.json",
+	"physics": {
+		"shapes": [
+			{
+				"type": "Box",
+				"extends": [ 0.25, 2.2, 1 ],
+				"attach": "Food",
+				"collisionGroup": 0,
+				"purpose": "ghost"
+			}
+		]
+	}
+}

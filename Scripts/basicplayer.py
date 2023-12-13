@@ -72,6 +72,47 @@ HIGH_JUMP_SPEED = 25.0
 TRAMPOLINE_JUMP_SPEED = 45.0
 DOUBLE_JUMP_SPEED = 15.0
 
+class PlayerCollectableManager(object):
+    def setCollectable(self, name, value):
+        if value < 0:
+            raise Exception("Cannot set count of collectable %s to a negative value (%s)" % (name, value))
+
+        if not hasattr(self, "collectables"):
+            if value == 0:
+                return
+            self.collectables = {}
+        
+        if value == 0:
+            del self.collectables[name]
+
+            if len(self.collectables) == 0:
+                del self.collectables
+        else:
+            self.collectables[name] = value
+
+    def changeCollectable(self, name, count):
+        self.setCollectable(name, self.getCollectableCount(name) + count)
+
+    def getCollectableCount(self, name):
+        if not hasattr(self, "collectables"):
+            return 0
+        
+        if name not in self.collectables:
+            return 0
+
+        return self.collectables[name]
+
+    def save(self):
+        if not hasattr(self, "collectables"):
+            return None
+        return self.collectables
+
+    def load(self, collectables):
+        if collectables is None:
+            return
+
+        self.collectables = collectables
+
 class PlayerKeyboardInputHandler(object):
     def __init__(self):
         self.pressedButtons = 0
@@ -488,6 +529,7 @@ class BasicPlayer(Player):
     def __init__(self):
         super(BasicPlayer, self).__init__()
         self.glob = PlayerGlobalManager()
+        self.collectables = PlayerCollectableManager()
 
         self.state = None
         
@@ -543,10 +585,13 @@ class BasicPlayer(Player):
         persident = data["persistent"]
         if "cucumbersCollected" in persident:
             self.glob.cucumbersCollected = persident["cucumbersCollected"]
+        
+        if "collectables" in persident:
+            self.collectables.load(persident["collectables"])
 
         if "canDoubleJump" in persident:
             self.glob.canDoubleJump = persident["canDoubleJump"]
-
+        
         return True
 
     def beforeUnload(self):
@@ -556,6 +601,10 @@ class BasicPlayer(Player):
             persident["cucumbersCollected"] = self.glob.cucumbersCollected
 
         persident["canDoubleJump"] = self.glob.canDoubleJump
+
+        col = self.collectables.save()
+        if col is not None:
+            persident["collectables"] = col
 
         return {
             "persistent": persident
@@ -645,6 +694,17 @@ class BasicPlayer(Player):
             return True
         return False
     
+
+    def setCollectable(self, name, value):
+        self.collectables.setCollectable(name, value)
+
+    def changeCollectable(self, name, count):
+        self.collectables.changeCollectable(name, count)
+
+    def getCollectableCount(self, name):
+        return self.collectables.getCollectableCount(name)
+
+
     def stopMovingImmediate(self):
         self.internalMovementVector.setTranslation(0, 0)
         self.setMoveDirection(Vector3f.ZERO)
