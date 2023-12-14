@@ -7,6 +7,20 @@
 	],
 	"forms": [
 		{
+			"url": "Forms/Scenes/00000000/FeedingTrough.json",
+			"transform": {
+				"translation": [
+					-70, 10, -60
+				],
+				"scale": [
+					1, 1, 1
+				],
+				"rotation": [
+					0, -90, 0
+				]
+			}
+		},
+		{
 			"url": "Forms/Generic/Door.json",
 			"transform": {
 				"translation": [

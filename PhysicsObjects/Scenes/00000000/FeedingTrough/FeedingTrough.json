@@ -1,0 +1,21 @@
+{
+	"model": "Models/Scenes/00000000/FeedingTrough/FeedingTrough.json",
+	"physics": {
+		"shapes": [
+			{
+				"type": "Mesh",
+				"attach": "FeedingTrough",
+				"collisionGroup": 0,
+				"purpose": "rigid",
+				"mass": 0
+			},
+			{
+				"type": "Sphere",
+				"radius": 25,
+				"attach": "ActionRadius",
+				"collisionGroup": 0,
+				"purpose": "ghost"
+			}
+		]
+	}
+}
