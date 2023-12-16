@@ -27,7 +27,7 @@ class SPSTTouchKeepButton(Actor):
             self.registerForAnimationEvents()
 
     def onTouchEnter(self, myName, otherForm, otherName):
-        if otherForm == glob.getPlayer() and otherName == "Ground":
+        if otherForm == glob.getPlayer() and otherName == "PlayerGround":
             if self._isUnpressed() or self._isUnpressing():
                 self._setPressing()
 

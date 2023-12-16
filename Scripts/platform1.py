@@ -33,11 +33,11 @@ class Platform1(Actor):
             self._startNextMove()
     
     def onTouchEnter(self, myName, otherForm, otherName):
-        if myName == "PlatformTop" and otherName == "Ground":
+        if myName == "PlatformTop" and otherName == "PlayerGround":
             glob.player.attachTo(self)
             
     def onTouchLeave(self, myName, otherForm, otherName):
-        if myName == "PlatformTop" and otherName == "Ground":
+        if myName == "PlatformTop" and otherName == "PlayerGround":
             glob.player.detachFrom()
     
     def _startNextMove(self):

@@ -58,7 +58,7 @@
 			{
 				"type": "Box",
 				"extends": [ 0.25, 0.25, 0.25 ],
-				"attach": "Ground",
+				"attach": "PlayerGround",
 				"collisionGroup": 0,
 				"purpose": "ghost"
 			},

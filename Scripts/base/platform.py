@@ -42,11 +42,11 @@ class Platform(Actor):
             self.stop()
     
     def onTouchEnter(self, myName, otherForm, otherName):
-        if myName == "PlatformTop" and otherName == "Ground":
+        if myName == "PlatformTop" and otherName == "PlayerGround":
             misc.getPlayer().attachTo(self)
             
     def onTouchLeave(self, myName, otherForm, otherName):
-        if myName == "PlatformTop" and otherName == "Ground":
+        if myName == "PlatformTop" and otherName == "PlayerGround":
             misc.getPlayer().detachFrom()
     
     def _startNextMove(self):

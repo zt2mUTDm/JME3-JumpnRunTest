@@ -1,5 +1,6 @@
 from base import globals as glob
 from base import cam
+from base import misc
 from base import scene
 from base import filters
 
@@ -11,6 +12,16 @@ class InitScript:
         
         glob.loadPlayer(Vector3f(0, 20, 0), Vector3f(1, 0, 0), Vector3f(0.25, 0.25, 0.25))
         cam.setChaseCamera(Vector3f(0.0, 0.5235988, 20.0))
+        misc.setCollisionEnabled(False)
         glob.getPlayer().setControlEnabled(True)
         
+        filters.registerForFadeEvents(self)
         filters.fadeIn()
+
+    def onFadeOut(self):
+        pass
+
+    def onFadeIn(self):
+        filters.unregisterForFadeEvents(self)
+        glob.getPlayer().setControlEnabled(True)
+        misc.setCollisionEnabled(True)

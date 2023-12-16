@@ -288,7 +288,7 @@ class PlayerGlobalManager(object):
 
     def onTouchEnter(self, myName, otherForm, otherName):
         if otherName != "Player":
-            if myName == "Ground":
+            if myName == "PlayerGround":
                 self.bottomCollideWithScene = True
                 if self.canHighJump and otherName == "HighJump":
                     self.onTrampoline = True
@@ -298,7 +298,7 @@ class PlayerGlobalManager(object):
 
     def onTouchLeave(self, myName, otherForm, otherName):
         if otherName != "Player":
-            if myName == "Ground":
+            if myName == "PlayerGround":
                 self.bottomCollideWithScene = False
                 if otherName == "HighJump":
                     self.onTrampoline = False
@@ -577,7 +577,7 @@ class BasicPlayer(Player):
         
         physics.registerForTouchTest(self, "Top")
         physics.registerForTouchTest(self, "Player")
-        physics.registerForTouchTest(self, "Ground")
+        physics.registerForTouchTest(self, "PlayerGround")
 
         self.setState(StandState())
     
@@ -703,6 +703,10 @@ class BasicPlayer(Player):
 
     def getCollectableCount(self, name):
         return self.collectables.getCollectableCount(name)
+
+
+    def throwObject(modelUrl, translation, rotation, scale, waypoints, tension):
+        pass
 
 
     def stopMovingImmediate(self):
