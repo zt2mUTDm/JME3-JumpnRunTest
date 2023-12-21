@@ -11,6 +11,8 @@ public final class NameLinkedAnimPlayer implements AnimPlayer {
 	// One-to-one linking
 	private final Map<String, String> links;
 	
+	private Map<AnimListener, AnimListener> animationListener;
+	
 	public NameLinkedAnimPlayer(final AnimPlayer parent, final Map<String, String> links) {
 		this.parent = Requires.notNull(parent, "parent == null");
 		this.links = Requires.containsNotNull(new HashMap<>(Requires.notNull(links, "links == null")), "links contains null");
@@ -28,7 +30,11 @@ public final class NameLinkedAnimPlayer implements AnimPlayer {
 	
 	@Override
 	public void addAnimationListener(final AnimListener l) {
-		parent.addAnimationListener(new AnimListener() {
+		if(animationListener != null && animationListener.containsKey(l)) {
+			return;
+		}
+		
+		final AnimListener subListener = new AnimListener() {
 			@Override
 			public void animationEvent(final String name, final boolean loop) {
 				// TODO 1:1
@@ -45,10 +51,30 @@ public final class NameLinkedAnimPlayer implements AnimPlayer {
 					l.animationEvent(name, loop);
 				}
 			}
-		});
+		};
+		parent.addAnimationListener(subListener);
+		
+		if(animationListener == null) {
+			animationListener = new HashMap<>();
+		}
+		animationListener.put(l, subListener);
 	}
 	@Override
 	public boolean removeAnimationListener(final AnimListener l) {
-		return(parent.removeAnimationListener(l));
+		if(animationListener == null) {
+			return(false);
+		}
+		
+		final AnimListener subListener = animationListener.remove(l);
+		if(subListener != null) {
+			parent.removeAnimationListener(subListener);
+			
+			if(animationListener == null) {
+				animationListener = null;
+			}
+			return(true);
+		} else {
+			return(false);
+		}
 	}
 }

@@ -75,7 +75,7 @@ public final class AnimPlayerImpl implements AnimPlayer {
 		}
 		
 		final boolean b = listeners.remove(l);
-		if(listeners.isEmpty()) {
+		if(b && listeners.isEmpty()) {
 			listeners = null;
 		}
 		return(b);
