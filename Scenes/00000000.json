@@ -386,9 +386,9 @@
 			"url": "Forms/Ryuudama/Ryuudama1.json",
 			"transform": {
 				"translation": [
-					-97.0,
+					-135.0,
 					26.0,
-					11.0
+					-104.0
 				],
 				"scale": [
 					1,
@@ -423,10 +423,38 @@
 			}
 		},
 		{
-			"url": "Forms/Scenes/00000000/Food.json",
+			"url": "Forms/Scenes/00000000/Food0.json",
 			"transform": {
 				"translation": [
-					-120.054016, 2.2, -187.87451
+					-120.054016, 1.2, -187.87451
+				],
+				"scale": [
+					1, 1, 1
+				],
+				"rotation": [
+					0, 0, 0
+				]
+			}
+		},
+		{
+			"url": "Forms/Scenes/00000000/Food1.json",
+			"transform": {
+				"translation": [
+					-105.054016, 1.2, -202.87451
+				],
+				"scale": [
+					1, 1, 1
+				],
+				"rotation": [
+					0, 0, 0
+				]
+			}
+		},
+		{
+			"url": "Forms/Scenes/00000000/Food2.json",
+			"transform": {
+				"translation": [
+					-120.054016, 1.2, -202.87451
 				],
 				"scale": [
 					1, 1, 1

@@ -1,0 +1,8 @@
+{
+	"model": "PhysicsObjects/Scenes/00000000/Food/Food.json",
+	"id": 6002,
+	"scripts": {
+		"module": "scenes.food",
+		"class": "Food"
+	}
+}

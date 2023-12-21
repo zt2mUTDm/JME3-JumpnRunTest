@@ -14,6 +14,11 @@
 				},
 				{
 					"type": "node",
+					"name": "PlayerShape",
+					"translation": [ 0.0, 0.0, 0.0 ]
+				},
+				{
+					"type": "node",
 					"name": "PlayerGround",
 					"translation": [ 0.0, -5.0, 0.0 ]
 				},

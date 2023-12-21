@@ -41,11 +41,9 @@
 				"type": "Capsule",
 				"radius": 0.4,
 				"height": 1.2,
-				"attach": "Player",
+				"attach": "PlayerShape",
 				"collisionGroup": 0,
-				"name": "PlayerShape",
-				"purpose": "ghost",
-				"eventName": "Main"
+				"purpose": "ghost"
 			},
 			{
 				"type": "Box",

@@ -1,3 +1,5 @@
+from java.lang import Object
+
 import math
 from collections import OrderedDict
 
@@ -16,7 +18,9 @@ from com.jme3.math import Quaternion
 from com.jme3.math import Vector3f
 from com.jme3.math import FastMath
 
+from online.money_daisuki.api.monkey.basegame.collections import SafeSet
 from online.money_daisuki.api.monkey.basegame.math import FloatLinearInterpolation2D
+from online.money_daisuki.api.monkey.basegame.cinematic import PythonMotionPathListener
 
 MOVE_SPEED = 0.3
 
@@ -287,22 +291,22 @@ class PlayerGlobalManager(object):
         self.inActivatablesTriggers = OrderedDict()
 
     def onTouchEnter(self, myName, otherForm, otherName):
-        if otherName != "Player":
+        if otherName != "PlayerShape":
             if myName == "PlayerGround":
                 self.bottomCollideWithScene = True
                 if self.canHighJump and otherName == "HighJump":
                     self.onTrampoline = True
-            elif myName == "Player":
+            elif myName == "PlayerShape":
                 if otherName.startswith("Activatable-Trigger-"):
                     self.inActivatablesTriggers[otherName] = otherForm
 
     def onTouchLeave(self, myName, otherForm, otherName):
-        if otherName != "Player":
+        if otherName != "PlayerShape":
             if myName == "PlayerGround":
                 self.bottomCollideWithScene = False
                 if otherName == "HighJump":
                     self.onTrampoline = False
-            elif myName == "Player":
+            elif myName == "PlayerShape":
                 if otherName.startswith("Activatable-Trigger-"):
                     if otherName in self.inActivatablesTriggers:
                         del self.inActivatablesTriggers[otherName]
@@ -525,6 +529,44 @@ class WalkLinearToState(PlayerState):
         self.player.setJumpSpeed(HIGH_JUMP_SPEED)
         self.player.jump()
 
+class ThrowItemState(PlayerState):
+    def __init__(self, motion):
+        super(ThrowItemState, self).__init__()
+        
+        self.motion = motion
+        
+        self.animationDone = False
+        self.movementDone = False
+
+        self.state = "Ready"
+
+    def onUpdate(self, tpf):
+        if self.state == "Ready":
+            if self.playerGlob.bottomCollideWithScene:
+                self.player.playAnimation("Strike", False)
+                self.state = "ThrowAniRunning"
+        elif self.animationDone and self.movementDone:
+            self.player.setState(StandState())
+            if hasattr(self.player, "thrownListeners"):
+                for listener in self.player.thrownListeners.getArray():
+                    listener.onPlayerThrowDone()
+
+    def register(self):
+        self.player.setAnimationSpeed(1)
+
+    def onAnimationEvent(self, aniName, loop):
+        if self.state == "ThrowAniRunning":
+            self.motion.getPath().addListener(PythonMotionPathListener(self))
+            self.motion.play()
+            self.player.playAnimation("StrikeWhileRunning", False)
+            self.state = "Throwing"
+        elif self.state == "Throwing":
+            self.animationDone = True
+
+    def onWaypointReach(self, motion, waypointIndex):
+        if(waypointIndex == motion.getPath().getNbWayPoints() - 1):
+            self.movementDone = True
+
 class BasicPlayer(Player):
     def __init__(self):
         super(BasicPlayer, self).__init__()
@@ -576,7 +618,7 @@ class BasicPlayer(Player):
         self.addViewReceiver("PlayerGeom")
         
         physics.registerForTouchTest(self, "Top")
-        physics.registerForTouchTest(self, "Player")
+        physics.registerForTouchTest(self, "PlayerShape")
         physics.registerForTouchTest(self, "PlayerGround")
 
         self.setState(StandState())
@@ -704,9 +746,94 @@ class BasicPlayer(Player):
     def getCollectableCount(self, name):
         return self.collectables.getCollectableCount(name)
 
+    
+    def throwObject(self, modelUrl, relativeTranslation, targetLocation, height, tension, additionalWaypoints=()):
+        from online.money_daisuki.api.monkey.basegame.model import ModelLoadAppState
+        from base import forms
+        from com.jme3.scene import Node
+        from com.jme3.cinematic import MotionPath
+        from com.jme3.cinematic.events import MotionEvent
 
-    def throwObject(modelUrl, translation, rotation, scale, waypoints, tension):
-        pass
+        modelLoader = glob.getAppState(ModelLoadAppState)
+
+        model = modelLoader.loadModel(modelUrl)
+        model.setLocalTranslation(relativeTranslation)
+
+        initLocation = forms.getSpatialFromInstance(self).getWorldTranslation()
+
+        # TODO use tmpvec
+        addLen = len(additionalWaypoints)
+        if addLen > 0:
+            lastLocation = additionalWaypoints[addLen - 1]
+        else:
+            lastLocation = targetLocation
+
+        tmpVec = Vector3f(lastLocation).subtractLocal(initLocation)
+        tmpQuat = Quaternion().lookAt(tmpVec, Vector3f.UNIT_Y)
+
+        modelNode = Node("ThrowingModelNode")
+        modelNode.setLocalTranslation(initLocation)
+        modelNode.setLocalRotation(tmpQuat)
+        modelNode.attachChild(model)
+
+        glob.getApp().getRootNode().attachChild(modelNode)
+
+        path = MotionPath()
+        middleLocation = Vector3f().interpolateLocal(initLocation, targetLocation, 0.5)
+        middleLocation.y+= height
+
+        path.addWayPoint(initLocation)
+        path.addWayPoint(middleLocation)
+        path.addWayPoint(targetLocation)
+
+        for wp in additionalWaypoints:
+            path.addWayPoint(wp)
+
+        motion = MotionEvent(modelNode, path)
+        motion.setSpeed(8)
+
+        self.setState(ThrowItemState(motion))
+        self.stopMovingImmediate()
+
+
+    def showThrowPath(self, relativeTranslation, targetLocation, height, tension, additionalWaypoints=()):
+        self.hideThrowPath()
+
+        from com.jme3.cinematic import MotionPath
+        from base import forms
+        path = MotionPath()
+        
+        sourceLocation = forms.getSpatialFromInstance(self).getWorldTranslation()
+        middleLocation = Vector3f().interpolateLocal(sourceLocation, targetLocation, 0.5)
+        middleLocation.y+= height
+
+        path.addWayPoint(sourceLocation)
+        path.addWayPoint(middleLocation)
+        path.addWayPoint(targetLocation)
+
+        for wp in additionalWaypoints:
+            path.addWayPoint(wp)
+
+        path.setCurveTension(tension)
+
+        path.enableDebugShape(glob.getApp().getAssetManager(), glob.getApp().getRootNode())
+
+        self.shownThrowPath = path
+
+    def hideThrowPath(self):
+        if hasattr(self, "shownThrowPath"):
+            self.shownThrowPath.disableDebugShape()
+            del self.shownThrowPath
+
+    def registerForThrownEvent(self, target):
+        if not hasattr(self, "thrownListeners"):
+            self.thrownListeners = SafeSet(Object, SafeSet.HashSetFactory())
+        self.thrownListeners.add(target)
+
+    def unregisterForThrownEvent(self, target):
+        self.thrownListeners.remove(target)
+        if len(self.thrownListeners) == 0:
+            del self.thrownListeners
 
 
     def stopMovingImmediate(self):

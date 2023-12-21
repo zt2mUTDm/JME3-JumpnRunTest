@@ -19,7 +19,7 @@ class Collectable(Actor):
         return None
 
     def onTouch(self, myName, otherForm, otherName):
-        if not self.collected and otherName == "Player":
+        if not self.collected and otherName == "PlayerShape":
             self.onCollected()
             self.collected = True
             forms.unload(self)

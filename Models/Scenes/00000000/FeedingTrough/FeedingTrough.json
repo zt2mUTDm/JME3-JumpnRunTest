@@ -10,6 +10,11 @@
 			"type": "model",
 			"url": "Models/Scenes/00000000/FeedingTrough/FeedingTrough.j3o",
 			"translation": [ 0, 0, 0 ]
+		},
+		{
+			"type": "node",
+			"name": "Cover",
+			"translation": [ 0, -1, 0 ]
 		}
 	]
 }

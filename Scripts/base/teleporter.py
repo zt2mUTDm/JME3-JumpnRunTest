@@ -46,7 +46,7 @@ class Teleporter(ScriptReference):
         pass
     
     def onTouchEnter(self, myName, otherForm, otherName):
-        if not self.triggered and otherName == "Player":
+        if not self.triggered and otherName == "PlayerShape":
             self.triggered = True
 
             self.initTeleporter()

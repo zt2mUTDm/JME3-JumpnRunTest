@@ -15,6 +15,15 @@
 				"attach": "ActionRadius",
 				"collisionGroup": 0,
 				"purpose": "ghost"
+			},
+			{
+				"type": "Box",
+				"extends": [ 4, 1, 4 ],
+				"attach": "Cover",
+				"collisionGroup": 0,
+				"purpose": "rigid",
+				"mass": 1,
+				"kinematic": true
 			}
 		]
 	}

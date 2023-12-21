@@ -18,7 +18,7 @@ class Cucumber(Actor):
         spatial.rotate(0, TURN_SPEED * tpf, 0)
 
     def onTouch(self, myName, otherForm, otherName):
-        if not self.collected and otherName == "Player":
+        if not self.collected and otherName == "PlayerShape":
             # TODO add animation here
             self.collected = True
             glob.player.glob.cucumbersCollected = glob.player.glob.cucumbersCollected + 1
