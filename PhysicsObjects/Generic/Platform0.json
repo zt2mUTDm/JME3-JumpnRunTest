@@ -11,7 +11,8 @@
 				"kinematic": true
 			},
 			{
-				"type": "Mesh",
+				"type": "Box",
+				"extends": [ 10, 0.25, 10 ],
 				"attach": "PlatformTop",
 				"collisionGroup": 0,
 				"purpose": "ghost"

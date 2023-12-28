@@ -8,7 +8,7 @@ from base.platform import Platform
 
 class Platform0(Platform):
     def onPlatformInit(self):
-        self.setWaypoints((Vector3f(-135, 20, -45), Vector3f(-135, 8, -45)))
+        self.setWaypoints((Vector3f(-135, 38, -45), Vector3f(-135, 22, -45)))
         self.setSpeed(6)
         self.setRepeat(True)
         self.start()

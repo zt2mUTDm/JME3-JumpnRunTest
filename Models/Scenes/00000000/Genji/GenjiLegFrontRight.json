@@ -1,0 +1,11 @@
+{
+	"type": "node",
+	"name": "GenjiLegFrontRight",
+	"childs": [
+		{
+			"type": "model",
+			"url": "Models/Scenes/00000000/Genji/GenjiLegFrontRight.j3o",
+			"translation": [ 0.0, 0.0, 0 ]
+		}
+	]
+}

@@ -115,7 +115,7 @@ public final class SceneLoadAppState extends BaseAppState {
 	}
 	private void loadPhysicsObject(final JsonList list) {
 		final SceneGraphAppState rootState = app.getStateManager().getState(SceneGraphAppState.class);
-		final PhysicsObjectLoadAppState formLoad = app.getStateManager().getState(PhysicsObjectLoadAppState.class);
+		final PhysicsObjectLoadAppState objLoad = app.getStateManager().getState(PhysicsObjectLoadAppState.class);
 		final BulletAppState bullet = app.getStateManager().getState(BulletAppState.class);
 		
 		final Collection<Spatial> toAdd = new LinkedList<>();
@@ -125,7 +125,7 @@ public final class SceneLoadAppState extends BaseAppState {
 		for(final JsonElement e:list) {
 			final JsonMap m = e.asMap();
 			final String url = m.get("url").asData().asString();
-			final PhysicsObject obj = formLoad.load(url);
+			final PhysicsObject obj = objLoad.load(url);
 			
 			final Spatial spatial = obj.getSpatial();
 			parseTransform(spatial, m);

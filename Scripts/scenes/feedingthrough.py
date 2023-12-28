@@ -1,70 +1,57 @@
 from com.jme3.math import Vector3f
+from com.jme3.scene import Node
+
+from com.jme3.cinematic import MotionPath
+from com.jme3.cinematic.events import MotionEvent
+
+from online.money_daisuki.api.monkey.basegame.cinematic import PythonMotionPathListener
 
 from base import globals as glob
 from base import forms
+from base import cam
 
-from base.actor import Actor
+from base.itemreceivement import ItemReceivementContainer
 
-class FeedingTrough(Actor):
-    def onInit(self):
-        self.registerForTouchEvent("ActionRadius")
+class FeedingTrough(ItemReceivementContainer):
+    def onDone(self):
+        path = MotionPath()
 
-        self.aniName = "ReceiveItem"
-        self.collectableName = "Food"
-        self.relativeModelLocation = Vector3f(0, 4, 0)
-        self.toThrow = 3
+        path.addWayPoint(Vector3f(-127, 21.099998, -12))
+        path.addWayPoint(Vector3f(-62, 21.099998, -67))
+        path.addWayPoint(Vector3f(-127, 21.099998, -122))
+        
+        path.setCurveTension(0.5)
 
-    def onTouchEnter(self, myName, otherForm, otherName):
-        if otherName == "PlayerShape":
-            if not hasattr(self, "active") or not self.active:
-                
-                player = glob.getPlayer()
-                if player.getCollectableCount("Food") >= 1:
-                    self.active = True
+        path.addListener(PythonMotionPathListener(self))
 
-                    player.setControlEnabled(False)
-                    player.registerForThrownEvent(self)
-                    
-                    self.throwFood()
+        self.cameraNode = Node()
+        cam.setCameraNode(self.cameraNode)
+        
+        forms.getRootNode().attachChild(self.cameraNode)
 
-    def throwFood(self):
-        player = glob.getPlayer()
-        spatial = forms.getSpatialFromInstance(self)
+        event = MotionEvent(self.cameraNode, path)
+        event.setDirectionType(MotionEvent.Direction.LookAt)
+        event.setLookAt(Vector3f(-127, 0, -67), Vector3f.UNIT_Y)
+        event.setSpeed(2)
+        event.play()
 
-        throwTarget = spatial.getWorldTranslation()
-        endTarget = Vector3f(throwTarget)
-        endTarget.y-= 6
+        self.trigger0()
 
-        player.throwObject("Models/Scenes/00000000/Food/Food.json",
-                self.relativeModelLocation,
-                throwTarget,
-                10,
-                0.5,
-                (endTarget,)
-        )
+    def trigger0(self):
+        genji = forms.getInstance(6004)
+        genji.diveUp()
 
-    def concludeThrow(self):
-        player = glob.getPlayer()
-        player.changeCollectable("Food", -1)
-        self.toThrow-= 1
-        if player.getCollectableCount("Food") >= 1:
-            self.throwFood()
-        else:
-            player.unregisterForThrownEvent(self)
-            del self.active
+    def trigger1(self):
+        genji = forms.getInstance(6004)
+        genji.leaveShell()
 
-            if self.toThrow == 0:
-                self.done()
-            player.setControlEnabled(True)
+    def onWaypointReach(self, motion, waypointIndex):
+        if waypointIndex == 1:
+            self.trigger1()
+        elif waypointIndex == 2:
+            cam.popCamera()
 
-    def onPlayerThrowDone(self):
-        self.registerForAnimationEvents()
-        self.playAnimation(self.aniName, False)
+            forms.getRootNode().detachChild(self.cameraNode)
+            del self.cameraNode
 
-    def onAnimationEvent(self, aniName, loop, source):
-        if aniName == self.aniName:
-            self.unregisterForAnimationEvents()
-            self.concludeThrow()
 
-    def done(self):
-        print "All 3 throwed."

@@ -1,0 +1,8 @@
+{
+	"model": "PhysicsObjects/Scenes/00000000/Genji/Genji.json",
+	"id": 6004,
+	"scripts": {
+		"module": "scenes.genji",
+		"class": "Genji"
+	}
+}

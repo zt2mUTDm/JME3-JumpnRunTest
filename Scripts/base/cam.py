@@ -14,6 +14,7 @@ from com.jme3.util import SafeArrayList
 from online.money_daisuki.api.monkey.basegame.cam import MoveCameraLinearToAppState
 from online.money_daisuki.api.monkey.basegame.cam import FixedLocationLookAtPlayerCamera
 from online.money_daisuki.api.monkey.basegame.cam import GameChaseCamera
+from online.money_daisuki.api.monkey.basegame.cam import GameCameraNode
 from online.money_daisuki.api.monkey.basegame.cam import MoveCameraLinearToCamera
 from online.money_daisuki.api.monkey.basegame.collections import SafeSet
 
@@ -67,6 +68,14 @@ def moveLinearTo(location, rotation, duration):
     pushCamera(c)
     # Add after aquire
     c.addListener(FireCameraEventsRunnable("MoveCameraLinearTo"))
+
+def setCameraNode(node, name="CamNode", camera=None):
+    if camera == None:
+        camera = glob.getCamera()
+
+    camNode = GameCameraNode(name, camera)
+    node.attachChild(camNode)
+    pushCamera(camNode)
 
 def pushCamera(cam):
     global camStack

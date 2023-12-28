@@ -4,7 +4,7 @@ from base.actor import Actor
 
 from com.jme3.math import Vector3f
 
-WAYPOINTS = (Vector3f(-135, 20, -15), Vector3f(-135, 32, -15))
+WAYPOINTS = (Vector3f(-135, 38, -15), Vector3f(-135, 50, -15))
 SPEED = 6
 REPEAT = True
 
@@ -43,7 +43,7 @@ class Platform1(Actor):
     def _startNextMove(self):
         global WAYPOINTS
         global SPEED
-        
+        WAYPOINTS[self.waypointCounter]
         self.moveLinearTo(WAYPOINTS[self.waypointCounter], SPEED)
 
     def cleanup(self):

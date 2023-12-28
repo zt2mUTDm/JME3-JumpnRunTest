@@ -73,7 +73,7 @@
 			"transform": {
 				"translation": [
 					-135,
-					20,
+					22,
 					-45
 				],
 				"scale": [
@@ -93,7 +93,7 @@
 			"transform": {
 				"translation": [
 					-135,
-					20,
+					50,
 					-15
 				],
 				"scale": [
@@ -113,8 +113,8 @@
 			"transform": {
 				"translation": [
 					-135,
-					32,
-					-81
+					50,
+					-45
 				],
 				"scale": [
 					1,
@@ -169,7 +169,7 @@
 			"transform": {
 				"translation": [
 					-135,
-					11,
+					29,
 					-45
 				],
 				"scale": [
@@ -189,7 +189,7 @@
 			"transform": {
 				"translation": [
 					-135,
-					14,
+					32,
 					-45
 				],
 				"scale": [
@@ -209,7 +209,7 @@
 			"transform": {
 				"translation": [
 					-135,
-					17,
+					35,
 					-45
 				],
 				"scale": [
@@ -229,7 +229,7 @@
 			"transform": {
 				"translation": [
 					-135,
-					23,
+					41,
 					-15
 				],
 				"scale": [
@@ -249,7 +249,7 @@
 			"transform": {
 				"translation": [
 					-135,
-					26,
+					44,
 					-15
 				],
 				"scale": [
@@ -269,7 +269,7 @@
 			"transform": {
 				"translation": [
 					-135,
-					29,
+					47,
 					-15
 				],
 				"scale": [
@@ -387,7 +387,7 @@
 			"transform": {
 				"translation": [
 					-135.0,
-					26.0,
+					44,
 					-104.0
 				],
 				"scale": [
@@ -455,6 +455,20 @@
 			"transform": {
 				"translation": [
 					-120.054016, 1.2, -202.87451
+				],
+				"scale": [
+					1, 1, 1
+				],
+				"rotation": [
+					0, 0, 0
+				]
+			}
+		},
+		{
+			"url": "Forms/Scenes/00000000/Genji.json",
+			"transform": {
+				"translation": [
+					-125, -28, -60
 				],
 				"scale": [
 					1, 1, 1

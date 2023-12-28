@@ -43,7 +43,11 @@ public final class ModelLoadAppState extends BaseAppState {
 	}
 	private Spatial loadSpatial(final JsonMap map) {
 		final Spatial spatial = loadSpatialType(map);
-		spatial.setName(map.containsKey("name") ? map.get("name").asData().asString() : "Spatial");
+		if(map.containsKey("name")) {
+			spatial.setName(map.get("name").asData().asString());
+		} else if(spatial.getName() == null) {
+			spatial.setName("Spatial");
+		}
 		parseTranslation(map, spatial);
 		parseScale(map, spatial);
 		parseRotations(map, spatial);
@@ -61,6 +65,8 @@ public final class ModelLoadAppState extends BaseAppState {
 				return(loadAudioNode(map));
 			case("model"):
 				return(loadModel(map));
+			case("json"):
+				return(loadJson(map));
 			case("box"):
 				return(loadBox(map));
 			case("stripBox"):
@@ -111,6 +117,10 @@ public final class ModelLoadAppState extends BaseAppState {
 	private Spatial loadModel(final JsonMap map) {
 		final String url = map.get("url").asData().asString();
 		return(app.getAssetManager().loadModel(url));
+	}
+	private Spatial loadJson(final JsonMap map) {
+		final String url = map.get("url").asData().asString();
+		return(loadModel(url));
 	}
 	
 	private Spatial loadBox(final JsonMap map) {

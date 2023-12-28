@@ -5,6 +5,7 @@ from com.jme3.scene import Node
 from com.jme3.bullet.control import GhostControl
 
 from online.money_daisuki.api.monkey.basegame.py import PythonAppState
+from online.money_daisuki.api.monkey.basegame import SceneGraphAppState
 
 forms = {}
 shapes = {}
@@ -84,3 +85,13 @@ def getFormForShapeOrNone(shape):
     if shape in shapes:
         return(shapes[shape])
     return None
+
+def getRootNode():
+    scene = glob.getAppState(SceneGraphAppState)
+    return scene.getRootNode()
+
+def getSpatialFromSpatialByName(spatial, name):
+    if spatial.getName() == name:
+        return spatial
+
+    return(spatial.getChild(name))

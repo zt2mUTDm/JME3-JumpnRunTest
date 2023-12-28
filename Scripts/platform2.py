@@ -4,7 +4,7 @@ from base.actor import Actor
 
 from com.jme3.math import Vector3f
 
-WAYPOINTS = (Vector3f(-135, 32, -81), Vector3f(-135, 32, -45))
+WAYPOINTS = (Vector3f(-135, 50, -81), Vector3f(-135, 50, -45))
 SPEED = 6
 REPEAT = True
 

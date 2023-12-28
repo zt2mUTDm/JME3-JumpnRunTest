@@ -8,6 +8,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Objects;
 
 import com.jme3.anim.AnimComposer;
 import com.jme3.anim.SkinningControl;
@@ -278,7 +279,23 @@ public final class PhysicsObjectLoadAppState extends BaseAppState {
 		return(cs);
 	}
 	private CollisionShape loadMeshShape(final JsonMap map, final Spatial spatial) {
-		return(CollisionShapeFactory.createMeshShape(spatial));
+		final String spatialName;
+		if(map.containsKey("from")) {
+			spatialName = map.get("from").asData().asString();
+		} else {
+			spatialName = map.get("attach").asData().asString();
+		}
+		return(CollisionShapeFactory.createMeshShape(getSpatialChildOrSpatial(spatial, spatialName)));
+	}
+	private Spatial getSpatialChildOrSpatial(final Spatial spatial, final String name) {
+		if(Objects.equals(name, spatial.getName())) {
+			return(spatial);
+		}
+		
+		if(spatial instanceof Node) {
+			return(((Node) spatial).getChild(name));
+		}
+		throw new IllegalStateException("Spatial " + name + " not found");
 	}
 	
 	private PhysicsControl parsePurpose(final JsonMap map, final Spatial spatial, final CollisionShape shape, final String attachName) {

@@ -138,11 +138,11 @@ class Actor(ScriptReference):
             self.transCtrl.setViewDirection(quat)
     
     def _updateAttachment(self):
-        thisAttachedLocation = self.attachedTo.getLocalTranslation();
+        thisAttachedLocation = self.attachedTo.getLocalTranslation()
         if self.lastAttachedLocation != None:
             mySpatial = forms.getSpatialFromInstance(self)
             
-            myVec = mySpatial.getLocalTranslation();
+            myVec = mySpatial.getLocalTranslation()
             diffX = (thisAttachedLocation.x - self.lastAttachedLocation.x)
             diffY = (thisAttachedLocation.y - self.lastAttachedLocation.y)
             diffZ = (thisAttachedLocation.z - self.lastAttachedLocation.z)
@@ -198,7 +198,7 @@ class Actor(ScriptReference):
             del self.registeredCameraListener
 
     def registerForActivation(self, spatialName):
-        spatial = glob.getSpatialFromSpatialByName(getSpatialFromInstance(self), spatialName)
+        spatial = forms.getSpatialFromSpatialByName(getSpatialFromInstance(self), spatialName)
         if spatial == None:
             raise Exception("Spatial %s not found" % spatialName)
 
@@ -217,7 +217,7 @@ class Actor(ScriptReference):
         if not hasattr(self, "registeredShapesForActivation"):
             return
 
-        spatial = glob.getSpatialFromSpatialByName(getSpatialFromInstance(self), spatialName)
+        spatial = forms.getSpatialFromSpatialByName(getSpatialFromInstance(self), spatialName)
         if spatial == None:
             raise Exception("Spatial %s not found" % spatialName)
 

@@ -128,4 +128,3 @@ def loadPlayer(translation=Vector3f(), rotation=Vector3f(0, 0, 0), scale=Vector3
     root.attachChild(spatial)
     
     getPlayer().setControlEnabled(False)
-  

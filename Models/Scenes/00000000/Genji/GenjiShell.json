@@ -1,0 +1,11 @@
+{
+	"type": "node",
+	"name": "GenjiShell",
+	"childs": [
+		{
+			"type": "model",
+			"url": "Models/Scenes/00000000/Genji/GenjiShell.j3o",
+			"translation": [ 0.0, 0.0, 0 ]
+		}
+	]
+}

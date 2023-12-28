@@ -1,0 +1,63 @@
+{
+	"model": "Models/Scenes/00000000/Genji/Genji.json",
+	"physics": {
+		"shapes": [
+			{
+				"type": "Mesh",
+				"attach": "GenjiShell",
+				"collisionGroup": 0,
+				"purpose": "rigid",
+				"mass": 1,
+				"kinematic": true
+			},
+			{
+				"type": "Mesh",
+				"attach": "GenjiHead",
+				"collisionGroup": 0,
+				"purpose": "rigid",
+				"mass": 1,
+				"kinematic": true
+			},
+			{
+				"type": "Mesh",
+				"attach": "GenjiLegFrontLeft",
+				"collisionGroup": 0,
+				"purpose": "rigid",
+				"mass": 1,
+				"kinematic": true
+			},
+			{
+				"type": "Mesh",
+				"attach": "GenjiLegFrontRight",
+				"collisionGroup": 0,
+				"purpose": "rigid",
+				"mass": 1,
+				"kinematic": true
+			},
+			{
+				"type": "Mesh",
+				"attach": "GenjiLegBackLeft",
+				"collisionGroup": 0,
+				"purpose": "rigid",
+				"mass": 1,
+				"kinematic": true
+			},
+			{
+				"type": "Mesh",
+				"attach": "GenjiLegBackRight",
+				"collisionGroup": 0,
+				"purpose": "rigid",
+				"mass": 1,
+				"kinematic": true
+			},
+			{
+				"type": "Mesh",
+				"attach": "GenjiTail",
+				"collisionGroup": 0,
+				"purpose": "rigid",
+				"mass": 1,
+				"kinematic": true
+			}
+		]
+	}
+}
