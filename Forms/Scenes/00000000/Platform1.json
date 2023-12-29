@@ -1,0 +1,8 @@
+{
+	"model": "PhysicsObjects/Generic/Platforms/SimplePlatform/SimplePlatform.json",
+	"id": 1103,
+	"scripts": {
+		"module": "scenes.S00000000.platforms",
+		"class": "Platform1"
+	}
+}

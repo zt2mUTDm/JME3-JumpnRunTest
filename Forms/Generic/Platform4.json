@@ -1,8 +1,0 @@
-{
-	"model": "PhysicsObjects/Generic/Platform0.json",
-	"id": 1106,
-	"scripts": {
-		"module": "platform4",
-		"class": "Platform4"
-	}
-}

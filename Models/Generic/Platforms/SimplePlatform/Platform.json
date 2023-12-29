@@ -9,7 +9,7 @@
 			"childs": [
 				{
 					"type": "model",
-					"url": "Models/Generic/Platform/Platform.obj",
+					"url": "Models/Generic/Platforms/SimplePlatform/Platform.obj",
 					"translation": [ 0.0, 0.0, 0.0 ]
 				}
 			]

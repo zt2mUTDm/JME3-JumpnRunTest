@@ -69,7 +69,7 @@
 			}
 		},
 		{
-			"url": "Forms/Generic/Platform0.json",
+			"url": "Forms/Scenes/00000000/Platform0.json",
 			"transform": {
 				"translation": [
 					-135,
@@ -89,7 +89,7 @@
 			}
 		},
 		{
-			"url": "Forms/Generic/Platform1.json",
+			"url": "Forms/Scenes/00000000/Platform1.json",
 			"transform": {
 				"translation": [
 					-135,
@@ -109,7 +109,7 @@
 			}
 		},
 		{
-			"url": "Forms/Generic/Platform2.json",
+			"url": "Forms/Scenes/00000000/Platform2.json",
 			"transform": {
 				"translation": [
 					-135,
@@ -129,7 +129,7 @@
 			}
 		},
 		{
-			"url": "Forms/Generic/Platform3.json",
+			"url": "Forms/Scenes/00000000/Platform3.json",
 			"transform": {
 				"translation": [
 					-105.0, 24.8, -239.0
@@ -147,7 +147,7 @@
 			}
 		},
 		{
-			"url": "Forms/Generic/Platform4.json",
+			"url": "Forms/Scenes/00000000/Platform4.json",
 			"transform": {
 				"translation": [
 					-105.0, 24.8, -209.0

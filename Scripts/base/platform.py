@@ -1,12 +1,15 @@
 from base import misc
+from base import forms
 from base import physics
 from base.actor import Actor
 
+from com.jme3.cinematic import MotionPath
+from com.jme3.cinematic.events import MotionEvent
 from com.jme3.math import Vector3f
 
-class Platform(Actor):
+class SimplePlatform(Actor):
     def onInit(self):
-        super(Platform, self).onInit()
+        super(SimplePlatform, self).onInit()
         
         self.waypointCounter = -1
         self.started = False
@@ -18,12 +21,12 @@ class Platform(Actor):
         physics.registerForTouchTest(self, "PlatformTop")
         
         self.registerForMovementEvents()
-
-        self.onPlatformInit()
         
+        self.onPlatformInit()
+    
     def onPlatformInit(self):
         pass
-
+    
     def onUpdate(self, tpf):
         if self.started:
             if self.waypointCounter == -1:
@@ -62,14 +65,56 @@ class Platform(Actor):
         if self.moving:
             self.stopMoving()
             
-    def setWaypoints(self, waypoints):
-        self.waypoints = waypoints
+    def setWaypoints(self, *args):
+        self.waypoints = args
     
     def setSpeed(self, speed):
         self.speed = speed
         
     def setRepeat(self, repeat):
         self.repeat = repeat
+    
+    def onCleanup(self):
+        physics.unregisterForTouchTest(self, "PlatformTop")
+
+class WaypointPlatform(Actor):
+    def onInit(self):
+        super(WaypointPlatform, self).onInit()
+
+        physics.registerForTouchTest(self, "PlatformTop")
+    
+    def onPlatformInit(self):
+        pass
+    
+    def onFirstUpdate(self, tpf):
+        spatial = forms.getSpatialFromInstance(self)
+
+        self.path = MotionPath()
+        self.path.setCycle(True)
+        self.motion = MotionEvent(spatial, self.path)
+
+        self.onPlatformInit()
+
+        del self.path
+        self.motion.play()
+
+    def onTouchEnter(self, myName, otherForm, otherName):
+        if myName == "PlatformTop" and otherName == "PlayerGround":
+            misc.getPlayer().attachTo(self)
+            
+    def onTouchLeave(self, myName, otherForm, otherName):
+        if myName == "PlatformTop" and otherName == "PlayerGround":
+            misc.getPlayer().detachFrom()
+    
+    def addWaypoint(self, waypoint):
+        self.path.addWayPoint(waypoint)
+
+    def addWaypoints(self, *args):
+        for wp in args:
+            self.path.addWayPoint(wp)
+    
+    def setDuration(self, duration):
+        self.motion.setSpeed(duration)
     
     def onCleanup(self):
         physics.unregisterForTouchTest(self, "PlatformTop")
