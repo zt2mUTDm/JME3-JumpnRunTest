@@ -2,7 +2,7 @@
 	"model": "PhysicsObjects/Scenes/00000000/Genji/Genji.json",
 	"id": 6004,
 	"scripts": {
-		"module": "scenes.genji",
+		"module": "scenes.S00000000.genji",
 		"class": "Genji"
 	}
 }

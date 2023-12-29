@@ -2,7 +2,7 @@
 	"model": "PhysicsObjects/Scenes/00000000/FeedingTrough/FeedingTrough.json",
 	"id": 6001,
 	"scripts": {
-		"module": "scenes.feedingthrough",
+		"module": "scenes.S00000000.feedingthrough",
 		"class": "FeedingTrough"
 	}
 }
