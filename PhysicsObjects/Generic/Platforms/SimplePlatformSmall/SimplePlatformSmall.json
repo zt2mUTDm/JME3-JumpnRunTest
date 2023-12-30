@@ -1,0 +1,27 @@
+{
+	"model": "Models/Generic/Platforms/SimplePlatformSmall/SimplePlatformSmall.json",
+	"physics": {
+		"shapes": [
+			{
+				"type": "Mesh",
+				"attach": "SimplePlatformSmall",
+				"collisionGroup": 0,
+				"purpose": "rigid",
+				"mass": 1.0,
+				"kinematic": true
+			},
+			{
+				"type": "Box",
+				"extends": [ 5, 0.25, 5 ],
+				"attach": "PlatformTop",
+				"collisionGroup": 0,
+				"purpose": "ghost"
+			}
+		]
+	},
+	"controls": [
+	],
+	"conditions": [
+		
+	]
+}

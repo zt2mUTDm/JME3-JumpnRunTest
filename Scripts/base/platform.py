@@ -1,11 +1,13 @@
+from com.jme3.animation import LoopMode
+from com.jme3.cinematic import MotionPath
+from com.jme3.cinematic.events import MotionEvent
+from com.jme3.math import Vector3f
+from com.jme3.math import Spline
+
 from base import misc
 from base import forms
 from base import physics
 from base.actor import Actor
-
-from com.jme3.cinematic import MotionPath
-from com.jme3.cinematic.events import MotionEvent
-from com.jme3.math import Vector3f
 
 class SimplePlatform(Actor):
     def onInit(self):
@@ -90,8 +92,10 @@ class WaypointPlatform(Actor):
         spatial = forms.getSpatialFromInstance(self)
 
         self.path = MotionPath()
-        self.path.setCycle(True)
         self.motion = MotionEvent(spatial, self.path)
+
+        self.path.setPathSplineType(Spline.SplineType.Linear)
+        self.motion.setLoopMode(LoopMode.Cycle)
 
         self.onPlatformInit()
 
@@ -112,9 +116,18 @@ class WaypointPlatform(Actor):
     def addWaypoints(self, *args):
         for wp in args:
             self.path.addWayPoint(wp)
+
+    def setLoopMode(self, mode):
+        self.motion.setLoopMode(mode)
     
-    def setDuration(self, duration):
-        self.motion.setSpeed(duration)
+    def setSpeed(self, speed):
+        self.motion.setSpeed(speed)
+
+    def setType(self, splineType):
+        self.path.setPathSplineType(splineType)
+
+    def setTension(self, tension):
+        self.path.setCurveTension(tension)
     
     def onCleanup(self):
         physics.unregisterForTouchTest(self, "PlatformTop")

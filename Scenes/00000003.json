@@ -22,10 +22,42 @@
 			"url": "Forms/Scenes/00000003/Teleporter_00000003_00000000_1.json",
 			"transform": {
 				"translation": [
-					-0.21184538, 7.5, 28.311893
+					1, 7.5, 28.311893
 				],
 				"scale": [
 					1, 3.2, 0.5
+				],
+				"rotation": [
+					0,
+					0,
+					0
+ 				]
+ 			}
+ 		},
+ 		{
+			"url": "Forms/Scenes/00000003/Platform0.json",
+			"transform": {
+				"translation": [
+					-5, 5, 6
+				],
+				"scale": [
+					1, 1, 1
+				],
+				"rotation": [
+					0,
+					0,
+					0
+ 				]
+ 			}
+ 		},
+ 		{
+			"url": "Forms/Scenes/00000003/Platform1.json",
+			"transform": {
+				"translation": [
+					5, 25, 5
+				],
+				"scale": [
+					1, 1, 1
 				],
 				"rotation": [
 					0,
