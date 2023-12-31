@@ -1,0 +1,100 @@
+{
+	"forms": [
+		{
+			"url": "Forms/Scenes/00000005/Teleporter_00000005_00000003.json",
+			"transform": {
+				"translation": [
+					50.75, 14.0, 6.0
+				],
+				"scale": [
+					0.5, 4.0, 2.0
+				],
+				"rotation": [
+					0, 0, 0
+ 				]
+ 			}
+ 		},
+ 		{
+			"url": "Forms/Scenes/00000005/Teleporter_00000005_00000003_1.json",
+			"transform": {
+				"translation": [
+					-71.0, 11.0, 17.0
+				],
+				"scale": [
+					2.0, 0.5, 2.0
+				],
+				"rotation": [
+					0, 0, 0
+ 				]
+ 			}
+ 		},
+ 		{
+			"url": "Forms/Ryuudama/Ryuudama3.json",
+			"transform": {
+				"translation": [
+					-64.0, 13.0, 17.0
+				],
+				"scale": [
+					1,
+					1,
+					1
+				],
+				"rotation": [
+					0,
+					0,
+					0
+				]
+			}
+		}
+	],
+	"physicsObjects": [
+		{
+			"url": "PhysicsObjects/Scenes/00000005/Ground.json",
+			"transform": {
+				"translation": [
+					0,
+					0,
+					0
+				],
+				"scale": [
+					1,
+					1,
+					1
+				],
+				"rotation": [
+					0,
+					0,
+					0
+ 				]
+ 			}
+		},
+ 		{
+			"url": "PhysicsObjects/Generic/Primitives/BlackCubeNoShape.json",
+			"transform": {
+				"translation": [
+					53.0, 14.0, 6.0
+				],
+				"scale": [
+					4.0, 8.0, 4.0
+				],
+				"rotation": [
+					0, 0, 0
+				]
+			}
+		},
+ 		{
+			"url": "PhysicsObjects/Generic/Primitives/BlackCubeNoShape.json",
+			"transform": {
+				"translation": [
+					-71.0, 9.0, 17.0
+				],
+				"scale": [
+					4.0, 4.0, 4.0
+				],
+				"rotation": [
+					0, 0, 0
+				]
+			}
+		}
+	]
+}
