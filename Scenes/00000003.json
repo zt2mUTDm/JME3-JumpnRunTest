@@ -35,6 +35,38 @@
  			}
  		},
  		{
+			"url": "Forms/Scenes/00000003/Teleporter_00000003_00000004.json",
+			"transform": {
+				"translation": [
+					-18.448671, -26.5, 20.244045
+				],
+				"scale": [
+					2, 4, 0.5
+				],
+				"rotation": [
+					0,
+					-45,
+					0
+ 				]
+ 			}
+ 		},
+ 		{
+			"url": "Forms/Scenes/00000003/Teleporter_00000003_00000000_1.json",
+			"transform": {
+				"translation": [
+					2.0, 38.5, -61.5
+				],
+				"scale": [
+					4.0, 6.0, 0.5
+				],
+				"rotation": [
+					0,
+					0,
+					0
+ 				]
+ 			}
+ 		},
+ 		{
 			"url": "Forms/Scenes/00000003/Platform0.json",
 			"transform": {
 				"translation": [
@@ -87,6 +119,62 @@
 					0
  				]
  			}
+		},
+ 		{
+			"url": "PhysicsObjects/Generic/Primitives/WhiteCubeNoShape.json",
+			"transform": {
+				"translation": [
+					-1, -1, -29.5
+				],
+				"scale": [
+					2, 4, 1
+				],
+				"rotation": [
+					0, 0, 0
+				]
+			}
+		},
+ 		{
+			"url": "PhysicsObjects/Generic/Primitives/WhiteCubeNoShape.json",
+			"transform": {
+				"translation": [
+					1, 7.5, 29.5
+				],
+				"scale": [
+					2, 4, 1
+				],
+				"rotation": [
+					0, 0, 0
+				]
+			}
+		},
+ 		{
+			"url": "PhysicsObjects/Generic/Primitives/BlackCubeNoShape.json",
+			"transform": {
+				"translation": [
+					-21.168417, -26.0, 22.59469
+				],
+				"scale": [
+					6, 6, 6
+				],
+				"rotation": [
+					0, -45, 0
+				]
+			}
+		},
+ 		{
+			"url": "PhysicsObjects/Generic/Primitives/BlackCubeNoShape.json",
+			"transform": {
+				"translation": [
+					2.0, 39.0, -64.75
+				],
+				"scale": [
+					6.0, 42.0, 6.0
+				],
+				"rotation": [
+					0, 0, 0
+				]
+			}
 		}
 	]
 }

@@ -1,0 +1,14 @@
+{
+	"model": "Models/Scenes/00000004/Ground.json",
+	"physics": {
+		"shapes": [
+			{
+				"type": "Mesh",
+				"attach": "Ground",
+				"collisionGroup": 0,
+				"purpose": "rigid",
+				"mass": 0
+			}
+		]
+	}
+}
