@@ -31,7 +31,12 @@ def _removeInstanceShapes(instance, spatial):
     ghost = spatial.getControl(GhostControl)
     if ghost != None:
         global shapes
-        del shapes[ghost.getCollisionShape()]
+        
+        try:
+            del shapes[ghost.getCollisionShape()]
+        except KeyError as e:
+            # Workaround for bug
+            pass
 
     if isinstance(spatial, Node):
         childs = spatial.getChildren()
