@@ -56,8 +56,6 @@ import online.money_daisuki.api.monkey.basegame.script.ScriptLineExecutorImpl;
 import online.money_daisuki.api.monkey.basegame.spatial.CharacterControlTransformControl;
 
 public final class PhysicsObjectLoadAppState extends BaseAppState {
-	private Application app;
-	
 	public PhysicsObject load(final String name) {
 		try(final Reader r = new FileReader(new File(name))) {
 			final JsonMap main = new JsonDecoder(r).decode().asMap();
@@ -68,7 +66,7 @@ public final class PhysicsObjectLoadAppState extends BaseAppState {
 	}
 	private PhysicsObject load0(final JsonMap map) throws IOException {
 		final String modelUrl = map.get("model").asData().asString();
-		final Spatial spatial = app.getStateManager().getState(ModelLoadAppState.class).loadModel(modelUrl);
+		final Spatial spatial = getState(ModelLoadAppState.class).loadModel(modelUrl);
 		
 		// Load Animations before control
 		loadAnimations(map, spatial);
@@ -116,7 +114,7 @@ public final class PhysicsObjectLoadAppState extends BaseAppState {
 		
 		try(final Reader in = new FileReader(url)){
 			final Collection<String[]> commands = new ScriptFileLoader(in).source();
-			return(new ScriptControl(new ScriptLineExecutorImpl(commands, spatial, app), 0.1f, true));
+			return(new ScriptControl(new ScriptLineExecutorImpl(commands, spatial, getApplication()), 0.1f, true));
 		} catch (final IOException e) {
 			throw new RuntimeException(e);
 		}
@@ -160,7 +158,7 @@ public final class PhysicsObjectLoadAppState extends BaseAppState {
 					
 					//loadSubspatial(skinningMap);
 					final String url = attachmentSetting.get("url").asData().asString();
-					final Spatial attachmentModel = app.getStateManager().getState(ModelLoadAppState.class).loadModel(url);
+					final Spatial attachmentModel = getState(ModelLoadAppState.class).loadModel(url);
 					
 					parseTranslation(attachmentSetting, attachmentModel);
 					parseScaleAndSet(attachmentSetting, attachmentModel);
@@ -401,7 +399,7 @@ public final class PhysicsObjectLoadAppState extends BaseAppState {
 		}
 		cc.setGravity(50f);
 		cc.setJumpSpeed(20f);
-		return(new CharacterControlAdapter(cc, app, (Node)spatial, app.getStateManager().getState(BulletAppState.class)));
+		return(new CharacterControlAdapter(cc, getApplication(), (Node)spatial, getState(BulletAppState.class)));
 	}
 	/*private Control loadJCharacterControl(final JsonMap map, final Spatial spatial) {
 		final float r = (float) map.get("radius").asData().asNumber().asFloat();
@@ -491,11 +489,11 @@ public final class PhysicsObjectLoadAppState extends BaseAppState {
 	
 	@Override
 	protected void initialize(final Application app) {
-		this.app = app;
+		
 	}
 	@Override
 	protected void cleanup(final Application app) {
-		this.app = null;
+		
 	}
 	@Override
 	protected void onEnable() {

@@ -1,5 +1,5 @@
 {
-	"model": "Models/Player/Sinbad/Sinbad.json",
+	"model": "Models/Player/Sinbad/Sinbad.jsonmodel",
 	"controls": [
 		{
 			"type": "CC",
@@ -24,7 +24,7 @@
 			{
 				"Hand.R": {
 					"type": "model",
-					"url": "Models/Player/Gohei/Gohei.json",
+					"url": "Models/Player/Gohei/Gohei.jsonmodel",
 					"translation": [ -5, 1, 0 ],
 					"rotate": [
 						[ 270.0, 0, 1, 0 ],

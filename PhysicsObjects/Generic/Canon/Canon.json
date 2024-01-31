@@ -1,5 +1,5 @@
 {
-	"model": "Models/Generic/Canon/Canon.json",
+	"model": "Models/Generic/Canon/Canon.jsonmodel",
 	"physics": {
 		"shapes": [
 			{

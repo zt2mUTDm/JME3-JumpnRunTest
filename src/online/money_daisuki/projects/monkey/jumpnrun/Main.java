@@ -24,13 +24,15 @@ import online.money_daisuki.api.base.DataSink;
 import online.money_daisuki.api.io.CharacterStreamConcater;
 import online.money_daisuki.api.monkey.basegame.ModulesApp;
 import online.money_daisuki.api.monkey.basegame.cam.MoveCameraLinearToAppState;
+import online.money_daisuki.api.monkey.basegame.material.MaterialLoader;
+import online.money_daisuki.api.monkey.basegame.model.ModelLoader;
 import online.money_daisuki.api.monkey.basegame.py.PythonAppState;
 import online.money_daisuki.api.monkey.basegame.state.OneRunAppState;
 
 public final class Main {
 	public static void main(final String[] args) throws IOException {
 		final ArgumentHandler handler = new ArgumentHandler(args);
-		handler.addSwitch("disable-security-manager-do-not-use", 0);
+		handler.addSwitch("disable-security-manager-do- not-use", 0);
 		
 		final ArgumentParserResult result = handler.source();
 		
@@ -47,11 +49,13 @@ public final class Main {
 					@Override
 					public void sink(final AppState value) {
 						// Temporary bootstrap
-						
 						app.getStateManager().getState(BulletAppState.class).setDebugEnabled(true);
 						
 						final AssetManager assetManager = app.getAssetManager();
 						assetManager.registerLocator("", FileLocator.class);
+						
+						app.getAssetManager().registerLoader(MaterialLoader.class, "jsonmat");
+						app.getAssetManager().registerLoader(ModelLoader.class, "jsonmodel");
 						
 						app.getRootNode().addLight(new AmbientLight(ColorRGBA.White));
 						app.getStateManager().getState(PythonAppState.class).addSingleScript("initScript", "InitScript");

@@ -1,0 +1,46 @@
+{
+	"type": "node",
+	"name": "Genji",
+	"childs": [
+		{
+			"type": "model",
+			"url": "Models/Scenes/00000000/Genji/GenjiShell.jsonmodel",
+			"translation": [ 0.0, 0.0, 0 ]
+		},
+		{
+			"type": "model",
+			"url": "Models/Scenes/00000000/Genji/GenjiHead.jsonmodel",
+			"translation": [ 12.0, 1.0, 0 ]
+		},
+		{
+			"type": "model",
+			"url": "Models/Scenes/00000000/Genji/GenjiTail.jsonmodel",
+			"translation": [ -18.0, 2.0, 0 ]
+		},
+		{
+			"type": "model",
+			"url": "Models/Scenes/00000000/Genji/GenjiLegFrontLeft.jsonmodel",
+			"translation": [ 16.5, 1.5, -10 ]
+		},
+		{
+			"type": "model",
+			"url": "Models/Scenes/00000000/Genji/GenjiLegFrontRight.jsonmodel",
+			"translation": [ 16.5, 1.5, 10 ]
+		},
+		{
+			"type": "model",
+			"url": "Models/Scenes/00000000/Genji/GenjiLegBackLeft.jsonmodel",
+			"translation": [ -16.5, 1.5, -10 ]
+		},
+		{
+			"type": "model",
+			"url": "Models/Scenes/00000000/Genji/GenjiLegBackRight.jsonmodel",
+			"translation": [ -16.5, 1.5, 10 ]
+		},
+		{
+			"type": "node",
+			"name": "Talk",
+			"translation": [ 40, 1.7, 0 ]
+		}
+	]
+}

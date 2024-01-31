@@ -1,5 +1,5 @@
 {
-	"model": "Models/Generic/Torii/Torii.json",
+	"model": "Models/Generic/Torii/Torii.jsonmodel",
 	"physics": {
 		"shapes": [
 			{

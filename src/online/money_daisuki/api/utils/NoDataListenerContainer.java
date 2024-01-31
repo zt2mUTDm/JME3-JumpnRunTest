@@ -9,7 +9,7 @@ import online.money_daisuki.api.base.Requires;
 /**
  * Template:<br/>
  * 
- 	public void add[Template:Uppercase]Listener(final Runnable l) {
+	public void add[Template:Uppercase]Listener(final Runnable l) {
 		[Template:Lowercase]Listeners.addListener(Requires.notNull(l, "l == null"));
 	}
 	public Collection<Runnable> get[Template:Uppercase]Listeners() {

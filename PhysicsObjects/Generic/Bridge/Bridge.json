@@ -1,5 +1,5 @@
 {
-	"model": "Models/Generic/Bridge/Bridge.json",
+	"model": "Models/Generic/Bridge/Bridge.jsonmodel",
 	"physics": {
 		"shapes": [
 			{

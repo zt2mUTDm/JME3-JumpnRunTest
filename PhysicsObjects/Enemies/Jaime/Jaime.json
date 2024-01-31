@@ -1,5 +1,5 @@
 {
-	"model": "Models/Enemies/Jaime/Jaime.json",
+	"model": "Models/Enemies/Jaime/Jaime.jsonmodel",
 	"physics": {
 		"shapes": [
 			{

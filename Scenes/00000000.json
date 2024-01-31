@@ -10,13 +10,13 @@
 			"url": "Forms/Scenes/00000000/FeedingTrough.json",
 			"transform": {
 				"translation": [
-					-70, 10, -60
+					-70, 10, -20
 				],
 				"scale": [
 					1, 1, 1
 				],
 				"rotation": [
-					0, -90, 0
+					0, -120, 0
 				]
 			}
 		},

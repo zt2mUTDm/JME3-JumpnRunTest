@@ -1,5 +1,5 @@
 {
-	"model": "Models/Scenes/00000000/Genji/Genji.json",
+	"model": "Models/Scenes/00000000/Genji/Genji.jsonmodel",
 	"physics": {
 		"shapes": [
 			{
@@ -57,6 +57,14 @@
 				"purpose": "rigid",
 				"mass": 1,
 				"kinematic": true
+			},
+			{
+				"type": "Cylinder",
+				"attach": "Talk",
+				"collisionGroup": 0,
+				"purpose": "ghost",
+				"radius": 3.8,
+				"height": 3
 			}
 		]
 	}

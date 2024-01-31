@@ -1,5 +1,5 @@
 {
-	"model": "Models/Scenes/00000000/FeedingTrough/FeedingTrough.json",
+	"model": "Models/Scenes/00000000/FeedingTrough/FeedingTrough.jsonmodel",
 	"physics": {
 		"shapes": [
 			{
@@ -11,7 +11,7 @@
 			},
 			{
 				"type": "Sphere",
-				"radius": 25,
+				"radius": 20,
 				"attach": "ActionRadius",
 				"collisionGroup": 0,
 				"purpose": "ghost"

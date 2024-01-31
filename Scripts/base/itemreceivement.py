@@ -34,7 +34,7 @@ class ItemReceivementContainer(Actor):
         endTarget = Vector3f(throwTarget)
         endTarget.y-= 6
 
-        player.throwObject("Models/Scenes/00000000/Food/Food.json",
+        player.throwObject("Models/Scenes/00000000/Food/Food.jsonmodel",
                 self.relativeModelLocation,
                 throwTarget,
                 10,

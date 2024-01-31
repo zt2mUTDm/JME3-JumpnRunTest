@@ -1,5 +1,5 @@
 {
-	"model": "Models/Generic/Tree/Tree.json",
+	"model": "Models/Generic/Tree/Tree.jsonmodel",
 	"physics": {
 		"shapes": [
 			{

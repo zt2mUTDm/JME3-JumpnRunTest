@@ -1,5 +1,5 @@
 {
-	"model": "Models/Generic/Switch/Switch.json",
+	"model": "Models/Generic/Switch/Switch.jsonmodel",
 	"physics": {
 		"shapes": [
 			{

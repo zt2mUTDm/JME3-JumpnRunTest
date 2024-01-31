@@ -14,7 +14,7 @@ import com.jme3.util.TempVars;
 
 import online.money_daisuki.api.monkey.basegame.character.control.CharControl;
 
-public final class TranslateControl implements Control {
+public final class TranslateControl implements Control, Cloneable {
 	private Spatial spatial;
 	private Vector3f newLocalTranslation;
 	
@@ -85,6 +85,11 @@ public final class TranslateControl implements Control {
 	}
 	@Override
 	public void write(final JmeExporter ex) throws IOException {
-		throw new UnsupportedOperationException("Auto-generated method stub");
+		
+	}
+	
+	@Override
+	public Object clone() throws CloneNotSupportedException {
+		return(new TranslateControl());
 	}
 }

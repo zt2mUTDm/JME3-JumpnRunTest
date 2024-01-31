@@ -1,5 +1,5 @@
 {
-	"model": "Models/Generic/SakuraTree/SakuraTree.json",
+	"model": "Models/Generic/SakuraTree/SakuraTree.jsonmodel",
 	"physics": {
 		"shapes": [
 			{

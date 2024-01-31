@@ -1,5 +1,5 @@
 {
-	"model": "Models/Generic/Trampoline/Trampoline.json",
+	"model": "Models/Generic/Trampoline/Trampoline.jsonmodel",
 	"physics": {
 		"shapes": [
 			{

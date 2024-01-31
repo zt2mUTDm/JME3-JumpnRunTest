@@ -1,5 +1,5 @@
 {
-	"model": "Models/Generic/Door/Door.json",
+	"model": "Models/Generic/Door/Door.jsonmodel",
 	"physics": {
 		"shapes": [
 			{

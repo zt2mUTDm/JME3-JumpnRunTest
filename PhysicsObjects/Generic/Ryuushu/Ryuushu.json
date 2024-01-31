@@ -1,5 +1,5 @@
 {
-	"model": "Models/Generic/DragonGem/DragonGem.json",
+	"model": "Models/Generic/DragonGem/DragonGem.jsonmodel",
 	"physics": {
 		"shapes": [
 			{

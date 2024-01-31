@@ -1,5 +1,5 @@
 {
-	"model": "Models/Generic/Platforms/SimplePlatformSmall/SimplePlatformSmall.json",
+	"model": "Models/Generic/Platforms/SimplePlatformSmall/SimplePlatformSmall.jsonmodel",
 	"physics": {
 		"shapes": [
 			{
