@@ -1,7 +1,7 @@
 {
 	"type": "triangle",
 	"particleCount": 1000,
-	"material": "Materials/Flash.json",
+	"material": "Materials/Flash.jsonmat",
 	"imageX": 2,
 	"imageY": 2,
 	"selectRandomImage": true
