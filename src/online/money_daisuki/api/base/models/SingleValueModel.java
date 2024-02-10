@@ -13,6 +13,8 @@ import online.money_daisuki.api.base.ValueChangedHandler;
  */
 public interface SingleValueModel<T> extends DataSource<T> {
 	
-	Runnable addValueChangedHandler(ValueChangedHandler<T> l);
+	Runnable addValueChangedHandler(ValueChangedHandler<? super T> l);
+	
+	void removeValueChangedHandler(ValueChangedHandler<? super T> l);
 	
 }

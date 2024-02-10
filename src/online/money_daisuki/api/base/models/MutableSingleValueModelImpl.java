@@ -15,45 +15,48 @@ import online.money_daisuki.api.base.ValueChangedHandler;
  * @param <T> Type of the value.
  */
 public final class MutableSingleValueModelImpl<T> implements MutableSingleValueModel<T> {
-	private final List<ValueChangedHandler<T>> changeHandlers;
+	private final List<ValueChangedHandler<? super T>> changeHandlers;
 	
 	private T value;
 	
 	public MutableSingleValueModelImpl(final T value) {
 		this.value = Requires.notNull(value, "value == null");
 		this.changeHandlers = new LinkedList<>();
-		
 	}
-	public MutableSingleValueModelImpl(final DataSource<T> src) {
+	public MutableSingleValueModelImpl(final DataSource<? extends T> src) {
 		this(Requires.notNull(src, "src == null").source());
 	}
 	
 	@Override
 	public T source() {
 		return (value);
-	}	
+	}
 	@Override
 	public void sink(final T t) {
 		final T old = this.value;
 		this.value = Requires.notNull(t, "t == null");
 		
-		for(final ValueChangedHandler<T> h:changeHandlers) {
+		for(final ValueChangedHandler<? super T> h:changeHandlers) {
 			h.valueChanged(old, t);
 		}
 	}
 	
 	@Override
-	public Runnable addValueChangedHandler(final ValueChangedHandler<T> l) {
+	public Runnable addValueChangedHandler(final ValueChangedHandler<? super T> l) {
 		changeHandlers.add(Requires.notNull(l, "l == null"));
 		
 		return(new Runnable() {
 			@Override
 			public void run() {
-				changeHandlers.remove(l);
+				removeValueChangedHandler(l);
 			}
 		});
 	}
-	
+	@Override
+	public void removeValueChangedHandler(final ValueChangedHandler<? super T> l) {
+		changeHandlers.remove(Requires.notNull(l, "l == null"));
+	}
+
 	/*@Override
 	public String toString() {
 		return(getClass().getName() + "[value=" + value + ",changeHandlers=" + changeHandlers.getClass().getName() +

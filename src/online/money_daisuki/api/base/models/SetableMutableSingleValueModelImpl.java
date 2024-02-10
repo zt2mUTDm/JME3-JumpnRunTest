@@ -1,12 +1,10 @@
 package online.money_daisuki.api.base.models;
 
 import java.util.LinkedList;
+import java.util.Objects;
 import java.util.Queue;
 
-import online.money_daisuki.api.base.ConstantDataSource;
-import online.money_daisuki.api.base.DataSinkConsumer;
 import online.money_daisuki.api.base.DataSource;
-import online.money_daisuki.api.base.FireValueChangedListenerSink;
 import online.money_daisuki.api.base.OnceRunnable;
 import online.money_daisuki.api.base.Requires;
 import online.money_daisuki.api.base.ValueChangedHandler;
@@ -21,7 +19,7 @@ import online.money_daisuki.api.base.ValueChangedHandler;
  */
 public final class SetableMutableSingleValueModelImpl<T> implements SetableMutableSingleValueModel<T> {
 	private T value;
-	private final Queue<ValueChangedHandler<T>> changeHandlers;
+	private final Queue<ValueChangedHandler<? super T>> changeHandlers;
 	
 	public SetableMutableSingleValueModelImpl() {
 		this.changeHandlers = new LinkedList<>();
@@ -30,7 +28,7 @@ public final class SetableMutableSingleValueModelImpl<T> implements SetableMutab
 		this.value = Requires.notNull(value, "value == null");
 		this.changeHandlers = new LinkedList<>();
 	}
-	public SetableMutableSingleValueModelImpl(final DataSource<T> src) {
+	public SetableMutableSingleValueModelImpl(final DataSource<? extends T> src) {
 		this(Requires.notNull(src, "src == null").source());
 	}
 	
@@ -45,28 +43,47 @@ public final class SetableMutableSingleValueModelImpl<T> implements SetableMutab
 	}
 	@Override
 	public void unset() {
+		final T oldValue = value;
 		value = null;
+		
+		if(oldValue != null) {
+			fireValueChangedEvents(oldValue, null);
+		}
 	}
 	@Override
 	public void sink(final T t) {
 		final T old = this.value;
-		final T firedOld = (old != null ? old : t);
 		this.value = Requires.notNull(t, "t == null");
 		
-		changeHandlers.forEach(new DataSinkConsumer<>(new FireValueChangedListenerSink<>(
-				new ConstantDataSource<>(firedOld), new ConstantDataSource<>(t))));
+		if(!Objects.equals(old, value)) {
+			fireValueChangedEvents(old, value);
+		}
+	}
+	
+	private void fireValueChangedEvents(final T oldValue, final T newValue) {
+		if(Objects.equals(oldValue, newValue)) {
+			return;
+		}
+			
+		for(final ValueChangedHandler<? super T> h:changeHandlers) {
+			h.valueChanged(oldValue, newValue);
+		}
 	}
 	
 	@Override
-	public Runnable addValueChangedHandler(final ValueChangedHandler<T> l) {
+	public Runnable addValueChangedHandler(final ValueChangedHandler<? super T> l) {
 		changeHandlers.add(Requires.notNull(l, "l == null"));
 		
 		return(new OnceRunnable(new Runnable() {
 			@Override
 			public void run() {
-				changeHandlers.remove(l);
+				removeValueChangedHandler(l);
 			}
 		}));
+	}
+	@Override
+	public void removeValueChangedHandler(final ValueChangedHandler<? super T> l) {
+		changeHandlers.remove(Requires.notNull(l, "l == null"));
 	}
 	
 	/*@Override
